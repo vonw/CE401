@@ -1,0 +1,21 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+chapters:
+- file: chapter1.md
+- file: chapter2.md
+  sections:
+    - file: chapter2/LaurentideIceSheet_and_SeaLevel.ipynb
+    - file: chapter2/plotBerkeleyEarth.ipynb
+- file: chapter3.md
+  sections:
+    - file: chapter3/PlancksLaw.ipynb
+    - file: chapter3/PowerEmittedByHuman.ipynb
+    - file: chapter3/BodiesEmittingInARoom.ipynb
+- file: chapter4.md
+  sections:
+    - file: chapter4/SolarConstant.ipynb
+    - file: chapter4/Insolation.ipynb
+    - file: chapter4/EarthTemperatureOfEarth.ipynb

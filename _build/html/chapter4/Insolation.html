@@ -1,0 +1,540 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Insolation &#8212; My sample book</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Calculation of the Solar Constant" href="SolarConstant.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Computational Notebooks for Dessler’s Introduction to Modern Climate Change
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter1.html">
+   An Introduction to the Climate Problem
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../chapter2.html">
+   Is the Climate Changing?
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../chapter2/LaurentideIceSheet_and_SeaLevel.html">
+     Approximate the Decrease in Sea-level from the Laurentide Ice Sheet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../chapter2/plotBerkeleyEarth.html">
+     Plot global temperature anomalies from Berkeley Earth
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../chapter3.html">
+   Radiation and Energy Balance
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../chapter3/PlancksLaw.html">
+     Calculate Planck curves as a function of wavelength and temperature
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../chapter3/PowerEmittedByHuman.html">
+     Calculate the Power Emitted by a Human
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../chapter3/BodiesEmittingInARoom.html">
+     Bodies Emitting in a Room
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../chapter4.html">
+   A Simple Climate Model
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="SolarConstant.html">
+     Calculation of the Solar Constant
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Insolation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/chapter4/Insolation.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fchapter4/Insolation.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/chapter4/Insolation.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculates-the-insolation-as-a-function-of-time-and-location">
+   Calculates the insolation as a function of time and location.
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solar-flux-per-unit-area-at-toa-equations-from-hartmann-i-global-physical-climatology-i">
+     Solar flux per unit area at TOA (Equations from Hartmann,
+     <i>
+      Global Physical Climatology
+     </i>
+     )
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Insolation</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculates-the-insolation-as-a-function-of-time-and-location">
+   Calculates the insolation as a function of time and location.
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solar-flux-per-unit-area-at-toa-equations-from-hartmann-i-global-physical-climatology-i">
+     Solar flux per unit area at TOA (Equations from Hartmann,
+     <i>
+      Global Physical Climatology
+     </i>
+     )
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="insolation">
+<h1>Insolation<a class="headerlink" href="#insolation" title="Permalink to this headline">¶</a></h1>
+<p><i>© Von P. Walden, Washington State University</i></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">pylab</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using matplotlib backend: MacOSX
+%pylab is deprecated, use %matplotlib inline and import the required libraries.
+Populating the interactive namespace from numpy and matplotlib
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="calculates-the-insolation-as-a-function-of-time-and-location">
+<h2>Calculates the insolation as a function of time and location.<a class="headerlink" href="#calculates-the-insolation-as-a-function-of-time-and-location" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="solar-flux-per-unit-area-at-toa-equations-from-hartmann-i-global-physical-climatology-i">
+<h3>Solar flux per unit area at TOA (Equations from Hartmann, <i>Global Physical Climatology</i>)<a class="headerlink" href="#solar-flux-per-unit-area-at-toa-equations-from-hartmann-i-global-physical-climatology-i" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[Q = S_o (d_m/d)^2 \cos(\theta_s)\]</div>
+<p>where So is the solar “constant”, dm is the mean distance between the Earth and Sun, d is the actual distance between the Earth and Sun, and theta(s) is the solar zenith angle.</p>
+<p><span class="math notranslate nohighlight">\(\delta = -23.44^{\circ}\cos{[(t_j+10 days)*(360^{\circ}/365.25 days)]}\)</span> is the declination angle.</p>
+<p><span class="math notranslate nohighlight">\(\cos{\theta_s} = \sin{\phi}sin{\delta} + \cos{\phi}\cos{\delta}\cos{h}\)</span>, where phi is the latitude and h is the hour angle.</p>
+<p><span class="math notranslate nohighlight">\(h=(12-t)*(15^{\circ} / 1 hour)\)</span>, where t is the local time and 15 is the number of degrees that the Earth rotates in one hour.  The conversion factor converts hours to degrees.</p>
+<p><span class="math notranslate nohighlight">\(Q_{dayavg} = (S_o/\pi)(d_m/d)^2[h_o\sin{\phi}\sin{\delta}+\cos{\phi}\cos{\delta}\sin{h_o}]\)</span>, where <span class="math notranslate nohighlight">\(h_o = -\tan{\phi}\tan{\delta}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">earth_sun_distance</span><span class="p">(</span><span class="n">day</span><span class="p">):</span>
+    <span class="n">a</span>     <span class="o">=</span> <span class="mf">149.6e6</span>                   <span class="c1"># km</span>
+    <span class="n">e</span>     <span class="o">=</span> <span class="mf">0.017</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">day</span> <span class="o">*</span> <span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">)</span> <span class="o">/</span> <span class="mf">365.25</span><span class="p">)</span>     <span class="c1"># This is only an approximation.</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">e</span><span class="o">*</span><span class="n">e</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">e</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">r</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">declination</span><span class="p">(</span><span class="n">day</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="o">-</span><span class="mf">23.44</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span> <span class="p">(</span><span class="mf">2.</span><span class="o">*</span><span class="n">pi</span><span class="p">)</span> <span class="o">/</span> <span class="mf">365.25</span> <span class="o">*</span> <span class="p">(</span><span class="n">day</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span> <span class="p">)</span>   <span class="c1"># Approximate</span>
+    <span class="k">return</span> <span class="n">d</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">solar_zenith_angle</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span><span class="n">declinationAngle</span><span class="p">,</span><span class="n">hour</span><span class="p">):</span>
+    <span class="c1"># All angles must be in radians !!</span>
+    <span class="n">latitude</span> <span class="o">=</span> <span class="n">latitude</span> <span class="o">*</span> <span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mf">180.</span><span class="p">)</span>
+    <span class="n">declinationAngle</span> <span class="o">=</span> <span class="n">declinationAngle</span> <span class="o">*</span> <span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mf">180.</span><span class="p">)</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="mf">15.</span> <span class="o">*</span> <span class="p">(</span><span class="mf">12.</span> <span class="o">-</span> <span class="n">hour</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mf">180.</span><span class="p">)</span>
+    <span class="n">sza</span> <span class="o">=</span> <span class="n">arccos</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">latitude</span><span class="p">)</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">declinationAngle</span><span class="p">)</span> <span class="o">+</span> <span class="n">cos</span><span class="p">(</span><span class="n">latitude</span><span class="p">)</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">declinationAngle</span><span class="p">)</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">h</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">sza</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Qday_avg</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span><span class="n">day</span><span class="p">):</span>
+    <span class="n">lat</span> <span class="o">=</span> <span class="n">latitude</span><span class="o">*</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mf">180.</span><span class="p">)</span>
+    <span class="n">So</span>  <span class="o">=</span> <span class="mf">1370.</span>
+    <span class="n">d</span>   <span class="o">=</span> <span class="n">earth_sun_distance</span><span class="p">(</span><span class="n">day</span><span class="p">)</span>
+    <span class="n">dm</span>  <span class="o">=</span> <span class="mf">149.6e6</span>
+    <span class="n">da</span>  <span class="o">=</span> <span class="n">declination</span><span class="p">(</span><span class="n">day</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mf">180.</span><span class="p">)</span>
+    <span class="n">tmp</span> <span class="o">=</span> <span class="n">tan</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span><span class="o">*</span><span class="n">tan</span><span class="p">(</span><span class="n">da</span><span class="p">)</span>
+    <span class="c1"># Obtain this condition from http://en.wikipedia.org/wiki/Insolation</span>
+    <span class="k">if</span> <span class="n">tmp</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">ho</span> <span class="o">=</span> <span class="n">pi</span>
+    <span class="k">elif</span> <span class="n">tmp</span><span class="o">&lt;-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">ho</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ho</span>  <span class="o">=</span> <span class="n">arccos</span><span class="p">(</span><span class="o">-</span><span class="mf">1.</span><span class="o">*</span><span class="n">tan</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span><span class="o">*</span><span class="n">tan</span><span class="p">(</span><span class="n">da</span><span class="p">))</span>
+    <span class="n">Q</span>   <span class="o">=</span> <span class="p">(</span><span class="n">So</span><span class="o">/</span><span class="n">pi</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">dm</span><span class="o">/</span><span class="n">d</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">ho</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">da</span><span class="p">)</span> <span class="o">+</span> <span class="n">cos</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">da</span><span class="p">)</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">ho</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">Q</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">lats</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">90.</span><span class="p">,</span><span class="mf">91.</span><span class="p">)</span>
+<span class="n">days</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span><span class="mf">366.</span><span class="p">)</span>
+
+<span class="n">Q</span> <span class="o">=</span> <span class="n">array</span><span class="p">([])</span>
+<span class="k">for</span> <span class="n">lat</span> <span class="ow">in</span> <span class="n">lats</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">day</span> <span class="ow">in</span> <span class="n">days</span><span class="p">:</span>
+        <span class="n">Q</span> <span class="o">=</span> <span class="n">append</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">Qday_avg</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span><span class="n">day</span><span class="p">))</span>
+
+<span class="n">Qn</span> <span class="o">=</span> <span class="n">reshape</span><span class="p">(</span><span class="n">Q</span><span class="p">,(</span><span class="mi">181</span><span class="p">,</span><span class="mi">365</span><span class="p">))</span>
+<span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="c1">#CS=contourf(days, lats, Qn, range(0,550,50), cmap=plt.cm.RdBu_r)</span>
+<span class="n">CS</span><span class="o">=</span><span class="n">contour</span><span class="p">(</span><span class="n">days</span><span class="p">,</span> <span class="n">lats</span><span class="p">,</span> <span class="n">Qn</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">550</span><span class="p">,</span><span class="mi">25</span><span class="p">),</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">clabel</span><span class="p">(</span><span class="n">CS</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">550</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span> <span class="p">,</span><span class="n">inline</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%4.0f</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Day of Year&#39;</span><span class="p">);</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Latitude (deg)&#39;</span><span class="p">);</span>
+<span class="n">title</span><span class="p">(</span><span class="s1">&#39;TOA Insolation as a function of Day of Year and Latitude&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Insolation_14_0.png" src="../_images/Insolation_14_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">jun21</span> <span class="o">=</span> <span class="mi">31</span><span class="o">+</span><span class="mi">28</span><span class="o">+</span><span class="mi">31</span><span class="o">+</span><span class="mi">30</span><span class="o">+</span><span class="mi">31</span><span class="o">+</span><span class="mi">21</span>
+<span class="n">dec21</span> <span class="o">=</span> <span class="mi">355</span>
+<span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">lats</span><span class="p">,</span><span class="n">Qn</span><span class="p">[:,</span><span class="n">jun21</span><span class="p">],</span><span class="s1">&#39;k--&#39;</span><span class="p">,</span><span class="n">lats</span><span class="p">,</span><span class="n">Qn</span><span class="p">[:,</span><span class="n">dec21</span><span class="p">],</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">lats</span><span class="p">,</span><span class="n">Qn</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>                      <span class="c1"># Annual mean</span>
+<span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mf">90.</span><span class="p">,</span> <span class="mf">90.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mi">600</span><span class="p">])</span>
+<span class="n">xticks</span><span class="p">(</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">90.</span><span class="p">,</span> <span class="mf">90.</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mf">30.</span><span class="p">))</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Latitude (degrees)&#39;</span><span class="p">)</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Insolation (W m-2)&#39;</span><span class="p">)</span>
+<span class="n">title</span><span class="p">(</span><span class="s1">&#39;Insolation for the summer and winter solstices&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Insolation for the summer and winter solstices&#39;)
+</pre></div>
+</div>
+<img alt="../_images/Insolation_15_1.png" src="../_images/Insolation_15_1.png" />
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapter4"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="SolarConstant.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Calculation of the Solar Constant</p>
+            </div>
+        </a>
+    </div>
+
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Jupyter Book Community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
