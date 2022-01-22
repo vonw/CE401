@@ -17,7 +17,7 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-be = xr.open_dataset('/Users/vonw/Downloads/Land_and_Ocean_LatLong1.nc')
+be = xr.open_dataset('Land_and_Ocean_LatLong1.nc')
 be
 ------------------
 
@@ -33,13 +33,13 @@ File [0;32m~/anaconda3/envs/work/lib/python3.9/site-packages/xarray/backends/lr
 [0;32m---> 53[0m     value [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_cache[49m[43m[[49m[43mkey[49m[43m][49m
 [1;32m     54[0m     [38;5;28mself[39m[38;5;241m.[39m_cache[38;5;241m.[39mmove_to_end(key)
 
-[0;31mKeyError[0m: [<class 'netCDF4._netCDF4.Dataset'>, ('/Users/vonw/Downloads/Land_and_Ocean_LatLong1.nc',), 'r', (('clobber', True), ('diskless', False), ('format', 'NETCDF4'), ('persist', False))]
+[0;31mKeyError[0m: [<class 'netCDF4._netCDF4.Dataset'>, ('/Users/vonw/OneDrive - Washington State University (email.wsu.edu)/work/courses/2021-2022/spring/CE401/jupyterbook/CE401/chapter2/Land_and_Ocean_LatLong1.nc',), 'r', (('clobber', True), ('diskless', False), ('format', 'NETCDF4'), ('persist', False))]
 
 During handling of the above exception, another exception occurred:
 
 [0;31mFileNotFoundError[0m                         Traceback (most recent call last)
 Input [0;32mIn [3][0m, in [0;36m<module>[0;34m[0m
-[0;32m----> 1[0m be [38;5;241m=[39m [43mxr[49m[38;5;241;43m.[39;49m[43mopen_dataset[49m[43m([49m[38;5;124;43m'[39;49m[38;5;124;43m/Users/vonw/Downloads/Land_and_Ocean_LatLong1.nc[39;49m[38;5;124;43m'[39;49m[43m)[49m
+[0;32m----> 1[0m be [38;5;241m=[39m [43mxr[49m[38;5;241;43m.[39;49m[43mopen_dataset[49m[43m([49m[38;5;124;43m'[39;49m[38;5;124;43mLand_and_Ocean_LatLong1.nc[39;49m[38;5;124;43m'[39;49m[43m)[49m
 [1;32m      2[0m be
 
 File [0;32m~/anaconda3/envs/work/lib/python3.9/site-packages/xarray/backends/api.py:497[0m, in [0;36mopen_dataset[0;34m(filename_or_obj, engine, chunks, cache, decode_cf, mask_and_scale, decode_times, decode_timedelta, use_cftime, concat_characters, decode_coords, drop_variables, backend_kwargs, *args, **kwargs)[0m
@@ -140,6 +140,6 @@ File [0;32msrc/netCDF4/_netCDF4.pyx:2330[0m, in [0;36mnetCDF4._netCDF4.Datase
 
 File [0;32msrc/netCDF4/_netCDF4.pyx:1948[0m, in [0;36mnetCDF4._netCDF4._ensure_nc_success[0;34m()[0m
 
-[0;31mFileNotFoundError[0m: [Errno 2] No such file or directory: b'/Users/vonw/Downloads/Land_and_Ocean_LatLong1.nc'
-FileNotFoundError: [Errno 2] No such file or directory: b'/Users/vonw/Downloads/Land_and_Ocean_LatLong1.nc'
+[0;31mFileNotFoundError[0m: [Errno 2] No such file or directory: b'/Users/vonw/OneDrive - Washington State University (email.wsu.edu)/work/courses/2021-2022/spring/CE401/jupyterbook/CE401/chapter2/Land_and_Ocean_LatLong1.nc'
+FileNotFoundError: [Errno 2] No such file or directory: b'/Users/vonw/OneDrive - Washington State University (email.wsu.edu)/work/courses/2021-2022/spring/CE401/jupyterbook/CE401/chapter2/Land_and_Ocean_LatLong1.nc'
 
