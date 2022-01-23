@@ -5,16 +5,7 @@
 
 # <i>© Von P. Walden, Washington State University</i>
 
-# First, download the following dataset from [Berkeley Earth](http://berkeleyearth.org):
-# 
-# [Land_and_Ocean_LatLong1.nc](http://berkeleyearth.lbl.gov/auto/Global/Gridded/Land_and_Ocean_LatLong1.nc)
-# 
-# This may take a minute..., because the file is 400 MB.
-
-# import requests
-# url = 'http://berkeleyearth.lbl.gov/auto/Global/Gridded/Land_and_Ocean_LatLong1.nc'
-# r = requests.get(url, allow_redirects=True)
-# open('Land_and_Ocean_LatLong1.nc', 'wb').write(r.content)
+# The data used in this notebook are from [Berkeley Earth](http://berkeleyearth.org/data): Land_and_Ocean_LatLong1.nc
 
 # In[1]:
 
@@ -27,7 +18,7 @@ import xarray as xr
 # In[2]:
 
 
-be = xr.open_dataset('Land_and_Ocean_LatLong1.nc')
+be = xr.open_dataset('../Land_and_Ocean_LatLong1.nc')
 be
 
 
