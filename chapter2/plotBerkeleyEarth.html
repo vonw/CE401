@@ -294,13 +294,7 @@
   <div class="tex2jax_ignore mathjax_ignore section" id="plot-global-temperature-anomalies-from-berkeley-earth">
 <h1>Plot global temperature anomalies from Berkeley Earth<a class="headerlink" href="#plot-global-temperature-anomalies-from-berkeley-earth" title="Permalink to this headline">¶</a></h1>
 <p><i>© Von P. Walden, Washington State University</i></p>
-<p>First, download the following dataset from <a class="reference external" href="http://berkeleyearth.org">Berkeley Earth</a>:</p>
-<p><a class="reference external" href="http://berkeleyearth.lbl.gov/auto/Global/Gridded/Land_and_Ocean_LatLong1.nc">Land_and_Ocean_LatLong1.nc</a></p>
-<p>This may take a minute…, because the file is 400 MB.</p>
-<p>import requests
-url = ‘<a class="reference external" href="http://berkeleyearth.lbl.gov/auto/Global/Gridded/Land_and_Ocean_LatLong1.nc">http://berkeleyearth.lbl.gov/auto/Global/Gridded/Land_and_Ocean_LatLong1.nc</a>’
-r = requests.get(url, allow_redirects=True)
-open(‘Land_and_Ocean_LatLong1.nc’, ‘wb’).write(r.content)</p>
+<p>The data used in this notebook are from <a class="reference external" href="http://berkeleyearth.org/data">Berkeley Earth</a>: Land_and_Ocean_LatLong1.nc</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -312,7 +306,7 @@ open(‘Land_and_Ocean_LatLong1.nc’, ‘wb’).write(r.content)</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">be</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s1">&#39;Land_and_Ocean_LatLong1.nc&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">be</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s1">&#39;../Land_and_Ocean_LatLong1.nc&#39;</span><span class="p">)</span>
 <span class="n">be</span>
 </pre></div>
 </div>
@@ -330,13 +324,13 @@ open(‘Land_and_Ocean_LatLong1.nc’, ‘wb’).write(r.content)</p>
 <span class="ne">---&gt; </span><span class="mi">53</span>     <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
 <span class="g g-Whitespace">     </span><span class="mi">54</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">move_to_end</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
 
-<span class="ne">KeyError</span>: [&lt;class &#39;netCDF4._netCDF4.Dataset&#39;&gt;, (&#39;/Users/vonw/OneDrive - Washington State University (email.wsu.edu)/work/courses/2021-2022/spring/CE401/jupyterbook/CE401/chapter2/Land_and_Ocean_LatLong1.nc&#39;,), &#39;r&#39;, ((&#39;clobber&#39;, True), (&#39;diskless&#39;, False), (&#39;format&#39;, &#39;NETCDF4&#39;), (&#39;persist&#39;, False))]
+<span class="ne">KeyError</span>: [&lt;class &#39;netCDF4._netCDF4.Dataset&#39;&gt;, (&#39;/Users/vonw/OneDrive - Washington State University (email.wsu.edu)/work/courses/2021-2022/spring/CE401/jupyterbook/CE401/Land_and_Ocean_LatLong1.nc&#39;,), &#39;r&#39;, ((&#39;clobber&#39;, True), (&#39;diskless&#39;, False), (&#39;format&#39;, &#39;NETCDF4&#39;), (&#39;persist&#39;, False))]
 
 <span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
 
 <span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
 <span class="n">Input</span> <span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">be</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s1">&#39;Land_and_Ocean_LatLong1.nc&#39;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">be</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s1">&#39;../Land_and_Ocean_LatLong1.nc&#39;</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">be</span>
 
 <span class="nn">File ~/anaconda3/envs/work/lib/python3.9/site-packages/xarray/backends/api.py:497,</span> in <span class="ni">open_dataset</span><span class="nt">(filename_or_obj, engine, chunks, cache, decode_cf, mask_and_scale, decode_times, decode_timedelta, use_cftime, concat_characters, decode_coords, drop_variables, backend_kwargs, *args, **kwargs)</span>
@@ -437,7 +431,7 @@ open(‘Land_and_Ocean_LatLong1.nc’, ‘wb’).write(r.content)</p>
 
 <span class="nn">File src/netCDF4/_netCDF4.pyx:1948,</span> in <span class="ni">netCDF4._netCDF4._ensure_nc_success</span><span class="nt">()</span>
 
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: b&#39;/Users/vonw/OneDrive - Washington State University (email.wsu.edu)/work/courses/2021-2022/spring/CE401/jupyterbook/CE401/chapter2/Land_and_Ocean_LatLong1.nc&#39;
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: b&#39;/Users/vonw/OneDrive - Washington State University (email.wsu.edu)/work/courses/2021-2022/spring/CE401/jupyterbook/CE401/Land_and_Ocean_LatLong1.nc&#39;
 </pre></div>
 </div>
 </div>
@@ -842,7 +836,7 @@ Attributes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/plotBerkeleyEarth_7_0.png" src="../_images/plotBerkeleyEarth_7_0.png" />
+<img alt="../_images/plotBerkeleyEarth_6_0.png" src="../_images/plotBerkeleyEarth_6_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -860,7 +854,7 @@ Attributes:
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;cartopy.mpl.geocollection.GeoQuadMesh at 0x187c23d30&gt;
 </pre></div>
 </div>
-<img alt="../_images/plotBerkeleyEarth_8_1.png" src="../_images/plotBerkeleyEarth_8_1.png" />
+<img alt="../_images/plotBerkeleyEarth_7_1.png" src="../_images/plotBerkeleyEarth_7_1.png" />
 </div>
 </div>
 </div>
