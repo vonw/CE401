@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# ## Bodies Emitting in a Room
+# # Bodies Emitting in a Room
+
+# <i>© Von P. Walden, Washington State University</i>
 
 # ##### Stefan-Boltzmann constant
 

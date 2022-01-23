@@ -8,35 +8,36 @@
 # First, download the following dataset from [Berkeley Earth](http://berkeleyearth.org):
 # 
 # [Land_and_Ocean_LatLong1.nc](http://berkeleyearth.lbl.gov/auto/Global/Gridded/Land_and_Ocean_LatLong1.nc)
+# 
+# This may take a minute..., because the file is 400 MB.
+
+# import requests
+# url = 'http://berkeleyearth.lbl.gov/auto/Global/Gridded/Land_and_Ocean_LatLong1.nc'
+# r = requests.get(url, allow_redirects=True)
+# open('Land_and_Ocean_LatLong1.nc', 'wb').write(r.content)
 
 # In[1]:
 
 
+import matplotlib.pyplot as plt
+import cartopy.crs as ccrs
 import xarray as xr
-import hvplot.xarray
 
 
 # In[2]:
-
-
-import matplotlib.pyplot as plt
-import cartopy.crs as ccrs
-
-
-# In[3]:
 
 
 be = xr.open_dataset('Land_and_Ocean_LatLong1.nc')
 be
 
 
-# In[4]:
+# In[112]:
 
 
 be.climatology[0:12]
 
 
-# In[5]:
+# In[115]:
 
 
 fig = plt.figure(figsize=(30,15))
@@ -46,7 +47,7 @@ be.climatology[0].plot(ax=ax)
 plt.title('Climatology (1951-1980)');
 
 
-# In[6]:
+# In[116]:
 
 
 month = 6

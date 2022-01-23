@@ -18,4 +18,3 @@ chapters:
   sections:
     - file: chapter4/SolarConstant.ipynb
     - file: chapter4/Insolation.ipynb
-    - file: chapter4/EarthTemperatureOfEarth.ipynb

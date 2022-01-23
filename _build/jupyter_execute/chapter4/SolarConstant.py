@@ -3,6 +3,8 @@
 
 # # Calculation of the Solar Constant
 
+# <i>© Von P. Walden, Washington State University</i>
+
 # ## Useful links
 # 
 # ### [Information on the Solar "Constant"](https://en.wikipedia.org/wiki/Solar_cycle)

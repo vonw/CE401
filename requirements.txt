@@ -3,3 +3,4 @@ matplotlib
 numpy
 xarray
 pandas
+requests
