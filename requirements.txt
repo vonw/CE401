@@ -1,6 +1,8 @@
 jupyter-book
 matplotlib
 numpy
+scipy
 xarray
 pandas
 requests
+cartopy
