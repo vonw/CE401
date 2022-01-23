@@ -5,5 +5,5 @@ scipy
 xarray
 pandas
 requests
-proj==8
+proj==8.2.1
 cartopy
