@@ -1,0 +1,13 @@
+name: ce401
+channels:
+  - default
+dependencies:
+  - python=3.8
+  - matplotlib
+  - numpy
+  - scipy
+  - xarray
+  - pandas
+  - cartopy
+  - pip:
+    - jupyter-book
