@@ -1,4 +1,4 @@
-# Computational Notebooks for Dessler's *Introduction to Modern Climate Change*
+# Computational Notebooks
 
 <i>© Von P. Walden, Washington State University</i>
 
