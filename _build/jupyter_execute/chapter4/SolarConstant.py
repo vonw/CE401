@@ -14,7 +14,7 @@
 # In[1]:
 
 
-get_ipython().run_line_magic('pylab', 'inline')
+import numpy as np
 import pandas as pd
 
 
@@ -34,7 +34,7 @@ print('The flux from the Sun is:',E, 'W m-2')
 
 
 Rs   = 695.7e6                    # meters
-As   = 4*pi*Rs**2                 # m2
+As   = 4*np.pi*Rs**2                 # m2
 Psun = E * As
 print('Power emitted by the Sun is:', Psun, 'Watts')
 
@@ -47,7 +47,7 @@ print('Power emitted by the Sun is:', Psun, 'Watts')
 # Average radius of Earth's orbit around the Sun.
 Res   = 149.6e9                    # meters
 # Surface area of a sphere with radius equal to Re.
-Aes   = 4*pi*Res**2                # m2
+Aes   = 4*np.pi*Res**2                # m2
 # Solar Constant
 S     = Psun / Aes
 print('The Solar Constant for Earth is:', S, 'W m-2')
@@ -61,7 +61,7 @@ print('The Solar Constant for Earth is:', S, 'W m-2')
 
 
 Re   = 6.4e6                        # meters
-Aint = pi*Re**2                     # Area intercepted by Earth in m2
+Aint = np.pi*Re**2                     # Area intercepted by Earth in m2
 Pe   = S * Aint
 print('The amount of power (in Watts) that is constantly intercepted by Earth is:', Pe, 'Watts')
 
@@ -101,7 +101,7 @@ S/4
 
 
 SensRes                   = pd.DataFrame({'Earth-Sun Distance': [147.1e9,149.6e9,152.1e9]})
-SensRes['Area']           = 4 * pi * SensRes['Earth-Sun Distance']**2
+SensRes['Area']           = 4 * np.pi * SensRes['Earth-Sun Distance']**2
 SensRes['Solar Constant'] = Psun / SensRes['Area']
 SensRes['% difference']   = (SensRes['Solar Constant'] - SensRes['Solar Constant'].iloc[1]) / SensRes['Solar Constant'].iloc[1] * 100
 SensRes
@@ -119,12 +119,12 @@ SensRes
 Tsun = np.array([5772, 5773.5])   # K; chosen to yield S = 1361 W m-2
 E    = 5.67e-8 * Tsun**4        # W m-2
 Rs   = 695.7e6                  # meters
-As   = 4*pi*Rs**2               # m2
+As   = 4*np.pi*Rs**2               # m2
 Psun = E * As
 # Average radius of Earth's orbit around the Sun.
 Res   = 149.6e9                 # meters
 # Surface area of a sphere with radius equal to Re.
-Aes   = 4*pi*Res**2             # m2
+Aes   = 4*np.pi*Res**2             # m2
 # Solar Constant
 S     = Psun / Aes
 
