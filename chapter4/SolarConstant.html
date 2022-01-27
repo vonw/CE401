@@ -461,14 +461,8 @@
 <h3><a class="reference external" href="https://en.wikipedia.org/wiki/Earth%27s_orbit">Information on Earth’s orbit</a><a class="headerlink" href="#information-on-earth-s-orbit" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">pylab</span> inline
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>%pylab is deprecated, use %matplotlib inline and import the required libraries.
-Populating the interactive namespace from numpy and matplotlib
 </pre></div>
 </div>
 </div>
@@ -496,7 +490,7 @@ Populating the interactive namespace from numpy and matplotlib
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Rs</span>   <span class="o">=</span> <span class="mf">695.7e6</span>                    <span class="c1"># meters</span>
-<span class="n">As</span>   <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">Rs</span><span class="o">**</span><span class="mi">2</span>                 <span class="c1"># m2</span>
+<span class="n">As</span>   <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">Rs</span><span class="o">**</span><span class="mi">2</span>                 <span class="c1"># m2</span>
 <span class="n">Psun</span> <span class="o">=</span> <span class="n">E</span> <span class="o">*</span> <span class="n">As</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Power emitted by the Sun is:&#39;</span><span class="p">,</span> <span class="n">Psun</span><span class="p">,</span> <span class="s1">&#39;Watts&#39;</span><span class="p">)</span>
 </pre></div>
@@ -516,7 +510,7 @@ Populating the interactive namespace from numpy and matplotlib
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Average radius of Earth&#39;s orbit around the Sun.</span>
 <span class="n">Res</span>   <span class="o">=</span> <span class="mf">149.6e9</span>                    <span class="c1"># meters</span>
 <span class="c1"># Surface area of a sphere with radius equal to Re.</span>
-<span class="n">Aes</span>   <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">Res</span><span class="o">**</span><span class="mi">2</span>                <span class="c1"># m2</span>
+<span class="n">Aes</span>   <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">Res</span><span class="o">**</span><span class="mi">2</span>                <span class="c1"># m2</span>
 <span class="c1"># Solar Constant</span>
 <span class="n">S</span>     <span class="o">=</span> <span class="n">Psun</span> <span class="o">/</span> <span class="n">Aes</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The Solar Constant for Earth is:&#39;</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="s1">&#39;W m-2&#39;</span><span class="p">)</span>
@@ -536,7 +530,7 @@ Populating the interactive namespace from numpy and matplotlib
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Re</span>   <span class="o">=</span> <span class="mf">6.4e6</span>                        <span class="c1"># meters</span>
-<span class="n">Aint</span> <span class="o">=</span> <span class="n">pi</span><span class="o">*</span><span class="n">Re</span><span class="o">**</span><span class="mi">2</span>                     <span class="c1"># Area intercepted by Earth in m2</span>
+<span class="n">Aint</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">Re</span><span class="o">**</span><span class="mi">2</span>                     <span class="c1"># Area intercepted by Earth in m2</span>
 <span class="n">Pe</span>   <span class="o">=</span> <span class="n">S</span> <span class="o">*</span> <span class="n">Aint</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The amount of power (in Watts) that is constantly intercepted by Earth is:&#39;</span><span class="p">,</span> <span class="n">Pe</span><span class="p">,</span> <span class="s1">&#39;Watts&#39;</span><span class="p">)</span>
 </pre></div>
@@ -603,7 +597,7 @@ Populating the interactive namespace from numpy and matplotlib
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SensRes</span>                   <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Earth-Sun Distance&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">147.1e9</span><span class="p">,</span><span class="mf">149.6e9</span><span class="p">,</span><span class="mf">152.1e9</span><span class="p">]})</span>
-<span class="n">SensRes</span><span class="p">[</span><span class="s1">&#39;Area&#39;</span><span class="p">]</span>           <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">SensRes</span><span class="p">[</span><span class="s1">&#39;Earth-Sun Distance&#39;</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">SensRes</span><span class="p">[</span><span class="s1">&#39;Area&#39;</span><span class="p">]</span>           <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">SensRes</span><span class="p">[</span><span class="s1">&#39;Earth-Sun Distance&#39;</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
 <span class="n">SensRes</span><span class="p">[</span><span class="s1">&#39;Solar Constant&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Psun</span> <span class="o">/</span> <span class="n">SensRes</span><span class="p">[</span><span class="s1">&#39;Area&#39;</span><span class="p">]</span>
 <span class="n">SensRes</span><span class="p">[</span><span class="s1">&#39;</span><span class="si">% d</span><span class="s1">ifference&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="p">(</span><span class="n">SensRes</span><span class="p">[</span><span class="s1">&#39;Solar Constant&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">SensRes</span><span class="p">[</span><span class="s1">&#39;Solar Constant&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">SensRes</span><span class="p">[</span><span class="s1">&#39;Solar Constant&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>
 <span class="n">SensRes</span>
@@ -672,12 +666,12 @@ Populating the interactive namespace from numpy and matplotlib
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Tsun</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5772</span><span class="p">,</span> <span class="mf">5773.5</span><span class="p">])</span>   <span class="c1"># K; chosen to yield S = 1361 W m-2</span>
 <span class="n">E</span>    <span class="o">=</span> <span class="mf">5.67e-8</span> <span class="o">*</span> <span class="n">Tsun</span><span class="o">**</span><span class="mi">4</span>        <span class="c1"># W m-2</span>
 <span class="n">Rs</span>   <span class="o">=</span> <span class="mf">695.7e6</span>                  <span class="c1"># meters</span>
-<span class="n">As</span>   <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">Rs</span><span class="o">**</span><span class="mi">2</span>               <span class="c1"># m2</span>
+<span class="n">As</span>   <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">Rs</span><span class="o">**</span><span class="mi">2</span>               <span class="c1"># m2</span>
 <span class="n">Psun</span> <span class="o">=</span> <span class="n">E</span> <span class="o">*</span> <span class="n">As</span>
 <span class="c1"># Average radius of Earth&#39;s orbit around the Sun.</span>
 <span class="n">Res</span>   <span class="o">=</span> <span class="mf">149.6e9</span>                 <span class="c1"># meters</span>
 <span class="c1"># Surface area of a sphere with radius equal to Re.</span>
-<span class="n">Aes</span>   <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">Res</span><span class="o">**</span><span class="mi">2</span>             <span class="c1"># m2</span>
+<span class="n">Aes</span>   <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">Res</span><span class="o">**</span><span class="mi">2</span>             <span class="c1"># m2</span>
 <span class="c1"># Solar Constant</span>
 <span class="n">S</span>     <span class="o">=</span> <span class="n">Psun</span> <span class="o">/</span> <span class="n">Aes</span>
 
