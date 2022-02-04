@@ -12,6 +12,7 @@
 
 import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
+import pandas as pd
 import xarray as xr
 
 
@@ -22,29 +23,91 @@ be = xr.open_dataset('../Land_and_Ocean_LatLong1.nc')
 be
 
 
-# In[112]:
+# ### Plot geographic distribution of 1951-1980 climatology
+
+# In[3]:
 
 
-be.climatology[0:12]
+# Select a particular month to view
+month = 'Jan'
+#month = 'Jul'
 
+months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
-# In[115]:
-
-
-fig = plt.figure(figsize=(30,15))
+fig = plt.figure(figsize=(20,10))
 ax = plt.axes(projection=ccrs.PlateCarree())
 ax.coastlines()
-be.climatology[0].plot(ax=ax)
-plt.title('Climatology (1951-1980)');
+be.climatology[months.index(month)].plot(ax=ax)
+plt.title('Climatology (1951-1980) for ' + month);
 
 
-# In[116]:
+# ### Plot geographic distribution of temperature anomalies for given year and month
+
+# In[4]:
 
 
-month = 6
-year  = 1900
-fig = plt.figure(figsize=(30,15))
+# Select a particular year and month to view
+year = 1990
+month = 'Jan'
+#month = 'Jul'
+
+months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+fig = plt.figure(figsize=(20,10))
 ax = plt.axes(projection=ccrs.PlateCarree())
 ax.coastlines()
-(be.temperature[month+((year-1850)*12)]).plot(ax=ax, clim=[-10, 10])
+(be.temperature[months.index(month)+((year-1850)*12)]).plot(ax=ax, clim=[-10, 10])
+plt.title('Temperature Anomalies for ' + month + ' ' + str(year));
+
+
+# ### Plot geographic distribution of actual temperatures for given year and month
+
+# In[5]:
+
+
+# Select a particular year and month to view
+year = 1990
+month = 'Jan'
+#month = 'Jul'
+
+months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+fig = plt.figure(figsize=(20,10))
+ax = plt.axes(projection=ccrs.PlateCarree())
+ax.coastlines()
+(be.temperature[months.index(month)+((year-1850)*12)] + be.climatology[months.index(month)]).plot(ax=ax, clim=[-10, 10])
+plt.title('Temperature Anomalies for ' + month + ' ' + str(year));
+
+
+# ### Calculate global annual temperature anomalies
+
+# In[6]:
+
+
+# Select a particular year and month to view
+# !! Depending on how many years you choose to analyze, this COULD TAKE TENS OF SECONDS to complete.
+beginning_year = 1940
+ending_year = 1970
+
+months = pd.date_range(start=str(beginning_year), end=str(ending_year+1), freq='M')
+
+data = []
+for month in months:
+    #print(month.month)
+    data.append(be.temperature[month.month+((month.year-1850)*12)].mean())
+
+Tanomalies = xr.DataArray(data, coords={'month': months})
+
+fig = plt.figure(figsize=(20,10))
+Tanomalies.plot()
+plt.grid()
+plt.xlabel('Month');
+plt.ylabel('Temperature anomaly (C)');
+plt.title('Global monthly temperature anomaly between ' + str(beginning_year) + ' and ' + str(ending_year));
+
+
+# In[ ]:
+
+
+
 
