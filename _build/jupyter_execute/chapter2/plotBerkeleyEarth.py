@@ -25,7 +25,7 @@ be
 
 # ### Plot geographic distribution of 1951-1980 climatology
 
-# In[3]:
+# In[21]:
 
 
 # Select a particular month to view
@@ -43,7 +43,7 @@ plt.title('Climatology (1951-1980) for ' + month);
 
 # ### Plot geographic distribution of temperature anomalies for given year and month
 
-# In[4]:
+# In[34]:
 
 
 # Select a particular year and month to view
@@ -62,7 +62,7 @@ plt.title('Temperature Anomalies for ' + month + ' ' + str(year));
 
 # ### Plot geographic distribution of actual temperatures for given year and month
 
-# In[5]:
+# In[35]:
 
 
 # Select a particular year and month to view
@@ -81,13 +81,13 @@ plt.title('Temperature Anomalies for ' + month + ' ' + str(year));
 
 # ### Calculate global annual temperature anomalies
 
-# In[6]:
+# In[63]:
 
 
 # Select a particular year and month to view
 # !! Depending on how many years you choose to analyze, this COULD TAKE TENS OF SECONDS to complete.
-beginning_year = 1940
-ending_year = 1970
+beginning_year = 1951
+ending_year = 1980
 
 months = pd.date_range(start=str(beginning_year), end=str(ending_year+1), freq='M')
 
@@ -104,10 +104,4 @@ plt.grid()
 plt.xlabel('Month');
 plt.ylabel('Temperature anomaly (C)');
 plt.title('Global monthly temperature anomaly between ' + str(beginning_year) + ' and ' + str(ending_year));
-
-
-# In[ ]:
-
-
-
 
