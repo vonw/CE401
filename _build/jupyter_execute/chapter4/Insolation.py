@@ -8,11 +8,11 @@
 # In[1]:
 
 
-get_ipython().run_line_magic('pylab', '')
-get_ipython().run_line_magic('matplotlib', 'inline')
+import numpy as np
+import matplotlib.pyplot as plt
 
 
-# ### Calculates the insolation as a function of time and location.
+# ### Calculates the insolation at the top of the atmosphere (TOA) as a function of time and location.
 
 # #### Solar flux per unit area at TOA (Equations from Hartmann, <i>Global Physical Climatology</i>)
 
@@ -33,8 +33,8 @@ get_ipython().run_line_magic('matplotlib', 'inline')
 def earth_sun_distance(day):
     a     = 149.6e6                   # km
     e     = 0.017
-    theta = day * ((2*pi) / 365.25)     # This is only an approximation.
-    r = a*(1-e*e)/(1+e * cos(theta))
+    theta = day * ((2*np.pi) / 365.25)     # This is only an approximation.
+    r = a*(1-e*e)/(1+e * np.cos(theta))
     return r
 
 
@@ -42,7 +42,7 @@ def earth_sun_distance(day):
 
 
 def declination(day):
-    d = -23.44 * cos( (2.*pi) / 365.25 * (day + 10) )   # Approximate
+    d = -23.44 * np.cos( (2.*np.pi) / 365.25 * (day + 10) )   # Approximate
     return d
 
 
@@ -51,10 +51,10 @@ def declination(day):
 
 def solar_zenith_angle(latitude,declinationAngle,hour):
     # All angles must be in radians !!
-    latitude = latitude * (pi/180.)
-    declinationAngle = declinationAngle * (pi/180.)
-    h = 15. * (12. - hour) * (pi/180.)
-    sza = arccos(sin(latitude)*sin(declinationAngle) + cos(latitude)*cos(declinationAngle)*cos(h))
+    latitude = latitude * (np.pi/180.)
+    declinationAngle = declinationAngle * (np.pi/180.)
+    h = 15. * (12. - hour) * (np.pi/180.)
+    sza = np.arccos(np.sin(latitude)*np.sin(declinationAngle) + np.cos(latitude)*np.cos(declinationAngle)*np.cos(h))
     return sza
 
 
@@ -62,62 +62,61 @@ def solar_zenith_angle(latitude,declinationAngle,hour):
 
 
 def Qday_avg(latitude,day):
-    lat = latitude*(pi/180.)
+    lat = latitude*(np.pi/180.)
     So  = 1370.
     d   = earth_sun_distance(day)
     dm  = 149.6e6
-    da  = declination(day) * (pi/180.)
-    tmp = tan(lat)*tan(da)
+    da  = declination(day) * (np.pi/180.)
+    tmp = np.tan(lat)*np.tan(da)
     # Obtain this condition from http://en.wikipedia.org/wiki/Insolation
     if tmp>1:
-        ho = pi
+        ho = np.pi
     elif tmp<-1:
         ho = 0.
     else:
-        ho  = arccos(-1.*tan(lat)*tan(da))
-    Q   = (So/pi) * (dm/d)**2 * (ho*sin(lat)*sin(da) + cos(lat)*cos(da)*sin(ho))
+        ho  = np.arccos(-1.*np.tan(lat)*np.tan(da))
+    Q   = (So/np.pi) * (dm/d)**2 * (ho*np.sin(lat)*np.sin(da) + np.cos(lat)*np.cos(da)*np.sin(ho))
     return Q
 
 
 # In[6]:
 
 
-import matplotlib.pyplot as plt
-lats = arange(-90.,91.)
-days = arange(1.,366.)
+lats = np.arange(-90.,91.)
+days = np.arange(1.,366.)
 
-Q = array([])
+Q = np.array([])
 for lat in lats:
     for day in days:
-        Q = append(Q, Qday_avg(lat,day))
+        Q = np.append(Q, Qday_avg(lat,day))
 
-Qn = reshape(Q,(181,365))
-figure(figsize=(10,10))
+Qn = np.reshape(Q,(181,365))
+plt.figure(figsize=(20,10))
 #CS=contourf(days, lats, Qn, range(0,550,50), cmap=plt.cm.RdBu_r)
-CS=contour(days, lats, Qn, range(0,550,25), colors='k')
-clabel(CS, range(0,550,100) ,inline=1,fmt='%4.0f',fontsize=12)
-xlabel('Day of Year');
-ylabel('Latitude (deg)');
-title('TOA Insolation as a function of Day of Year and Latitude');
+CS=plt.contour(days, lats, Qn, range(0,550,25), colors='k')
+plt.clabel(CS, range(0,550,100) ,inline=1,fmt='%4.0f',fontsize=12)
+plt.grid()
+plt.xlabel('Day of Year');
+plt.ylabel('Latitude (deg)');
+plt.title('TOA Insolation as a function of Day of Year and Latitude');
 
 
 # In[7]:
 
 
+mar20 = 31+28+20
 jun21 = 31+28+31+30+31+21
+sep20 = 31+28+31+30+31+30+31+31+20
 dec21 = 355
-figure(figsize=(10,10))
-plot(lats,Qn[:,jun21],'k--',lats,Qn[:,dec21],'k')
-plot(lats,Qn.mean(axis=1),'k')                      # Annual mean
-axis([-90., 90., 0., 600])
-xticks(arange(-90., 90.+1, 30.))
-xlabel('Latitude (degrees)')
-ylabel('Insolation (W m-2)')
-title('Insolation for the summer and winter solstices')
-
-
-# In[ ]:
-
-
-
+plt.figure(figsize=(20,10))
+plt.plot(lats,Qn[:,jun21],'r',lats,Qn[:,dec21],'b')
+plt.plot(lats,Qn[:,mar20],'r--',lats,Qn[:,sep20],'b--')
+#plt.plot(lats,Qn.mean(axis=1),'k')                      # Annual mean
+plt.axis([-90., 90., 0., 600])
+plt.grid()
+plt.xticks(np.arange(-90., 90.+1, 30.))
+plt.xlabel('Latitude (degrees)');
+plt.ylabel('Insolation (W m-2)');
+plt.title('Insolation for the summer and winter solstices');
+plt.legend(['June Solstice', 'December Solstice', 'March Equinox', 'September Equinox'])
 
