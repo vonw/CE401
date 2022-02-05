@@ -76,7 +76,7 @@ fig = plt.figure(figsize=(20,10))
 ax = plt.axes(projection=ccrs.PlateCarree())
 ax.coastlines()
 (be.temperature[months.index(month)+((year-1850)*12)] + be.climatology[months.index(month)]).plot(ax=ax, clim=[-10, 10])
-plt.title('Temperature Anomalies for ' + month + ' ' + str(year));
+plt.title('Temperatures for ' + month + ' ' + str(year));
 
 
 # ### Calculate global annual temperature anomalies
@@ -104,6 +104,37 @@ plt.grid()
 plt.xlabel('Month');
 plt.ylabel('Temperature anomaly (C)');
 plt.title('Global monthly temperature anomaly between ' + str(beginning_year) + ' and ' + str(ending_year));
+
+
+# ### Calculate longitudinally-averaged temperature anomalies
+
+# In[7]:
+
+
+# Select the latitude range to average over
+beginning_latitude = -5
+ending_latitude = 5
+
+# Select a particular year and month to view
+# !! Depending on how many years you choose to analyze, this COULD TAKE TENS OF SECONDS to complete.
+beginning_year = 1950
+ending_year = 2020
+
+months = pd.date_range(start=str(beginning_year), end=str(ending_year+1), freq='M')
+
+data = []
+for month in months:
+    #print(month.month)
+    data.append(be.temperature[month.month+((month.year-1850)*12)].sel(latitude=slice(beginning_latitude, ending_latitude)).mean())
+
+Tanomalies = xr.DataArray(data, coords={'month': months})
+
+fig = plt.figure(figsize=(20,10))
+Tanomalies.plot()
+plt.grid()
+plt.xlabel('Month');
+plt.ylabel('Temperature anomaly (C)');
+plt.title('Equatorial temperature anomaly between ' + str(beginning_year) + ' and ' + str(ending_year));
 
 
 # In[ ]:

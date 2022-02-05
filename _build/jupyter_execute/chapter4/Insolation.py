@@ -79,6 +79,8 @@ def Qday_avg(latitude,day):
     return Q
 
 
+# ### Geographic distribution of insolation (solar radition) at TOA
+
 # In[6]:
 
 
@@ -101,6 +103,8 @@ plt.ylabel('Latitude (deg)');
 plt.title('TOA Insolation as a function of Day of Year and Latitude');
 
 
+# ### Latitudinal variation of TOA insolation on solstices and equinoxes
+
 # In[7]:
 
 
@@ -117,6 +121,6 @@ plt.grid()
 plt.xticks(np.arange(-90., 90.+1, 30.))
 plt.xlabel('Latitude (degrees)');
 plt.ylabel('Insolation (W m-2)');
-plt.title('Insolation for the summer and winter solstices');
+plt.title('Insolation for the Solstices and Equinoxes');
 plt.legend(['June Solstice', 'December Solstice', 'March Equinox', 'September Equinox'])
 
