@@ -16,6 +16,14 @@ import pandas as pd
 import xarray as xr
 
 
+# ### Working from your local computer
+# 
+# If you are running this notebook from your local computer, you will need to:
+# 
+# 1) Download a large (400 MB) data file from Berkeley Earth by clicking on [this link](http://berkeleyearth.lbl.gov/auto/Global/Gridded/Land_and_Ocean_LatLong1.nc)
+# 
+# 2) Edit the code cell below by replacing '../Land_and_Ocean_LatLong1.nc' with the pathname to the data file on your local hard drive.
+
 # In[2]:
 
 
@@ -25,7 +33,7 @@ be
 
 # ### Plot geographic distribution of 1951-1980 climatology
 
-# In[3]:
+# In[21]:
 
 
 # Select a particular month to view
@@ -43,7 +51,7 @@ plt.title('Climatology (1951-1980) for ' + month);
 
 # ### Plot geographic distribution of temperature anomalies for given year and month
 
-# In[4]:
+# In[34]:
 
 
 # Select a particular year and month to view
@@ -62,7 +70,7 @@ plt.title('Temperature Anomalies for ' + month + ' ' + str(year));
 
 # ### Plot geographic distribution of actual temperatures for given year and month
 
-# In[5]:
+# In[35]:
 
 
 # Select a particular year and month to view
@@ -81,7 +89,7 @@ plt.title('Temperatures for ' + month + ' ' + str(year));
 
 # ### Calculate global annual temperature anomalies
 
-# In[6]:
+# In[64]:
 
 
 # Select a particular year and month to view
@@ -108,7 +116,7 @@ plt.title('Global monthly temperature anomaly between ' + str(beginning_year) + 
 
 # ### Calculate longitudinally-averaged temperature anomalies
 
-# In[7]:
+# In[9]:
 
 
 # Select the latitude range to average over
