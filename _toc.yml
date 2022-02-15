@@ -18,6 +18,7 @@ chapters:
   sections:
     - file: chapter4/SolarConstant.ipynb
     - file: chapter4/Insolation.ipynb
+    - file: chapter4/InfraredAbsorptionByTheAtmosphere.ipynb
 - file: homework.md
   sections:
     - file: homework/hw2.ipynb
