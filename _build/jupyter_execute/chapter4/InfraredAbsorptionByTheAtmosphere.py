@@ -15,24 +15,46 @@ import matplotlib.pyplot as plt
 
 # ## Definition of the Optical Depth
 
-# To calculate the infrared absorption by the atmosphere, we must calculate the optical depth. In general, the optical depth is:
+# To calculate the infrared absorption by the atmosphere, we must calculate the optical depth.  The optical depth is related to the transmission of radiation through "optical media", such as an absorbing gas or an absorbing liquid. [Beer's Law](https://en.wikipedia.org/wiki/Beer–Lambert_law) gives us
 # 
-# $$ \tau = \int_0^L \sigma_{\lambda} n(z) dz $$
+# $$ I(\lambda) = I_o(\lambda) e^{-\tau} $$
 # 
-# where $\sigma$ is attenuation cross section (which depends on wavelength, $\lambda$), n(z) is the number concentration of the absorbing gas, z is distance along the absorbing path, and L is the total length of the absorbing path. 
+# This can be rewritten as 
+# 
+# $$ Transmission = \frac{I(\lambda)}{I_o(\lambda)} = e^{-\tau} $$
+# 
+# Then one can solve for the optical depth $\tau$ as
+# 
+# $$ \tau = -ln \Big[ \frac{I(\lambda)}{I_o(\lambda)} \Big] $$
+# 
+# 
+# In general, the optical depth is:
+# 
+# $$ \tau = \int_{z_1}^{z_2} \beta_{\lambda} dz = \int_{z_1}^{z_2} \kappa_{\lambda} \rho (z) dz = \int_{z_1}^{z_2} \sigma_{\lambda} n(z) dz $$
+# 
+# where 
+# - $\beta$ is the volume absorption coefficient,
+# - $\kappa$ is the mass absorption coefficient, 
+# - $\sigma$ is the absorption cross section,
+# 
+# which all depend on wavelength, $\lambda$.
+# 
+# $\rho(z)$ and n(z) are the air density and the number density of the absorbing gas. z is distance along the absorbing path from $z_1$ to $z_2$. 
 # 
 # If one conducts an experiment of Beer's Law in the lab using a tube filled with an absorbing gas (like H2O or CO2), this equation reduces to:
 # 
-# $$ \tau = \sigma_{\lambda} N L $$
+# $$ \tau = \beta (z_2 - z_1) = \kappa_{\lambda} \rho (z_2 - z_1) = \sigma_{\lambda} N (z_2 - z_1) $$
 # 
-# where N is the number of absorbing molecules per unit length. Note that this is how scientists (100 or so years ago) determined the absorption cross sections for different gases at different wavelengths, by measuring the transmission of radiation through the gas (with known N and L), calculating the optical depth, then solving for $\sigma_{\lambda}$.
+# Note that this is how scientists (100 or so years ago) determined how different gases absorbed infrared radiation at different wavelengths, by measuring the transmission of radiation through the gas, calculating the optical depth, then solving for either $\beta_{\lambda}$, $\kappa_{\lambda}$, or $\sigma_{\lambda}$.
 # 
 
 # ### Optical Depth in the Atmosphere
 
 # To determine the optical depth in the atmosphere, one must use the general equation above, because the number of molecules of absorbing gas changes with height in the atmosphere. Carbon dioxide is "uniformly mixed" in the atmosphere, meaning that its concentration relative to other gases does not change with height. However, the actual number of CO2 molecules decreases exponentially with height in the atmosphere because the density (and pressure) of the air decreases in this manner. Most of the water vapor in the atmosphere is contained only in the troposphere in the lowest 7 or 8 km. Therefore, one must integrate through the atmosphere to determine the optical depth using: 
 # 
-# $$ \tau = \int_0^L \sigma_{\lambda} n(z) dz $$
+# $$ \tau = \beta (z_2 - z_1) = \kappa_{\lambda} \rho (z_2 - z_1) = \sigma_{\lambda} N (z_2 - z_1) $$
+# 
+# We will choose to use the second equation, which contains the mass absorption coefficient (because Pierrehumbert's paper from 2010 give values of $\kappa$ in Figure 2).
 # 
 
 # ## The McClatchey Standard Atmospheres

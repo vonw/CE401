@@ -443,19 +443,36 @@
 </div>
 <div class="section" id="definition-of-the-optical-depth">
 <h2>Definition of the Optical Depth<a class="headerlink" href="#definition-of-the-optical-depth" title="Permalink to this headline">¶</a></h2>
-<p>To calculate the infrared absorption by the atmosphere, we must calculate the optical depth. In general, the optical depth is:</p>
+<p>To calculate the infrared absorption by the atmosphere, we must calculate the optical depth.  The optical depth is related to the transmission of radiation through “optical media”, such as an absorbing gas or an absorbing liquid. <a class="reference external" href="https://en.wikipedia.org/wiki/Beer%E2%80%93Lambert_law">Beer’s Law</a> gives us</p>
 <div class="math notranslate nohighlight">
-\[ \tau = \int_0^L \sigma_{\lambda} n(z) dz \]</div>
-<p>where <span class="math notranslate nohighlight">\(\sigma\)</span> is attenuation cross section (which depends on wavelength, <span class="math notranslate nohighlight">\(\lambda\)</span>), n(z) is the number concentration of the absorbing gas, z is distance along the absorbing path, and L is the total length of the absorbing path.</p>
+\[ I(\lambda) = I_o(\lambda) e^{-\tau} \]</div>
+<p>This can be rewritten as</p>
+<div class="math notranslate nohighlight">
+\[ Transmission = \frac{I(\lambda)}{I_o(\lambda)} = e^{-\tau} \]</div>
+<p>Then one can solve for the optical depth <span class="math notranslate nohighlight">\(\tau\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[ \tau = -ln \Big[ \frac{I(\lambda)}{I_o(\lambda)} \Big] \]</div>
+<p>In general, the optical depth is:</p>
+<div class="math notranslate nohighlight">
+\[ \tau = \int_{z_1}^{z_2} \beta_{\lambda} dz = \int_{z_1}^{z_2} \kappa_{\lambda} \rho (z) dz = \int_{z_1}^{z_2} \sigma_{\lambda} n(z) dz \]</div>
+<p>where</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\beta\)</span> is the volume absorption coefficient,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\kappa\)</span> is the mass absorption coefficient,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma\)</span> is the absorption cross section,</p></li>
+</ul>
+<p>which all depend on wavelength, <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(\rho(z)\)</span> and n(z) are the air density and the number density of the absorbing gas. z is distance along the absorbing path from <span class="math notranslate nohighlight">\(z_1\)</span> to <span class="math notranslate nohighlight">\(z_2\)</span>.</p>
 <p>If one conducts an experiment of Beer’s Law in the lab using a tube filled with an absorbing gas (like H2O or CO2), this equation reduces to:</p>
 <div class="math notranslate nohighlight">
-\[ \tau = \sigma_{\lambda} N L \]</div>
-<p>where N is the number of absorbing molecules per unit length. Note that this is how scientists (100 or so years ago) determined the absorption cross sections for different gases at different wavelengths, by measuring the transmission of radiation through the gas (with known N and L), calculating the optical depth, then solving for <span class="math notranslate nohighlight">\(\sigma_{\lambda}\)</span>.</p>
+\[ \tau = \beta (z_2 - z_1) = \kappa_{\lambda} \rho (z_2 - z_1) = \sigma_{\lambda} N (z_2 - z_1) \]</div>
+<p>Note that this is how scientists (100 or so years ago) determined how different gases absorbed infrared radiation at different wavelengths, by measuring the transmission of radiation through the gas, calculating the optical depth, then solving for either <span class="math notranslate nohighlight">\(\beta_{\lambda}\)</span>, <span class="math notranslate nohighlight">\(\kappa_{\lambda}\)</span>, or <span class="math notranslate nohighlight">\(\sigma_{\lambda}\)</span>.</p>
 <div class="section" id="optical-depth-in-the-atmosphere">
 <h3>Optical Depth in the Atmosphere<a class="headerlink" href="#optical-depth-in-the-atmosphere" title="Permalink to this headline">¶</a></h3>
 <p>To determine the optical depth in the atmosphere, one must use the general equation above, because the number of molecules of absorbing gas changes with height in the atmosphere. Carbon dioxide is “uniformly mixed” in the atmosphere, meaning that its concentration relative to other gases does not change with height. However, the actual number of CO2 molecules decreases exponentially with height in the atmosphere because the density (and pressure) of the air decreases in this manner. Most of the water vapor in the atmosphere is contained only in the troposphere in the lowest 7 or 8 km. Therefore, one must integrate through the atmosphere to determine the optical depth using:</p>
 <div class="math notranslate nohighlight">
-\[ \tau = \int_0^L \sigma_{\lambda} n(z) dz \]</div>
+\[ \tau = \beta (z_2 - z_1) = \kappa_{\lambda} \rho (z_2 - z_1) = \sigma_{\lambda} N (z_2 - z_1) \]</div>
+<p>We will choose to use the second equation, which contains the mass absorption coefficient (because Pierrehumbert’s paper from 2010 give values of <span class="math notranslate nohighlight">\(\kappa\)</span> in Figure 2).</p>
 </div>
 </div>
 <div class="section" id="the-mcclatchey-standard-atmospheres">
@@ -481,7 +498,7 @@
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Rair</span> <span class="o">=</span> <span class="mf">287.058</span>        <span class="c1"># J kg-1 K-1</span>
 <span class="c1"># Calculate air density</span>
