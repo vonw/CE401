@@ -52,9 +52,9 @@ import matplotlib.pyplot as plt
 
 # To determine the optical depth in the atmosphere, one must use the general equation above, because the number of molecules of absorbing gas changes with height in the atmosphere. Carbon dioxide is "uniformly mixed" in the atmosphere, meaning that its concentration relative to other gases does not change with height. However, the actual number of CO2 molecules decreases exponentially with height in the atmosphere because the density (and pressure) of the air decreases in this manner. Most of the water vapor in the atmosphere is contained only in the troposphere in the lowest 7 or 8 km. Therefore, one must integrate through the atmosphere to determine the optical depth using: 
 # 
-# $$ \tau = \beta (z_2 - z_1) = \kappa_{\lambda} \rho (z_2 - z_1) = \sigma_{\lambda} N (z_2 - z_1) $$
+# $$ \tau = \int_{z_1}^{z_2} \kappa_{\lambda} \rho (z) dz $$
 # 
-# We will choose to use the second equation, which contains the mass absorption coefficient (because Pierrehumbert's paper from 2010 give values of $\kappa$ in Figure 2).
+# Here we have chosen to use the specific formula of the optical depth that contains the mass absorption coefficient, because Figure 2 of  Pierrehumbert (2010) gives values of $\kappa$ for both H2O and CO2.
 # 
 
 # ## The McClatchey Standard Atmospheres
@@ -126,8 +126,12 @@ saw = saw.reindex(np.arange(0,60001,100)).interpolate(method='linear')
 # In[5]:
 
 
-co2 = 600.   # ppmv
+co2 = 330.   # ppmv; approximate concentration in 1971
+#co2 = 280.   # ppmv; pre-industrial concentration
+#co2 = 300.   # ppmv; experimental pre-industrial concentration
+#co2 = 600.   # ppmv; experiment doubled CO2 concentration
 
+# Set CO2 in all Standard Atmospheres.
 trp['co2'] = mls['co2'] = mlw['co2'] = sas['co2'] = saw['co2'] = co2
 
 
@@ -221,7 +225,9 @@ ax3.legend(['TRP','MLS','MLW','SAS','SAW']);
 
 # ## Calculating Optical Depth
 
-# Now that we have values for the number density of air and the concentrations of greenhouse gases, it is easy to calculate the optical depth. We will first use absorption cross sections for carbon dioxide at the following wavelengths:
+# Now that we have values for the air density and the concentrations of the greenhouse gases, it is easy to calculate the optical depth for individual gases. 
+# 
+# We will first use absorption cross sections for carbon dioxide at the following wavelengths:
 # 
 # |Type of Absorption|Wavenumber ($cm^{-1}$)|Wavelength ($\mu$m)| $\kappa_a$ ($m^2 kg^{-1}$) |
 # | ---------------- | -------------------- | ----------------- | -------------------------- |
@@ -230,9 +236,19 @@ ax3.legend(['TRP','MLS','MLW','SAS','SAW']);
 # | Moderate         | 590                  | 16.9              |    1                       |
 # | Weak             | 500                  | 20.0              |    0.01                    |
 # 
-# The absorption cross section values were approximated from Pierrehumbert, Physics Today, January 2011. Also, note that, for example, "5 x 10^{-23}" is 5 times 10 to the -23 power.
+# The absorption cross section values were approximated from Pierrehumbert, Physics Today, January 2011. 
 # 
-# So, the optical depth can now be calculated for each layer of the atmosphere by multiplying the absorption cross sections ($k_a$) by the number density, and then by the thickness of the atmospheric layer, as shown in the code below (for the Mid-latitude Winter Standard Atmosphere - MLW).
+# So, the optical depth can now be calculated for each layer of the atmosphere by multiplying the absorption cross sections ($\kappa_a$) by the air density, and then by the thickness of the atmospheric layer, as shown in the code below (for the Mid-latitude Winter Standard Atmosphere - MLW).
+
+# **Disclaimer:** Please note that this calculation of optical depth is for illustrative purposes only, and is over-simplified in the following ways:
+# 
+# - In most cases H2O overlaps the absorption bands of all the other GH gases. (See Figure 2 of Pierrehumbert (2010); blowup of 600-670 cm-1).
+# 
+# - We are neglecting how the line strengths of absorption lines depend on temperature in the atmosphere (https://hitran.org/docs/definitions-and-units/)
+# 
+# - We are neglecting how the widths of absorption lines depend on both temperature and pressure (https://hitran.org/docs/definitions-and-units/)
+# 
+# Accurate radiative transfer models of the atmosphere account for all of this issues.
 
 # In[8]:
 
@@ -242,8 +258,8 @@ Ka_16_7 = 100
 Ka_16_9 = 1
 Ka_20_0 = 0.01
 
-rhoCO2 = mlw.airDensity[:-1] * mlw.co2[:-1]/1e6               # Convert from ppmv to percent fraction
-dz   = np.diff(mlw.altitude) * 1000       # Calculate the height of each layer by differencing levels, and convert from km to m
+rhoCO2 = mlw.airDensity[:-1] * mlw.co2[:-1]/1e6     # Convert from ppmv to percent fraction
+dz   = np.diff(mlw.altitude) * 1000                 # Calculate the height of each layer by differencing levels; meters
 
 # Calculate and plot the optical depth at 14.6 um for CO2 for the MLW Standard Atmosphere.
 mlw['od_15_2'] = Ka_15_2 * rhoCO2 * dz
@@ -255,7 +271,7 @@ mlw['od_20_0'] = Ka_20_0 * rhoCO2 * dz
 # In[9]:
 
 
-fig, ax = plt.subplots()
+fig, ax = plt.subplots(figsize=(10,10))
 
 mlw.plot(ax=ax, x='od_15_2', y='altitude', logx=True, logy=True)
 mlw.plot(ax=ax, x='od_16_7', y='altitude', logx=True, logy=True)
@@ -296,7 +312,24 @@ ax.set_title('Infrared Transmission for CO2 in MLW Standard Atmospheres');
 ax.legend(['15.2 um','16.7 um','16.9 um','20.0 um']);
 
 
-# ## Calculating Atmospheric Absorption (= Emissivity)
+# ## Calculating Atmospheric Absorption and Emissivity
+
+# An important property of thermal radiation is given by [Kirchhoff's Law](https://en.wikipedia.org/wiki/Kirchhoff%27s_law_of_thermal_radiation). It states that 
+# 
+# ```
+# "For an arbitrary body emitting and absorbing thermal radiation in thermodynamic equilibrium, the emissivity is equal to the absorptivity."
+# ```
+# 
+# We don't have time to discuss this in CE401, but it states that a good emitter (high emissivity object) is an equally good absorber. 
+# 
+# This holds true for the atmosphere as well. So, if we calculate the absorption of the atmosphere as 
+# 
+# $$ Absorption = 1 - Transmission $$
+# 
+# then also
+# 
+# $$ Emissivity = 1 - Transmission $$
+# 
 
 # In[12]:
 
@@ -321,10 +354,4 @@ ax.set_xlabel('Absorption');
 ax.set_ylabel('Altitude (km)');
 ax.set_title('Infrared Optical Depths for CO2 in MLW Standard Atmospheres');
 ax.legend(['15.2 um','16.7 um','16.9 um','20.0 um']);
-
-
-# In[ ]:
-
-
-
 
