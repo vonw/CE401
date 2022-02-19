@@ -144,9 +144,3 @@ plt.xlabel('Month');
 plt.ylabel('Temperature anomaly (C)');
 plt.title('Equatorial temperature anomaly between ' + str(beginning_year) + ' and ' + str(ending_year));
 
-
-# In[ ]:
-
-
-
-

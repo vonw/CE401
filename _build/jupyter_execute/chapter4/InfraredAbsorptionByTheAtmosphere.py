@@ -128,8 +128,7 @@ saw = saw.reindex(np.arange(0,60001,100)).interpolate(method='linear')
 
 co2 = 330.   # ppmv; approximate concentration in 1971
 #co2 = 280.   # ppmv; pre-industrial concentration
-#co2 = 300.   # ppmv; experimental pre-industrial concentration
-#co2 = 600.   # ppmv; experiment doubled CO2 concentration
+#co2 = 560.   # ppmv; doubled CO2 concentration (from pre-industrial)
 
 # Set CO2 in all Standard Atmospheres.
 trp['co2'] = mls['co2'] = mlw['co2'] = sas['co2'] = saw['co2'] = co2
@@ -227,16 +226,16 @@ ax3.legend(['TRP','MLS','MLW','SAS','SAW']);
 
 # Now that we have values for the air density and the concentrations of the greenhouse gases, it is easy to calculate the optical depth for individual gases. 
 # 
-# We will first use absorption cross sections for carbon dioxide at the following wavelengths:
+# We will use mass absorption coefficients for carbon dioxide at the following wavelengths (from the center of the 15-um CO2 band towards the atmospheric window between 8 and 12.5 um):
 # 
 # |Type of Absorption|Wavenumber ($cm^{-1}$)|Wavelength ($\mu$m)| $\kappa_a$ ($m^2 kg^{-1}$) |
 # | ---------------- | -------------------- | ----------------- | -------------------------- |
-# | Very Strong      | 667                  | 15.2              | 9000                       |
-# | Strong           | 600                  | 16.7              |  100                       |
-# | Moderate         | 590                  | 16.9              |    1                       |
-# | Weak             | 500                  | 20.0              |    0.01                    |
+# | Very Strong      | 667                  | 15                | 2000                       |
+# | Very Strong      | 714                  | 14                |   10                       |
+# | Moderate         | 769                  | 13                |    0.1                     |
+# | Weak             | 833                  | 12                |    0.001                   |
 # 
-# The absorption cross section values were approximated from Pierrehumbert, Physics Today, January 2011. 
+# These mass absorption coefficients values were *approximated* from Figure 2 in Pierrehumbert, Physics Today, January 2011. 
 # 
 # So, the optical depth can now be calculated for each layer of the atmosphere by multiplying the absorption cross sections ($\kappa_a$) by the air density, and then by the thickness of the atmospheric layer, as shown in the code below (for the Mid-latitude Winter Standard Atmosphere - MLW).
 
@@ -253,19 +252,19 @@ ax3.legend(['TRP','MLS','MLW','SAS','SAW']);
 # In[8]:
 
 
-Ka_15_2 = 9000
-Ka_16_7 = 100
-Ka_16_9 = 1
-Ka_20_0 = 0.01
+Ka_15 = 2000
+Ka_14 = 10
+Ka_13 = 0.1
+Ka_12 = 0.001
 
 rhoCO2 = mlw.airDensity[:-1] * mlw.co2[:-1]/1e6     # Convert from ppmv to percent fraction
 dz   = np.diff(mlw.altitude) * 1000                 # Calculate the height of each layer by differencing levels; meters
 
 # Calculate and plot the optical depth at 14.6 um for CO2 for the MLW Standard Atmosphere.
-mlw['od_15_2'] = Ka_15_2 * rhoCO2 * dz
-mlw['od_16_7'] = Ka_16_7 * rhoCO2 * dz
-mlw['od_16_9'] = Ka_16_9 * rhoCO2 * dz
-mlw['od_20_0'] = Ka_20_0 * rhoCO2 * dz
+mlw['od_15'] = Ka_15 * rhoCO2 * dz
+mlw['od_14'] = Ka_14 * rhoCO2 * dz
+mlw['od_13'] = Ka_13 * rhoCO2 * dz
+mlw['od_12'] = Ka_12 * rhoCO2 * dz
 
 
 # In[9]:
@@ -273,26 +272,28 @@ mlw['od_20_0'] = Ka_20_0 * rhoCO2 * dz
 
 fig, ax = plt.subplots(figsize=(10,10))
 
-mlw.plot(ax=ax, x='od_15_2', y='altitude', logx=True, logy=True)
-mlw.plot(ax=ax, x='od_16_7', y='altitude', logx=True, logy=True)
-mlw.plot(ax=ax, x='od_16_9', y='altitude', logx=True, logy=True)
-mlw.plot(ax=ax, x='od_20_0', y='altitude', logx=True, logy=True)
+mlw.plot(ax=ax, x='od_15', y='altitude', logx=True, logy=True)
+mlw.plot(ax=ax, x='od_14', y='altitude', logx=True, logy=True)
+mlw.plot(ax=ax, x='od_13', y='altitude', logx=True, logy=True)
+mlw.plot(ax=ax, x='od_12', y='altitude', logx=True, logy=True)
 ax.grid()
 ax.set_xlabel('Optical Depth');
 ax.set_ylabel('Altitude (km)');
 ax.set_title('Infrared Optical Depths for CO2 in MLW Standard Atmospheres');
-ax.legend(['15.2 um','16.7 um','16.9 um','20.0 um']);
+ax.legend(['15 um','14 um','13 um','12 um']);
 
 
 # ## Calculating Atmospheric Transmission
 
+# ### As a function of altitude
+
 # In[10]:
 
 
-mlw['T_15_2'] = np.exp(-mlw.od_15_2) * 100
-mlw['T_16_7'] = np.exp(-mlw.od_16_7) * 100
-mlw['T_16_9'] = np.exp(-mlw.od_16_9) * 100
-mlw['T_20_0'] = np.exp(-mlw.od_20_0) * 100
+mlw['T_15'] = np.exp(-mlw.od_15) * 100
+mlw['T_14'] = np.exp(-mlw.od_14) * 100
+mlw['T_13'] = np.exp(-mlw.od_13) * 100
+mlw['T_12'] = np.exp(-mlw.od_12) * 100
 
 
 # In[11]:
@@ -300,16 +301,48 @@ mlw['T_20_0'] = np.exp(-mlw.od_20_0) * 100
 
 fig, ax = plt.subplots(figsize=(10,10))
 
-mlw.plot(ax=ax, x='T_15_2', y='altitude', logx=True)
-mlw.plot(ax=ax, x='T_16_7', y='altitude', logx=True)
-mlw.plot(ax=ax, x='T_16_9', y='altitude', logx=True)
-mlw.plot(ax=ax, x='T_20_0', y='altitude', logx=True)
+mlw.plot(ax=ax, x='T_15', y='altitude', logx=True)
+mlw.plot(ax=ax, x='T_14', y='altitude', logx=True)
+mlw.plot(ax=ax, x='T_13', y='altitude', logx=True)
+mlw.plot(ax=ax, x='T_12', y='altitude', logx=True)
 ax.axis([0.1, 120, 0, 60])
 ax.grid()
 ax.set_xlabel('Transmission');
 ax.set_ylabel('Altitude (km)');
 ax.set_title('Infrared Transmission for CO2 in MLW Standard Atmospheres');
-ax.legend(['15.2 um','16.7 um','16.9 um','20.0 um']);
+ax.legend(['15 um','14 um','13 um','12 um']);
+
+
+# ### Throughout the entire atmosphere
+
+# The above figure shows the transmission as a function of altitude in the atmosphere. But how do we calculate the transmission through the entire atmosphere?
+# 
+# There are two ways to do this:
+# 
+# 1. Multiply all the transmission from each layer together, or
+# 
+# $$ T_{total} = e^{- \tau_1} e^{- \tau_2} e^{- \tau_3} ... $$
+# 
+# 2. Or (because of the properties of exponents) one can just add up all the optical depths for each layer and take the exponential of that sum
+# 
+# $$ T_{total} = e^{- \tau_1} e^{- \tau_2} e^{- \tau_3} ... = e^{- (\tau_1 +  \tau_2 + \tau_3 ...)} $$
+# 
+# Option 2 is much easier for us here; see the code below.
+
+# In[12]:
+
+
+# Calculate total transmission in the atmosphere by summing all optical depths
+Ttotal_15 = np.exp(-mlw.od_15.sum())
+Ttotal_14 = np.exp(-mlw.od_14.sum())
+Ttotal_13 = np.exp(-mlw.od_13.sum())
+Ttotal_12 = np.exp(-mlw.od_12.sum())
+
+# Print results
+print(f'Total transmission in atmosphere (%) at 15 um = {Ttotal_15*100:.2f} %')
+print(f'Total transmission in atmosphere (%) at 16 um = {Ttotal_14*100:.2f} %')
+print(f'Total transmission in atmosphere (%) at 17 um = {Ttotal_13*100:.2f} %')
+print(f'Total transmission in atmosphere (%) at 18 um = {Ttotal_12*100:.2f} %')
 
 
 # ## Calculating Atmospheric Absorption and Emissivity
@@ -331,27 +364,47 @@ ax.legend(['15.2 um','16.7 um','16.9 um','20.0 um']);
 # $$ Emissivity = 1 - Transmission $$
 # 
 
-# In[12]:
-
-
-mlw['A_15_2'] = (1. - np.exp(-mlw.od_15_2)) * 100        # Convert from fraction to percent
-mlw['A_16_7'] = (1. - np.exp(-mlw.od_16_7)) * 100
-mlw['A_16_9'] = (1. - np.exp(-mlw.od_16_9)) * 100
-mlw['A_20_0'] = (1. - np.exp(-mlw.od_20_0)) * 100
-
+# ### As a function of altitude
 
 # In[13]:
 
 
+mlw['A_15'] = (1. - np.exp(-mlw.od_15)) * 100        # Convert from fraction to percent
+mlw['A_14'] = (1. - np.exp(-mlw.od_14)) * 100
+mlw['A_13'] = (1. - np.exp(-mlw.od_13)) * 100
+mlw['A_12'] = (1. - np.exp(-mlw.od_12)) * 100
+
+
+# In[14]:
+
+
 fig, ax = plt.subplots(figsize=(10,10))
 
-mlw.plot(ax=ax, x='A_15_2', y='altitude', logx=True)
-mlw.plot(ax=ax, x='A_16_7', y='altitude', logx=True)
-mlw.plot(ax=ax, x='A_16_9', y='altitude', logx=True)
-mlw.plot(ax=ax, x='A_20_0', y='altitude', logx=True)
+mlw.plot(ax=ax, x='A_15', y='altitude', logx=True)
+mlw.plot(ax=ax, x='A_14', y='altitude', logx=True)
+mlw.plot(ax=ax, x='A_13', y='altitude', logx=True)
+mlw.plot(ax=ax, x='A_12', y='altitude', logx=True)
 ax.grid()
 ax.set_xlabel('Absorption');
 ax.set_ylabel('Altitude (km)');
 ax.set_title('Infrared Optical Depths for CO2 in MLW Standard Atmospheres');
-ax.legend(['15.2 um','16.7 um','16.9 um','20.0 um']);
+ax.legend(['15 um','14 um','13 um','12 um']);
+
+
+# ### Throughout the entire atmosphere
+
+# In[15]:
+
+
+# Print results
+print(f'Total transmission in atmosphere (%) at 15 um = {(1 - Ttotal_15)*100:.2f} %')
+print(f'Total transmission in atmosphere (%) at 14 um = {(1 - Ttotal_14)*100:.2f} %')
+print(f'Total transmission in atmosphere (%) at 13 um = {(1 - Ttotal_13)*100:.2f} %')
+print(f'Total transmission in atmosphere (%) at 12 um = {(1 - Ttotal_12)*100:.2f} %')
+
+
+# In[ ]:
+
+
+
 
