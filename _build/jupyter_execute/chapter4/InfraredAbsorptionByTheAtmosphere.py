@@ -340,9 +340,9 @@ Ttotal_12 = np.exp(-mlw.od_12.sum())
 
 # Print results
 print(f'Total transmission in atmosphere (%) at 15 um = {Ttotal_15*100:.2f} %')
-print(f'Total transmission in atmosphere (%) at 16 um = {Ttotal_14*100:.2f} %')
-print(f'Total transmission in atmosphere (%) at 17 um = {Ttotal_13*100:.2f} %')
-print(f'Total transmission in atmosphere (%) at 18 um = {Ttotal_12*100:.2f} %')
+print(f'Total transmission in atmosphere (%) at 14 um = {Ttotal_14*100:.2f} %')
+print(f'Total transmission in atmosphere (%) at 13 um = {Ttotal_13*100:.2f} %')
+print(f'Total transmission in atmosphere (%) at 12 um = {Ttotal_12*100:.2f} %')
 
 
 # ## Calculating Atmospheric Absorption and Emissivity
