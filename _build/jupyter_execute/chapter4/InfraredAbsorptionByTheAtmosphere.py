@@ -397,10 +397,10 @@ ax.legend(['15 um','14 um','13 um','12 um']);
 
 
 # Print results
-print(f'Total transmission in atmosphere (%) at 15 um = {(1 - Ttotal_15)*100:.2f} %')
-print(f'Total transmission in atmosphere (%) at 14 um = {(1 - Ttotal_14)*100:.2f} %')
-print(f'Total transmission in atmosphere (%) at 13 um = {(1 - Ttotal_13)*100:.2f} %')
-print(f'Total transmission in atmosphere (%) at 12 um = {(1 - Ttotal_12)*100:.2f} %')
+print(f'Total absorption in atmosphere (%) at 15 um = {(1 - Ttotal_15)*100:.2f} %')
+print(f'Total absorption in atmosphere (%) at 14 um = {(1 - Ttotal_14)*100:.2f} %')
+print(f'Total absorption in atmosphere (%) at 13 um = {(1 - Ttotal_13)*100:.2f} %')
+print(f'Total absorption in atmosphere (%) at 12 um = {(1 - Ttotal_12)*100:.2f} %')
 
 
 # In[ ]:
