@@ -41,20 +41,18 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Homework" href="../homework.html" />
+    <link rel="next" title="Infrared Absorption by the Atmosphere" href="InfraredAbsorptionByTheAtmosphere.html" />
     <link rel="prev" title="Calculation of the Solar Constant" href="SolarConstant.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -172,6 +170,11 @@
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      Insolation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="InfraredAbsorptionByTheAtmosphere.html">
+     Infrared Absorption by the Atmosphere
     </a>
    </li>
   </ul>
@@ -399,7 +402,7 @@
 <p><span class="math notranslate nohighlight">\(\delta = -23.44^{\circ}\cos{[(t_j+10 days)*(360^{\circ}/365.25 days)]}\)</span> is the declination angle.</p>
 <p><span class="math notranslate nohighlight">\(\cos{\theta_s} = \sin{\phi}sin{\delta} + \cos{\phi}\cos{\delta}\cos{h}\)</span>, where phi is the latitude and h is the hour angle.</p>
 <p><span class="math notranslate nohighlight">\(h=(12-t)*(15^{\circ} / 1 hour)\)</span>, where t is the local time and 15 is the number of degrees that the Earth rotates in one hour.  The conversion factor converts hours to degrees.</p>
-<p><span class="math notranslate nohighlight">\(Q_{dayavg} = (S_o/\pi)(d_m/d)^2[h_o\sin{\phi}\sin{\delta}+\cos{\phi}\cos{\delta}\sin{h_o}]\)</span>, where <span class="math notranslate nohighlight">\(h_o = -\tan{\phi}\tan{\delta}\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(Q_{dayavg} = (S_o/\pi)(d_m/d)^2[h_o\sin{\phi}\sin{\delta}+\cos{\phi}\cos{\delta}\sin{h_o}]\)</span>, where cos(<span class="math notranslate nohighlight">\(h_o) = -\tan{\phi}\tan{\delta}\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">earth_sun_distance</span><span class="p">(</span><span class="n">day</span><span class="p">):</span>
@@ -510,7 +513,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1590ca1c0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x115a47760&gt;
 </pre></div>
 </div>
 <img alt="../_images/Insolation_17_1.png" src="../_images/Insolation_17_1.png" />
@@ -542,31 +545,22 @@
               </div>
               
             
-                
-
-
-
-<div class='prev-next-bottom'>
-    
-    <div id="prev">
-        <a class="left-prev" href="SolarConstant.html" title="previous page">
-            <i class="prevnext-label fas fa-angle-left"></i>
-            <div class="prevnext-info">
-                <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Calculation of the Solar Constant</p>
-            </div>
-        </a>
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="SolarConstant.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Calculation of the Solar Constant</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="InfraredAbsorptionByTheAtmosphere.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Infrared Absorption by the Atmosphere</p>
     </div>
-     <div id="next">
-        <a class="right-next" href="../homework.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Homework</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
-
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             
         </div>
