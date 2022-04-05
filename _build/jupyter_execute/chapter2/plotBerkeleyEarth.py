@@ -33,7 +33,7 @@ be
 
 # ### Plot geographic distribution of 1951-1980 climatology
 
-# In[3]:
+# In[5]:
 
 
 # Select a particular month to view
@@ -51,7 +51,7 @@ plt.title('Climatology (1951-1980) for ' + month);
 
 # ### Plot geographic distribution of temperature anomalies for given year and month
 
-# In[4]:
+# In[6]:
 
 
 # Select a particular year and month to view
@@ -70,7 +70,7 @@ plt.title('Temperature Anomalies for ' + month + ' ' + str(year));
 
 # ### Plot geographic distribution of actual temperatures for given year and month
 
-# In[5]:
+# In[7]:
 
 
 # Select a particular year and month to view
@@ -89,7 +89,7 @@ plt.title('Temperatures for ' + month + ' ' + str(year));
 
 # ### Calculate global annual temperature anomalies
 
-# In[6]:
+# In[8]:
 
 
 # Select a particular year and month to view
@@ -116,7 +116,7 @@ plt.title('Global monthly temperature anomaly between ' + str(beginning_year) + 
 
 # ### Calculate longitudinally-averaged temperature anomalies
 
-# In[7]:
+# In[9]:
 
 
 # Select the latitude range to average over

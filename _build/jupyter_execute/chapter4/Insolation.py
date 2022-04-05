@@ -25,7 +25,7 @@ import matplotlib.pyplot as plt
 
 # $h=(12-t)*(15^{\circ} / 1 hour)$, where t is the local time and 15 is the number of degrees that the Earth rotates in one hour.  The conversion factor converts hours to degrees.
 
-# $Q_{dayavg} = (S_o/\pi)(d_m/d)^2[h_o\sin{\phi}\sin{\delta}+\cos{\phi}\cos{\delta}\sin{h_o}]$, where $h_o = -\tan{\phi}\tan{\delta}$.
+# $Q_{dayavg} = (S_o/\pi)(d_m/d)^2[h_o\sin{\phi}\sin{\delta}+\cos{\phi}\cos{\delta}\sin{h_o}]$, where cos($h_o) = -\tan{\phi}\tan{\delta}$.
 
 # In[2]:
 
