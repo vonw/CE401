@@ -1,3 +1,8 @@
 chapter4/.ipynb_checkpoints/InfraredAbsorptionByTheAtmosphere-checkpoint.ipynb
 .ipynb_checkpoints/chapter4-checkpoint.md
 .ipynb_checkpoints/.gitignore-checkpoint
+.DS_Store
+_build/.DS_Store
+_build/html/.DS_Store
+_build/jupyter_execute/.DS_Store
+chapter2/.DS_Store
