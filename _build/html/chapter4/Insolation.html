@@ -402,15 +402,20 @@ const thebe_selector_output = ".output, .cell_output"
 <p><span class="math notranslate nohighlight">\(\delta = -23.44^{\circ}\cos{[(t_j+10 days)*(360^{\circ}/365.25 days)]}\)</span> is the declination angle.</p>
 <p><span class="math notranslate nohighlight">\(\cos{\theta_s} = \sin{\phi}sin{\delta} + \cos{\phi}\cos{\delta}\cos{h}\)</span>, where phi is the latitude and h is the hour angle.</p>
 <p><span class="math notranslate nohighlight">\(h=(12-t)*(15^{\circ} / 1 hour)\)</span>, where t is the local time and 15 is the number of degrees that the Earth rotates in one hour.  The conversion factor converts hours to degrees.</p>
+<p><span class="math notranslate nohighlight">\( d_m \)</span> is the mean distance from the Sun to the Earth, and is equal to the length of semi-major axis (a) of the elliptical orbit (which is 149.6 million km).</p>
+<p>d is the distance between the Earth and Sun on any given day, where the closest approach (perihelion) occurs on 3 January.</p>
+<div class="math notranslate nohighlight">
+\[ d = \frac{a(1+\epsilon^2)}{1 + \epsilon cos(\theta)} \]</div>
+<p>where <span class="math notranslate nohighlight">\( \epsilon \)</span> is the eccentricity of Earth’s orbit (0.017) and <span class="math notranslate nohighlight">\( \theta \)</span> is an angle that relates the day number to the correct location of Earth in the elliptical orbit for that day.</p>
 <p><span class="math notranslate nohighlight">\(Q_{dayavg} = (S_o/\pi)(d_m/d)^2[h_o\sin{\phi}\sin{\delta}+\cos{\phi}\cos{\delta}\sin{h_o}]\)</span>, where cos(<span class="math notranslate nohighlight">\(h_o) = -\tan{\phi}\tan{\delta}\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">earth_sun_distance</span><span class="p">(</span><span class="n">day</span><span class="p">):</span>
     <span class="n">a</span>     <span class="o">=</span> <span class="mf">149.6e6</span>                   <span class="c1"># km</span>
     <span class="n">e</span>     <span class="o">=</span> <span class="mf">0.017</span>
-    <span class="n">theta</span> <span class="o">=</span> <span class="n">day</span> <span class="o">*</span> <span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">/</span> <span class="mf">365.25</span><span class="p">)</span>     <span class="c1"># This is only an approximation.</span>
-    <span class="n">r</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">e</span><span class="o">*</span><span class="n">e</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">e</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">r</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="p">(</span><span class="n">day</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">/</span> <span class="mf">365.25</span><span class="p">)</span>     <span class="c1"># This is only an approximation.</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">e</span><span class="o">*</span><span class="n">e</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">e</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">d</span>
 </pre></div>
 </div>
 </div>
@@ -418,8 +423,8 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">declination</span><span class="p">(</span><span class="n">day</span><span class="p">):</span>
-    <span class="n">d</span> <span class="o">=</span> <span class="o">-</span><span class="mf">23.44</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span> <span class="p">(</span><span class="mf">2.</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">/</span> <span class="mf">365.25</span> <span class="o">*</span> <span class="p">(</span><span class="n">day</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span> <span class="p">)</span>   <span class="c1"># Approximate</span>
-    <span class="k">return</span> <span class="n">d</span>
+    <span class="n">dec</span> <span class="o">=</span> <span class="o">-</span><span class="mf">23.44</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span> <span class="p">(</span><span class="mf">2.</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">/</span> <span class="mf">365.25</span> <span class="o">*</span> <span class="p">(</span><span class="n">day</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span> <span class="p">)</span>   <span class="c1"># Approximate</span>
+    <span class="k">return</span> <span class="n">dec</span>
 </pre></div>
 </div>
 </div>
@@ -486,7 +491,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Insolation_15_0.png" src="../_images/Insolation_15_0.png" />
+<img alt="../_images/Insolation_16_0.png" src="../_images/Insolation_16_0.png" />
 </div>
 </div>
 </div>
@@ -513,10 +518,10 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x115a47760&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1153df670&gt;
 </pre></div>
 </div>
-<img alt="../_images/Insolation_17_1.png" src="../_images/Insolation_17_1.png" />
+<img alt="../_images/Insolation_18_1.png" src="../_images/Insolation_18_1.png" />
 </div>
 </div>
 </div>

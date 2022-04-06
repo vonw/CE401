@@ -25,6 +25,14 @@ import matplotlib.pyplot as plt
 
 # $h=(12-t)*(15^{\circ} / 1 hour)$, where t is the local time and 15 is the number of degrees that the Earth rotates in one hour.  The conversion factor converts hours to degrees.
 
+# $ d_m $ is the mean distance from the Sun to the Earth, and is equal to the length of semi-major axis (a) of the elliptical orbit (which is 149.6 million km).
+# 
+# d is the distance between the Earth and Sun on any given day, where the closest approach (perihelion) occurs on 3 January.
+# 
+# $$ d = \frac{a(1+\epsilon^2)}{1 + \epsilon cos(\theta)} $$
+# 
+# where $ \epsilon $ is the eccentricity of Earth's orbit (0.017) and $ \theta $ is an angle that relates the day number to the correct location of Earth in the elliptical orbit for that day.
+
 # $Q_{dayavg} = (S_o/\pi)(d_m/d)^2[h_o\sin{\phi}\sin{\delta}+\cos{\phi}\cos{\delta}\sin{h_o}]$, where cos($h_o) = -\tan{\phi}\tan{\delta}$.
 
 # In[2]:
@@ -33,17 +41,17 @@ import matplotlib.pyplot as plt
 def earth_sun_distance(day):
     a     = 149.6e6                   # km
     e     = 0.017
-    theta = day * ((2*np.pi) / 365.25)     # This is only an approximation.
-    r = a*(1-e*e)/(1+e * np.cos(theta))
-    return r
+    theta = (day - 3) * ((2*np.pi) / 365.25)     # This is only an approximation.
+    d = a*(1-e*e)/(1+e * np.cos(theta))
+    return d
 
 
 # In[3]:
 
 
 def declination(day):
-    d = -23.44 * np.cos( (2.*np.pi) / 365.25 * (day + 10) )   # Approximate
-    return d
+    dec = -23.44 * np.cos( (2.*np.pi) / 365.25 * (day + 10) )   # Approximate
+    return dec
 
 
 # In[4]:
