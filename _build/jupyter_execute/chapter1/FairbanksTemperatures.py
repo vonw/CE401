@@ -25,7 +25,7 @@ import matplotlib.pyplot as plt
 from scipy.stats import norm
 import statistics
   
-# Plot between -10 and 10 with .001 steps.
+# ....These distributions roughly approximate those in Figure 1.1 in Dessler's Introduction to Modern Climate Change
 x = np.arange(21, 43, 0.1)
 F1970s = norm.pdf(x, 31, 2.75)
 F2010s = norm.pdf(x, 33, 2.75)

@@ -491,7 +491,7 @@ title="Print to PDF"
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
 <span class="kn">import</span> <span class="nn">statistics</span>
   
-<span class="c1"># Plot between -10 and 10 with .001 steps.</span>
+<span class="c1"># ....These distributions roughly approximate those in Figure 1.1 in Dessler&#39;s Introduction to Modern Climate Change</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">21</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
 <span class="n">F1970s</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mf">2.75</span><span class="p">)</span>
 <span class="n">F2010s</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mf">2.75</span><span class="p">)</span>
