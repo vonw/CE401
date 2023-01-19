@@ -1,3 +1,4 @@
 # An Introduction to the Climate Problem
 
-There are currently no computational notebooks for Chapter 1 - *An Introduction to the Climate Problem*.
+Chapter 1 includes the following computational notebooks:
+- Comparing two temperature distributions for Fairbanks, Alaska
