@@ -5,6 +5,8 @@ format: jb-book
 root: intro
 chapters:
 - file: chapter1.md
+  sections:
+    - file: chapter1/FairbanksTemperatures.ipynb
 - file: chapter2.md
   sections:
     - file: chapter2/LaurentideIceSheet_and_SeaLevel.ipynb
@@ -22,6 +24,3 @@ chapters:
 - file: chapter10.md
   sections:
     - file: chapter10/ExponentialGrowth_Dessler.ipynb
-- file: homework.md
-  sections:
-    - file: homework/hw2.ipynb
