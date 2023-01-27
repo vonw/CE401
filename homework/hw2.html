@@ -124,7 +124,7 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../chapter1/FairbanksTemperatures.html">
-     Comparing two histograms
+     Comparing temperature distributions
     </a>
    </li>
   </ul>
@@ -167,6 +167,11 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../chapter3/RadiationInSpectralBands.html">
+     Calculate Percentage of Radiation in Spectral Bands
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../chapter3/PowerEmittedByHuman.html">
      Calculate the Power Emitted by a Human
     </a>
@@ -174,50 +179,6 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="../chapter3/BodiesEmittingInARoom.html">
      Bodies Emitting in a Room
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../chapter4.html">
-   A Simple Climate Model
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-  <label for="toctree-checkbox-4">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../chapter4/SolarConstant.html">
-     Calculation of the Solar Constant
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../chapter4/Insolation.html">
-     Insolation
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../chapter4/InfraredAbsorptionByTheAtmosphere.html">
-     Infrared Absorption by the Atmosphere
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../chapter10.html">
-   Exponential Growth
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
-  <label for="toctree-checkbox-5">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../chapter10/ExponentialGrowth_Dessler.html">
-     Exponential Growth
     </a>
    </li>
   </ul>
@@ -582,27 +543,28 @@ title="Print to PDF"
 <span class="n">kB</span> <span class="o">=</span> <span class="mf">1.381e-23</span>                            <span class="c1"># m2 kg s-2 K-1</span>
 <span class="n">dl</span> <span class="o">=</span> <span class="mf">0.01</span>                                 <span class="c1"># meters</span>
 <span class="n">l</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">dl</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="n">dl</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e-6</span>           <span class="c1"># meters</span>
-<span class="n">B</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">2</span><span class="o">*</span><span class="n">h</span><span class="o">*</span><span class="n">c</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">l</span><span class="o">**</span><span class="mi">5</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">h</span><span class="o">*</span><span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">l</span> <span class="o">*</span><span class="n">kB</span> <span class="o">*</span> <span class="n">T</span><span class="p">))</span> <span class="o">-</span> <span class="mf">1.</span><span class="p">))</span> <span class="o">*</span> <span class="mf">1e-6</span>      <span class="c1"># W m-2 um-1</span>
+<span class="n">B</span>  <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">h</span><span class="o">*</span><span class="n">c</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">l</span><span class="o">**</span><span class="mi">5</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">h</span><span class="o">*</span><span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">l</span> <span class="o">*</span><span class="n">kB</span> <span class="o">*</span> <span class="n">T</span><span class="p">))</span> <span class="o">-</span> <span class="mf">1.</span><span class="p">))</span> <span class="o">*</span> <span class="mf">1e-6</span>      <span class="c1"># W m-2 um-1</span>
+<span class="n">spectralFlux</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">B</span>      <span class="c1"># W m-2 um-1</span>
 
-<span class="c1"># Convert B to an Xarray data array</span>
-<span class="n">B</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;wavelength&#39;</span><span class="p">:</span> <span class="n">l</span><span class="o">*</span><span class="mf">1e6</span><span class="p">},</span> <span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">])</span>
+<span class="c1"># Convert spectralFlux to an Xarray data array</span>
+<span class="n">spectralFlux</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">spectralFlux</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;wavelength&#39;</span><span class="p">:</span> <span class="n">l</span><span class="o">*</span><span class="mf">1e6</span><span class="p">},</span> <span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">])</span>
 
 <span class="c1"># Sum the radiation in uv, vis, nir and ir spectral bands:</span>
 <span class="c1">#     UV            = 0   to 0.3 microns</span>
 <span class="c1">#     visible       = 0.3 to 0.7 microns</span>
 <span class="c1">#     near infrared = 0.7 to 4 microns</span>
 <span class="c1">#     infrared      = 4   to 50 microns</span>
-<span class="n">uv</span>  <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">wavelength</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.3</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="n">dl</span>
-<span class="n">vis</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">wavelength</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span><span class="mf">0.7</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="n">dl</span>
-<span class="n">nir</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">wavelength</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mf">0.7</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="n">dl</span>
-<span class="n">ir</span>  <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">wavelength</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">50</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="n">dl</span>
+<span class="n">uv</span>  <span class="o">=</span> <span class="n">spectralFlux</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">wavelength</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.3</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="n">dl</span>
+<span class="n">vis</span> <span class="o">=</span> <span class="n">spectralFlux</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">wavelength</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span><span class="mf">0.7</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="n">dl</span>
+<span class="n">nir</span> <span class="o">=</span> <span class="n">spectralFlux</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">wavelength</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mf">0.7</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="n">dl</span>
+<span class="n">ir</span>  <span class="o">=</span> <span class="n">spectralFlux</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">wavelength</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">50</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="n">dl</span>
 
 <span class="c1"># Calculate the percent contribution in each band</span>
-<span class="n">E</span>     <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="n">dl</span>                           <span class="c1"># Total flux in W m-2; Should be nearly equal to sigma * T^4 !!</span>
-<span class="n">p_uv</span>  <span class="o">=</span> <span class="n">uv</span> <span class="o">/</span> <span class="n">E</span> <span class="o">*</span> <span class="mi">100</span>
-<span class="n">p_vis</span> <span class="o">=</span> <span class="n">vis</span> <span class="o">/</span> <span class="n">E</span> <span class="o">*</span> <span class="mi">100</span>
-<span class="n">p_nir</span> <span class="o">=</span> <span class="n">nir</span> <span class="o">/</span> <span class="n">E</span> <span class="o">*</span> <span class="mi">100</span>
-<span class="n">p_ir</span>  <span class="o">=</span> <span class="n">ir</span> <span class="o">/</span> <span class="n">E</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">Flux</span>  <span class="o">=</span> <span class="n">spectralFlux</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="n">dl</span>                           <span class="c1"># Total flux in W m-2; Should be nearly equal to sigma * T^4 !!</span>
+<span class="n">p_uv</span>  <span class="o">=</span> <span class="n">uv</span> <span class="o">/</span> <span class="n">Flux</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">p_vis</span> <span class="o">=</span> <span class="n">vis</span> <span class="o">/</span> <span class="n">Flux</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">p_nir</span> <span class="o">=</span> <span class="n">nir</span> <span class="o">/</span> <span class="n">Flux</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">p_ir</span>  <span class="o">=</span> <span class="n">ir</span> <span class="o">/</span> <span class="n">Flux</span> <span class="o">*</span> <span class="mi">100</span>
 
 <span class="c1">#%% Sum all the spectral bands; should be close to 100% !!</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Percent UV:            &#39;</span><span class="p">,</span> <span class="n">p_uv</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
@@ -615,7 +577,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Percent UV:             0.03450279720703203
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Percent UV:             0.034502797207032025
 Percent visible:        11.862449236428064
 Percent near infrared:  83.81426836992065
 Percent infrared:       4.327490415712202

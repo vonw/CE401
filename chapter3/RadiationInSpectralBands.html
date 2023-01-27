@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Calculation of the Equilibrium Temperature of Earth &#8212; Climate Change Science and Engineering</title>
+    <title>Calculate Percentage of Radiation in Spectral Bands &#8212; Climate Change Science and Engineering</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,6 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Calculate the Power Emitted by a Human" href="PowerEmittedByHuman.html" />
+    <link rel="prev" title="Calculate Planck curves as a function of wavelength and temperature" href="PlancksLaw.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -111,7 +113,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../chapter1.html">
    An Introduction to the Climate Problem
@@ -151,33 +153,33 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../chapter3.html">
    Radiation and Energy Balance
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
   <label for="toctree-checkbox-3">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2">
-    <a class="reference internal" href="../chapter3/PlancksLaw.html">
+    <a class="reference internal" href="PlancksLaw.html">
      Calculate Planck curves as a function of wavelength and temperature
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../chapter3/RadiationInSpectralBands.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      Calculate Percentage of Radiation in Spectral Bands
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../chapter3/PowerEmittedByHuman.html">
+    <a class="reference internal" href="PowerEmittedByHuman.html">
      Calculate the Power Emitted by a Human
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../chapter3/BodiesEmittingInARoom.html">
+    <a class="reference internal" href="BodiesEmittingInARoom.html">
      Bodies Emitting in a Room
     </a>
    </li>
@@ -242,7 +244,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/vonw/CE401/main?urlpath=lab/tree/chapter4/EquilibriumTemperatureOfEarth.ipynb"
+        <a href="https://mybinder.org/v2/gh/vonw/CE401/main?urlpath=lab/tree/chapter3/RadiationInSpectralBands.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -302,7 +304,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/vonw/CE401/issues/new?title=Issue%20on%20page%20%2Fchapter4/EquilibriumTemperatureOfEarth.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/vonw/CE401/issues/new?title=Issue%20on%20page%20%2Fchapter3/RadiationInSpectralBands.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -330,7 +332,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/chapter4/EquilibriumTemperatureOfEarth.ipynb"
+        <a href="../_sources/chapter3/RadiationInSpectralBands.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -390,8 +392,8 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#equation-4-3-b-in-dessler">
-   Equation 4.3(b) in Dessler.
+  <a class="reference internal nav-link" href="#for-a-given-temperature-t-calculate-the-proportion-of-radiation-emitted-in-various-spectral-bands-uv-visible-near-infrared-and-infrared">
+   For a given temperature T, calculate the proportion of radiation emitted in various spectral bands (UV, visible, near-infrared, and infrared).
   </a>
  </li>
 </ul>
@@ -403,7 +405,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Calculation of the Equilibrium Temperature of Earth</h1>
+                <h1>Calculate Percentage of Radiation in Spectral Bands</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -414,8 +416,8 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#equation-4-3-b-in-dessler">
-   Equation 4.3(b) in Dessler.
+  <a class="reference internal nav-link" href="#for-a-given-temperature-t-calculate-the-proportion-of-radiation-emitted-in-various-spectral-bands-uv-visible-near-infrared-and-infrared">
+   For a given temperature T, calculate the proportion of radiation emitted in various spectral bands (UV, visible, near-infrared, and infrared).
   </a>
  </li>
 </ul>
@@ -428,27 +430,81 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="calculation-of-the-equilibrium-temperature-of-earth">
-<h1>Calculation of the Equilibrium Temperature of Earth<a class="headerlink" href="#calculation-of-the-equilibrium-temperature-of-earth" title="Permalink to this headline">#</a></h1>
-<section id="equation-4-3-b-in-dessler">
-<h2>Equation 4.3(b) in Dessler.<a class="headerlink" href="#equation-4-3-b-in-dessler" title="Permalink to this headline">#</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="calculate-percentage-of-radiation-in-spectral-bands">
+<h1>Calculate Percentage of Radiation in Spectral Bands<a class="headerlink" href="#calculate-percentage-of-radiation-in-spectral-bands" title="Permalink to this headline">#</a></h1>
+<p><i>© Von P. Walden, Washington State University</i></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">S</span> <span class="o">=</span> <span class="mi">1360</span>                  <span class="c1"># W m-2</span>
-<span class="n">a</span> <span class="o">=</span> <span class="mf">0.3</span>                   <span class="c1"># unitless</span>
-<span class="n">Tequilibrium</span> <span class="o">=</span> <span class="p">(</span><span class="n">S</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="mf">5.67e-8</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="for-a-given-temperature-t-calculate-the-proportion-of-radiation-emitted-in-various-spectral-bands-uv-visible-near-infrared-and-infrared">
+<h2>For a given temperature T, calculate the proportion of radiation emitted in various spectral bands (UV, visible, near-infrared, and infrared).<a class="headerlink" href="#for-a-given-temperature-t-calculate-the-proportion-of-radiation-emitted-in-various-spectral-bands-uv-visible-near-infrared-and-infrared" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Temperature of the object</span>
+<span class="c1">#T  = 5700.                                 # K</span>
+<span class="n">T</span>  <span class="o">=</span> <span class="mf">3300.</span>                                 <span class="c1"># K</span>
+<span class="c1">#T  = 300.                                  # K</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The Equilibrium Temperature of Earth is:&#39;</span><span class="p">,</span> <span class="n">Tequilibrium</span><span class="p">,</span> <span class="s1">&#39;K&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate the Planck radiation distribution between 0 and 50 microns</span>
+<span class="n">c</span>  <span class="o">=</span> <span class="mf">2.998e8</span>                              <span class="c1"># m s-1</span>
+<span class="n">h</span>  <span class="o">=</span> <span class="mf">6.626e-34</span>                            <span class="c1"># m2 kg s-1</span>
+<span class="n">kB</span> <span class="o">=</span> <span class="mf">1.381e-23</span>                            <span class="c1"># m2 kg s-2 K-1</span>
+<span class="n">dl</span> <span class="o">=</span> <span class="mf">0.01</span>                                 <span class="c1"># meters</span>
+<span class="n">l</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">dl</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="n">dl</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e-6</span>           <span class="c1"># meters</span>
+<span class="n">B</span>  <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">h</span><span class="o">*</span><span class="n">c</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">l</span><span class="o">**</span><span class="mi">5</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">h</span><span class="o">*</span><span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">l</span> <span class="o">*</span><span class="n">kB</span> <span class="o">*</span> <span class="n">T</span><span class="p">))</span> <span class="o">-</span> <span class="mf">1.</span><span class="p">))</span> <span class="o">*</span> <span class="mf">1e-6</span>      <span class="c1"># W m-2 um-1</span>
+<span class="n">spectralFlux</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">B</span>      <span class="c1"># W m-2 um-1</span>
+
+<span class="c1"># Convert spectralFlux to an Xarray data array</span>
+<span class="n">spectralFlux</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">spectralFlux</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;wavelength&#39;</span><span class="p">:</span> <span class="n">l</span><span class="o">*</span><span class="mf">1e6</span><span class="p">},</span> <span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">])</span>
+
+<span class="c1"># Sum the radiation in uv, vis, nir and ir spectral bands:</span>
+<span class="c1">#     UV            = 0   to 0.3 microns</span>
+<span class="c1">#     visible       = 0.3 to 0.7 microns</span>
+<span class="c1">#     near infrared = 0.7 to 4 microns</span>
+<span class="c1">#     infrared      = 4   to 50 microns</span>
+<span class="n">uv</span>  <span class="o">=</span> <span class="n">spectralFlux</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">wavelength</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.3</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="n">dl</span>
+<span class="n">vis</span> <span class="o">=</span> <span class="n">spectralFlux</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">wavelength</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span><span class="mf">0.7</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="n">dl</span>
+<span class="n">nir</span> <span class="o">=</span> <span class="n">spectralFlux</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">wavelength</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mf">0.7</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="n">dl</span>
+<span class="n">ir</span>  <span class="o">=</span> <span class="n">spectralFlux</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">wavelength</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">50</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="n">dl</span>
+
+<span class="c1"># Calculate the percent contribution in each band</span>
+<span class="n">Flux</span>  <span class="o">=</span> <span class="n">spectralFlux</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="n">dl</span>                           <span class="c1"># Total flux in W m-2; Should be nearly equal to sigma * T^4 !!</span>
+<span class="n">p_uv</span>  <span class="o">=</span> <span class="n">uv</span> <span class="o">/</span> <span class="n">Flux</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">p_vis</span> <span class="o">=</span> <span class="n">vis</span> <span class="o">/</span> <span class="n">Flux</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">p_nir</span> <span class="o">=</span> <span class="n">nir</span> <span class="o">/</span> <span class="n">Flux</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">p_ir</span>  <span class="o">=</span> <span class="n">ir</span> <span class="o">/</span> <span class="n">Flux</span> <span class="o">*</span> <span class="mi">100</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#%% Sum all the spectral bands; should be close to 100% !!</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Percent UV:            &#39;</span><span class="p">,</span> <span class="n">p_uv</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Percent visible:       &#39;</span><span class="p">,</span> <span class="n">p_vis</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Percent near infrared: &#39;</span><span class="p">,</span> <span class="n">p_nir</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Percent infrared:      &#39;</span><span class="p">,</span> <span class="n">p_ir</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total percent:         &#39;</span><span class="p">,</span> <span class="n">p_uv</span><span class="o">.</span><span class="n">values</span> <span class="o">+</span> <span class="n">p_vis</span><span class="o">.</span><span class="n">values</span> <span class="o">+</span> <span class="n">p_nir</span><span class="o">.</span><span class="n">values</span> <span class="o">+</span> <span class="n">p_ir</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Equilibrium Temperature of Earth is: 254.53556605545324 K
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Percent UV:             0.034502797207032025
+Percent visible:        11.862449236428064
+Percent near infrared:  83.81426836992065
+Percent infrared:       4.327490415712202
+Total percent:          100.03871081926796
 </pre></div>
 </div>
 </div>
@@ -469,7 +525,7 @@ title="Print to PDF"
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./chapter4"
+            path: "./chapter3"
         },
         predefinedOutput: true
     }
@@ -483,6 +539,20 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="PlancksLaw.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Calculate Planck curves as a function of wavelength and temperature</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="PowerEmittedByHuman.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Calculate the Power Emitted by a Human</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             </footer>
         </div>
