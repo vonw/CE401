@@ -23,7 +23,7 @@ import pandas as pd
 # In[2]:
 
 
-Tsun = 5772                     # K; chosen to yield S = 1361 W m-2
+Tsun = 5772                   # K; chosen to yield S = 1361 W m-2
 E    = 5.67e-8 * Tsun**4        # W m-2
 print('The flux from the Sun is:',E, 'W m-2')
 

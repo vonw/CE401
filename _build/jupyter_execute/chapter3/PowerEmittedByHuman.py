@@ -22,9 +22,3 @@ power_per_human    = calories_per_day * joules_per_calorie / seconds_per_day
 
 print(f'The power emitted by an average human is {power_per_human:{4.3}} W m-2')
 
-
-# In[ ]:
-
-
-
-

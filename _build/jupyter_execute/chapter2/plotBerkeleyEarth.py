@@ -28,12 +28,13 @@ import xarray as xr
 
 
 be = xr.open_dataset('../Land_and_Ocean_LatLong1.nc')
+#be = xr.open_dataset('/Users/vonw/work/courses/2021-2022/spring/CE401/jupyterbook/CE401/Land_and_Ocean_LatLong1.nc')
 be
 
 
 # ### Plot geographic distribution of 1951-1980 climatology
 
-# In[5]:
+# In[ ]:
 
 
 # Select a particular month to view
@@ -51,7 +52,7 @@ plt.title('Climatology (1951-1980) for ' + month);
 
 # ### Plot geographic distribution of temperature anomalies for given year and month
 
-# In[6]:
+# In[ ]:
 
 
 # Select a particular year and month to view
@@ -70,7 +71,7 @@ plt.title('Temperature Anomalies for ' + month + ' ' + str(year));
 
 # ### Plot geographic distribution of actual temperatures for given year and month
 
-# In[7]:
+# In[ ]:
 
 
 # Select a particular year and month to view
@@ -89,7 +90,7 @@ plt.title('Temperatures for ' + month + ' ' + str(year));
 
 # ### Calculate global annual temperature anomalies
 
-# In[8]:
+# In[ ]:
 
 
 # Select a particular year and month to view
@@ -116,7 +117,7 @@ plt.title('Global monthly temperature anomaly between ' + str(beginning_year) + 
 
 # ### Calculate longitudinally-averaged temperature anomalies
 
-# In[9]:
+# In[ ]:
 
 
 # Select the latitude range to average over

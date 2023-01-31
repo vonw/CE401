@@ -126,7 +126,7 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../chapter1/FairbanksTemperatures.html">
-     Comparing two histograms
+     Comparing temperature distributions
     </a>
    </li>
   </ul>
@@ -169,6 +169,11 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../chapter3/RadiationInSpectralBands.html">
+     Calculate Percentage of Radiation in Spectral Bands
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../chapter3/PowerEmittedByHuman.html">
      Calculate the Power Emitted by a Human
     </a>
@@ -176,50 +181,6 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="../chapter3/BodiesEmittingInARoom.html">
      Bodies Emitting in a Room
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../chapter4.html">
-   A Simple Climate Model
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-  <label for="toctree-checkbox-4">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../chapter4/SolarConstant.html">
-     Calculation of the Solar Constant
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../chapter4/Insolation.html">
-     Insolation
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../chapter4/InfraredAbsorptionByTheAtmosphere.html">
-     Infrared Absorption by the Atmosphere
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../chapter10.html">
-   Exponential Growth
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
-  <label for="toctree-checkbox-5">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../chapter10/ExponentialGrowth_Dessler.html">
-     Exponential Growth
     </a>
    </li>
   </ul>
@@ -543,6 +504,7 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">be</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s1">&#39;../Land_and_Ocean_LatLong1.nc&#39;</span><span class="p">)</span>
+<span class="c1">#be = xr.open_dataset(&#39;/Users/vonw/work/courses/2021-2022/spring/CE401/jupyterbook/CE401/Land_and_Ocean_LatLong1.nc&#39;)</span>
 <span class="n">be</span>
 </pre></div>
 </div>
@@ -560,14 +522,15 @@ title="Print to PDF"
 <span class="ne">---&gt; </span><span class="mi">55</span>     <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
 <span class="g g-Whitespace">     </span><span class="mi">56</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">move_to_end</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
 
-<span class="ne">KeyError</span>: [&lt;class &#39;netCDF4._netCDF4.Dataset&#39;&gt;, (&#39;/Users/vonw/work/courses/2022-2023/spring/CE401/jupyterbook/CE401/Land_and_Ocean_LatLong1.nc&#39;,), &#39;r&#39;, ((&#39;clobber&#39;, True), (&#39;diskless&#39;, False), (&#39;format&#39;, &#39;NETCDF4&#39;), (&#39;persist&#39;, False)), &#39;a304ab4e-c4b1-4915-b629-bc219127bfc0&#39;]
+<span class="ne">KeyError</span>: [&lt;class &#39;netCDF4._netCDF4.Dataset&#39;&gt;, (&#39;/Users/vonw/work/courses/2022-2023/spring/CE401/jupyterbook/CE401/Land_and_Ocean_LatLong1.nc&#39;,), &#39;r&#39;, ((&#39;clobber&#39;, True), (&#39;diskless&#39;, False), (&#39;format&#39;, &#39;NETCDF4&#39;), (&#39;persist&#39;, False)), &#39;a2337edd-2bef-4a6e-acca-d305df02b198&#39;]
 
 <span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
 
 <span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
 <span class="nn">Input In [2],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">be</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s1">&#39;../Land_and_Ocean_LatLong1.nc&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">be</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1">#be = xr.open_dataset(&#39;/Users/vonw/work/courses/2021-2022/spring/CE401/jupyterbook/CE401/Land_and_Ocean_LatLong1.nc&#39;)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">be</span>
 
 <span class="nn">File ~/opt/anaconda3/envs/work/lib/python3.10/site-packages/xarray/backends/api.py:539,</span> in <span class="ni">open_dataset</span><span class="nt">(filename_or_obj, engine, chunks, cache, decode_cf, mask_and_scale, decode_times, decode_timedelta, use_cftime, concat_characters, decode_coords, drop_variables, inline_array, backend_kwargs, **kwargs)</span>
 <span class="g g-Whitespace">    </span><span class="mi">527</span> <span class="n">decoders</span> <span class="o">=</span> <span class="n">_resolve_decoders_kwargs</span><span class="p">(</span>
@@ -691,9 +654,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/plotBerkeleyEarth_7_0.png" src="../_images/plotBerkeleyEarth_7_0.png" />
-</div>
 </div>
 </section>
 <section id="plot-geographic-distribution-of-temperature-anomalies-for-given-year-and-month">
@@ -715,9 +675,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/plotBerkeleyEarth_9_0.png" src="../_images/plotBerkeleyEarth_9_0.png" />
-</div>
 </div>
 </section>
 <section id="plot-geographic-distribution-of-actual-temperatures-for-given-year-and-month">
@@ -738,9 +695,6 @@ title="Print to PDF"
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Temperatures for &#39;</span> <span class="o">+</span> <span class="n">month</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">));</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/plotBerkeleyEarth_11_0.png" src="../_images/plotBerkeleyEarth_11_0.png" />
 </div>
 </div>
 </section>
@@ -770,9 +724,6 @@ title="Print to PDF"
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Global monthly temperature anomaly between &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">beginning_year</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; and &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ending_year</span><span class="p">));</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/plotBerkeleyEarth_13_0.png" src="../_images/plotBerkeleyEarth_13_0.png" />
 </div>
 </div>
 </section>
@@ -806,9 +757,6 @@ title="Print to PDF"
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Equatorial temperature anomaly between &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">beginning_year</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; and &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ending_year</span><span class="p">));</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/plotBerkeleyEarth_15_0.png" src="../_images/plotBerkeleyEarth_15_0.png" />
 </div>
 </div>
 </section>

@@ -52,7 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Calculate the Power Emitted by a Human" href="PowerEmittedByHuman.html" />
+    <link rel="next" title="Calculate Percentage of Radiation in Spectral Bands" href="RadiationInSpectralBands.html" />
     <link rel="prev" title="Radiation and Energy Balance" href="../chapter3.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -126,7 +126,7 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../chapter1/FairbanksTemperatures.html">
-     Comparing two histograms
+     Comparing temperature distributions
     </a>
    </li>
   </ul>
@@ -169,6 +169,11 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="RadiationInSpectralBands.html">
+     Calculate Percentage of Radiation in Spectral Bands
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="PowerEmittedByHuman.html">
      Calculate the Power Emitted by a Human
     </a>
@@ -176,50 +181,6 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="BodiesEmittingInARoom.html">
      Bodies Emitting in a Room
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../chapter4.html">
-   A Simple Climate Model
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-  <label for="toctree-checkbox-4">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../chapter4/SolarConstant.html">
-     Calculation of the Solar Constant
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../chapter4/Insolation.html">
-     Insolation
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../chapter4/InfraredAbsorptionByTheAtmosphere.html">
-     Infrared Absorption by the Atmosphere
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../chapter10.html">
-   Exponential Growth
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
-  <label for="toctree-checkbox-5">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../chapter10/ExponentialGrowth_Dessler.html">
-     Exponential Growth
     </a>
    </li>
   </ul>
@@ -514,16 +475,17 @@ Populating the interactive namespace from numpy and matplotlib
 <span class="n">kB</span> <span class="o">=</span> <span class="mf">1.381e-23</span>                            <span class="c1"># m2 kg s-2 K-1</span>
 <span class="n">l</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.25</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mf">0.25</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e-6</span>       <span class="c1"># meters</span>
 <span class="n">T</span>  <span class="o">=</span> <span class="mf">300.</span>                                 <span class="c1"># K</span>
-<span class="n">B</span>  <span class="o">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="mi">2</span><span class="o">*</span><span class="n">h</span><span class="o">*</span><span class="n">c</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">l</span><span class="o">**</span><span class="mi">5</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">h</span><span class="o">*</span><span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">l</span> <span class="o">*</span><span class="n">kB</span> <span class="o">*</span> <span class="n">T</span><span class="p">))</span> <span class="o">-</span> <span class="mf">1.</span><span class="p">))</span> <span class="o">*</span> <span class="mf">1e-6</span>      <span class="c1"># W m-2 um-1</span>
+<span class="n">B</span>  <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">h</span><span class="o">*</span><span class="n">c</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">l</span><span class="o">**</span><span class="mi">5</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">h</span><span class="o">*</span><span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">l</span> <span class="o">*</span><span class="n">kB</span> <span class="o">*</span> <span class="n">T</span><span class="p">))</span> <span class="o">-</span> <span class="mf">1.</span><span class="p">))</span> <span class="o">*</span> <span class="mf">1e-6</span>      <span class="c1"># W m-2 um-1</span>
+<span class="n">spectralFlux</span>  <span class="o">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">B</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">l</span><span class="o">/</span><span class="mf">1e-6</span><span class="p">,</span><span class="n">B</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">l</span><span class="o">/</span><span class="mf">1e-6</span><span class="p">,</span><span class="n">spectralFlux</span><span class="p">)</span>
 <span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Wavelength, microns&#39;</span><span class="p">);</span>
-<span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux, W m-2 um-1&#39;</span><span class="p">);</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Spectral Flux, W m-2 um-1&#39;</span><span class="p">);</span>
 <span class="n">text</span><span class="p">(</span><span class="mf">17.5</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="s1">&#39;300 K&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -561,18 +523,19 @@ Populating the interactive namespace from numpy and matplotlib
 <h2>Dessler, Figure 3.2b<a class="headerlink" href="#dessler-figure-3-2b" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.25</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mf">0.05</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e-6</span>      <span class="c1"># meters</span>
-<span class="n">T</span>  <span class="o">=</span> <span class="mf">1600.</span>                               <span class="c1"># K</span>
-<span class="n">B</span>  <span class="o">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="mi">2</span><span class="o">*</span><span class="n">h</span><span class="o">*</span><span class="n">c</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">l</span><span class="o">**</span><span class="mi">5</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">h</span><span class="o">*</span><span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">l</span> <span class="o">*</span><span class="n">kB</span> <span class="o">*</span> <span class="n">T</span><span class="p">))</span> <span class="o">-</span> <span class="mf">1.</span><span class="p">))</span> <span class="o">*</span> <span class="mf">1e-6</span>      <span class="c1"># W m-2 um-1</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.25</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mf">0.05</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e-6</span>      <span class="c1"># meters</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mf">1600.</span>                               <span class="c1"># K</span>
+<span class="n">B</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">h</span><span class="o">*</span><span class="n">c</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">l</span><span class="o">**</span><span class="mi">5</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">h</span><span class="o">*</span><span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">l</span> <span class="o">*</span><span class="n">kB</span> <span class="o">*</span> <span class="n">T</span><span class="p">))</span> <span class="o">-</span> <span class="mf">1.</span><span class="p">))</span> <span class="o">*</span> <span class="mf">1e-6</span>      <span class="c1"># W m-2 um-1</span>
+<span class="n">spectralFlux</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">B</span>                   <span class="c1"># W m-2 um-1</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">l</span><span class="o">/</span><span class="mf">1e-6</span><span class="p">,</span><span class="n">B</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">l</span><span class="o">/</span><span class="mf">1e-6</span><span class="p">,</span><span class="n">spectralFlux</span><span class="p">)</span>
 <span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Wavelength, microns&#39;</span><span class="p">);</span>
-<span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux, W m-2 um-1&#39;</span><span class="p">);</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Spectral Flux, W m-2 um-1&#39;</span><span class="p">);</span>
 <span class="n">text</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">120000</span><span class="p">,</span><span class="s1">&#39;1600 K&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -691,10 +654,10 @@ Populating the interactive namespace from numpy and matplotlib
             <p class="prev-next-title">Radiation and Energy Balance</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="PowerEmittedByHuman.html" title="next page">
+    <a class='right-next' id="next-link" href="RadiationInSpectralBands.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Calculate the Power Emitted by a Human</p>
+        <p class="prev-next-title">Calculate Percentage of Radiation in Spectral Bands</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

@@ -30,27 +30,28 @@ h  = 6.626e-34                            # m2 kg s-1
 kB = 1.381e-23                            # m2 kg s-2 K-1
 dl = 0.01                                 # meters
 l  = np.arange(dl,50,dl) * 1e-6           # meters
-B  = np.pi * 2*h*c**2 / (l**5 * (np.exp((h*c) / (l *kB * T)) - 1.)) * 1e-6      # W m-2 um-1
+B  = 2*h*c**2 / (l**5 * (np.exp((h*c) / (l *kB * T)) - 1.)) * 1e-6      # W m-2 um-1
+spectralFlux  = np.pi * B      # W m-2 um-1
 
-# Convert B to an Xarray data array
-B = xr.DataArray(B, coords={'wavelength': l*1e6}, dims=['wavelength'])
+# Convert spectralFlux to an Xarray data array
+spectralFlux = xr.DataArray(spectralFlux, coords={'wavelength': l*1e6}, dims=['wavelength'])
 
 # Sum the radiation in uv, vis, nir and ir spectral bands:
 #     UV            = 0   to 0.3 microns
 #     visible       = 0.3 to 0.7 microns
 #     near infrared = 0.7 to 4 microns
 #     infrared      = 4   to 50 microns
-uv  = B.sel(wavelength=slice(0,0.3)).sum()*dl
-vis = B.sel(wavelength=slice(0.3,0.7)).sum()*dl
-nir = B.sel(wavelength=slice(0.7,4)).sum()*dl
-ir  = B.sel(wavelength=slice(4,50)).sum()*dl
+uv  = spectralFlux.sel(wavelength=slice(0,0.3)).sum()*dl
+vis = spectralFlux.sel(wavelength=slice(0.3,0.7)).sum()*dl
+nir = spectralFlux.sel(wavelength=slice(0.7,4)).sum()*dl
+ir  = spectralFlux.sel(wavelength=slice(4,50)).sum()*dl
 
 # Calculate the percent contribution in each band
-E     = B.sum()*dl                           # Total flux in W m-2; Should be nearly equal to sigma * T^4 !!
-p_uv  = uv / E * 100
-p_vis = vis / E * 100
-p_nir = nir / E * 100
-p_ir  = ir / E * 100
+Flux  = spectralFlux.sum()*dl                           # Total flux in W m-2; Should be nearly equal to sigma * T^4 !!
+p_uv  = uv / Flux * 100
+p_vis = vis / Flux * 100
+p_nir = nir / Flux * 100
+p_ir  = ir / Flux * 100
 
 #%% Sum all the spectral bands; should be close to 100% !!
 print('Percent UV:            ', p_uv.values)

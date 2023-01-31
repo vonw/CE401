@@ -169,6 +169,11 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../chapter3/RadiationInSpectralBands.html">
+     Calculate Percentage of Radiation in Spectral Bands
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../chapter3/PowerEmittedByHuman.html">
      Calculate the Power Emitted by a Human
     </a>
@@ -176,50 +181,6 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="../chapter3/BodiesEmittingInARoom.html">
      Bodies Emitting in a Room
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../chapter4.html">
-   A Simple Climate Model
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-  <label for="toctree-checkbox-4">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../chapter4/SolarConstant.html">
-     Calculation of the Solar Constant
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../chapter4/Insolation.html">
-     Insolation
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../chapter4/InfraredAbsorptionByTheAtmosphere.html">
-     Infrared Absorption by the Atmosphere
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../chapter10.html">
-   Exponential Growth
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
-  <label for="toctree-checkbox-5">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../chapter10/ExponentialGrowth_Dessler.html">
-     Exponential Growth
     </a>
    </li>
   </ul>
@@ -472,12 +433,13 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="comparing-temperature-distributions">
 <h1>Comparing temperature distributions<a class="headerlink" href="#comparing-temperature-distributions" title="Permalink to this headline">#</a></h1>
 <p><i>© Von P. Walden, Washington State University</i></p>
-<p>This notebook compares two histograms that differ slightly in their mean values. The idea is to simulate the two histograms in Figure 1.1 in Dessler’s book, and to then subtract the histograms to show where they differ the most.</p>
+<p>This notebook compares two distributions that differ slightly in their mean values. The idea is to simulate the two distributions in Figure 1.1 in Dessler’s book, and to then subtract the distributions to show where they differ the most.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">import</span> <span class="nn">statistics</span>
 </pre></div>
 </div>
 </div>
@@ -486,12 +448,7 @@ title="Print to PDF"
 <h2>Generate two distributions of temperatures that approximate those measured in Fairbanks, AK in the 1970s and 2010s.<a class="headerlink" href="#generate-two-distributions-of-temperatures-that-approximate-those-measured-in-fairbanks-ak-in-the-1970s-and-2010s" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
-<span class="kn">import</span> <span class="nn">statistics</span>
-  
-<span class="c1"># ....These distributions roughly approximate those in Figure 1.1 in Dessler&#39;s Introduction to Modern Climate Change</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ....These distributions roughly approximate those in Figure 1.1 in Dessler&#39;s Introduction to Modern Climate Change</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">21</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
 <span class="n">F1970s</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mf">2.75</span><span class="p">)</span>
 <span class="n">F2010s</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mf">2.75</span><span class="p">)</span>

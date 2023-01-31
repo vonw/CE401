@@ -126,7 +126,7 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../chapter1/FairbanksTemperatures.html">
-     Comparing two histograms
+     Comparing temperature distributions
     </a>
    </li>
   </ul>
@@ -169,6 +169,11 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../chapter3/RadiationInSpectralBands.html">
+     Calculate Percentage of Radiation in Spectral Bands
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../chapter3/PowerEmittedByHuman.html">
      Calculate the Power Emitted by a Human
     </a>
@@ -205,21 +210,9 @@ const thebe_selector_output = ".output, .cell_output"
      Infrared Absorption by the Atmosphere
     </a>
    </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../chapter10.html">
-   Exponential Growth
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
-  <label for="toctree-checkbox-5">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../chapter10/ExponentialGrowth_Dessler.html">
-     Exponential Growth
+    <a class="reference internal" href="EquilibriumTemperatureOfEarth.html">
+     Calculation of the Equilibrium Temperature of Earth
     </a>
    </li>
   </ul>
@@ -624,7 +617,7 @@ title="Print to PDF"
 <h3>a) Calculate the flux emitted by the Sun in W m-2 using the Stefan-Boltzmann Law.<a class="headerlink" href="#a-calculate-the-flux-emitted-by-the-sun-in-w-m-2-using-the-stefan-boltzmann-law" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Tsun</span> <span class="o">=</span> <span class="mi">5772</span>                     <span class="c1"># K; chosen to yield S = 1361 W m-2</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Tsun</span> <span class="o">=</span> <span class="mi">5772</span>                   <span class="c1"># K; chosen to yield S = 1361 W m-2</span>
 <span class="n">E</span>    <span class="o">=</span> <span class="mf">5.67e-8</span> <span class="o">*</span> <span class="n">Tsun</span><span class="o">**</span><span class="mi">4</span>        <span class="c1"># W m-2</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The flux from the Sun is:&#39;</span><span class="p">,</span><span class="n">E</span><span class="p">,</span> <span class="s1">&#39;W m-2&#39;</span><span class="p">)</span>
 </pre></div>

@@ -52,7 +52,6 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="A Simple Climate Model" href="../chapter4.html" />
     <link rel="prev" title="Calculate the Power Emitted by a Human" href="PowerEmittedByHuman.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -126,7 +125,7 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../chapter1/FairbanksTemperatures.html">
-     Comparing two histograms
+     Comparing temperature distributions
     </a>
    </li>
   </ul>
@@ -169,6 +168,11 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="RadiationInSpectralBands.html">
+     Calculate Percentage of Radiation in Spectral Bands
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="PowerEmittedByHuman.html">
      Calculate the Power Emitted by a Human
     </a>
@@ -176,50 +180,6 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      Bodies Emitting in a Room
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../chapter4.html">
-   A Simple Climate Model
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-  <label for="toctree-checkbox-4">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../chapter4/SolarConstant.html">
-     Calculation of the Solar Constant
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../chapter4/Insolation.html">
-     Insolation
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../chapter4/InfraredAbsorptionByTheAtmosphere.html">
-     Infrared Absorption by the Atmosphere
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../chapter10.html">
-   Exponential Growth
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
-  <label for="toctree-checkbox-5">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../chapter10/ExponentialGrowth_Dessler.html">
-     Exponential Growth
     </a>
    </li>
   </ul>
@@ -545,9 +505,9 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Troom</span> <span class="o">=</span> <span class="mi">20</span> <span class="o">+</span> <span class="mf">273.15</span>             <span class="c1"># K</span>
-<span class="n">Eroom</span> <span class="o">=</span> <span class="n">s</span> <span class="o">*</span> <span class="n">Troom</span><span class="o">**</span><span class="mi">4</span>            <span class="c1"># W m-2</span>
+<span class="n">Flux_room</span> <span class="o">=</span> <span class="n">s</span> <span class="o">*</span> <span class="n">Troom</span><span class="o">**</span><span class="mi">4</span>            <span class="c1"># W m-2</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The room radiates approximately </span><span class="si">{</span><span class="n">Eroom</span><span class="si">:</span><span class="s2">5.1f</span><span class="si">}</span><span class="s2"> W m-2&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The room radiates approximately </span><span class="si">{</span><span class="n">Flux_room</span><span class="si">:</span><span class="s2">5.1f</span><span class="si">}</span><span class="s2"> W m-2&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -563,9 +523,9 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Tbody</span> <span class="o">=</span> <span class="mi">28</span> <span class="o">+</span> <span class="mf">273.15</span>             <span class="c1"># K</span>
-<span class="n">Ebody</span> <span class="o">=</span> <span class="n">s</span> <span class="o">*</span> <span class="n">Tbody</span><span class="o">**</span><span class="mi">4</span>            <span class="c1"># W m-2</span>
+<span class="n">Flux_body</span> <span class="o">=</span> <span class="n">s</span> <span class="o">*</span> <span class="n">Tbody</span><span class="o">**</span><span class="mi">4</span>            <span class="c1"># W m-2</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bodies radiate at approximately </span><span class="si">{</span><span class="n">Ebody</span><span class="si">:</span><span class="s2">5.1f</span><span class="si">}</span><span class="s2"> W m-2&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bodies radiate at approximately </span><span class="si">{</span><span class="n">Flux_body</span><span class="si">:</span><span class="s2">5.1f</span><span class="si">}</span><span class="s2"> W m-2&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -597,9 +557,9 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">e</span>     <span class="o">=</span> <span class="mf">0.89</span>
 <span class="n">Tbody</span> <span class="o">=</span> <span class="mi">37</span> <span class="o">+</span> <span class="mf">273.15</span>             <span class="c1"># K</span>
-<span class="n">Ebody</span> <span class="o">=</span> <span class="n">e</span> <span class="o">*</span> <span class="n">s</span> <span class="o">*</span> <span class="n">Tbody</span><span class="o">**</span><span class="mi">4</span>            <span class="c1"># W m-2</span>
+<span class="n">Flux_body</span> <span class="o">=</span> <span class="n">e</span> <span class="o">*</span> <span class="n">s</span> <span class="o">*</span> <span class="n">Tbody</span><span class="o">**</span><span class="mi">4</span>            <span class="c1"># W m-2</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bodies radiate at approximately </span><span class="si">{</span><span class="n">Ebody</span><span class="si">:</span><span class="s2">5.1f</span><span class="si">}</span><span class="s2"> W m-2&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bodies radiate at approximately </span><span class="si">{</span><span class="n">Flux_body</span><span class="si">:</span><span class="s2">5.1f</span><span class="si">}</span><span class="s2"> W m-2&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -648,13 +608,6 @@ title="Print to PDF"
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">Calculate the Power Emitted by a Human</p>
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="../chapter4.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">A Simple Climate Model</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>

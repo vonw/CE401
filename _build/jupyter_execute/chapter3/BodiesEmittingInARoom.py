@@ -19,9 +19,9 @@ s = 5.67e-8                     # W m-2 K-4
 
 
 Troom = 20 + 273.15             # K
-Eroom = s * Troom**4            # W m-2
+Flux_room = s * Troom**4            # W m-2
 
-print(f"The room radiates approximately {Eroom:5.1f} W m-2")
+print(f"The room radiates approximately {Flux_room:5.1f} W m-2")
 
 
 # ### Radiation from the bodies in the room
@@ -30,9 +30,9 @@ print(f"The room radiates approximately {Eroom:5.1f} W m-2")
 
 
 Tbody = 28 + 273.15             # K
-Ebody = s * Tbody**4            # W m-2
+Flux_body = s * Tbody**4            # W m-2
 
-print(f"Bodies radiate at approximately {Ebody:5.1f} W m-2")
+print(f"Bodies radiate at approximately {Flux_body:5.1f} W m-2")
 
 
 # ##### Actual Body Temperature (in deg C)
@@ -50,21 +50,9 @@ print(f"Bodies radiate at approximately {Ebody:5.1f} W m-2")
 
 e     = 0.89
 Tbody = 37 + 273.15             # K
-Ebody = e * s * Tbody**4            # W m-2
+Flux_body = e * s * Tbody**4            # W m-2
 
-print(f"Bodies radiate at approximately {Ebody:5.1f} W m-2")
+print(f"Bodies radiate at approximately {Flux_body:5.1f} W m-2")
 
 
 # #### So if the emissivity of our bodies is 0.89 (or 89%), then we emit the same radiation as a blackbody at 28 C.
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
