@@ -52,6 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Insolation" href="Insolation.html" />
+    <link rel="prev" title="A Simple Climate Model" href="../chapter4.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -111,7 +113,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../chapter1.html">
    An Introduction to the Climate Problem
@@ -179,6 +181,38 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="../chapter3/BodiesEmittingInARoom.html">
      Bodies Emitting in a Room
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../chapter4.html">
+   A Simple Climate Model
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Calculation of the Solar Constant
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Insolation.html">
+     Insolation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="InfraredAbsorptionByTheAtmosphere.html">
+     Infrared Absorption by the Atmosphere
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="EquilibriumTemperatureOfEarth.html">
+     Calculation of the Equilibrium Temperature of Earth
     </a>
    </li>
   </ul>
@@ -583,7 +617,7 @@ title="Print to PDF"
 <h3>a) Calculate the flux emitted by the Sun in W m-2 using the Stefan-Boltzmann Law.<a class="headerlink" href="#a-calculate-the-flux-emitted-by-the-sun-in-w-m-2-using-the-stefan-boltzmann-law" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Tsun</span> <span class="o">=</span> <span class="mi">5772</span>                     <span class="c1"># K; chosen to yield S = 1361 W m-2</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Tsun</span> <span class="o">=</span> <span class="mi">5772</span>                   <span class="c1"># K; chosen to yield S = 1361 W m-2</span>
 <span class="n">E</span>    <span class="o">=</span> <span class="mf">5.67e-8</span> <span class="o">*</span> <span class="n">Tsun</span><span class="o">**</span><span class="mi">4</span>        <span class="c1"># W m-2</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The flux from the Sun is:&#39;</span><span class="p">,</span><span class="n">E</span><span class="p">,</span> <span class="s1">&#39;W m-2&#39;</span><span class="p">)</span>
 </pre></div>
@@ -869,6 +903,20 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../chapter4.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">A Simple Climate Model</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Insolation.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Insolation</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             </footer>
         </div>
