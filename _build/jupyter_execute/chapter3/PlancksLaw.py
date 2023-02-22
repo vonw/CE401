@@ -37,10 +37,17 @@ text(17.5,30,'300 K');
 # In[4]:
 
 
-print(f"Wiens Law gives wavelength of maximum flux at: {(2989/T):3.1f} um.")
+l_max = l[np.where(spectralFlux==spectralFlux.max())]
+print(l_max)
 
 
 # In[5]:
+
+
+print(f"Wiens Law gives wavelength of maximum flux at: {(2989/T):3.1f} um.")
+
+
+# In[6]:
 
 
 print(f"The Stefan-Boltzmann Law gives the total flux for this object as: {(5.67e-8*T**4):4.0f} W m-2.")
@@ -48,7 +55,7 @@ print(f"The Stefan-Boltzmann Law gives the total flux for this object as: {(5.67
 
 # ## Dessler, Figure 3.2b
 
-# In[6]:
+# In[7]:
 
 
 l = np.arange(0.25,12,0.05) * 1e-6      # meters
@@ -57,7 +64,7 @@ B = 2*h*c**2 / (l**5 * (np.exp((h*c) / (l *kB * T)) - 1.)) * 1e-6      # W m-2 u
 spectralFlux = pi * B                   # W m-2 um-1
 
 
-# In[7]:
+# In[8]:
 
 
 plot(l/1e-6,spectralFlux)
@@ -66,13 +73,13 @@ ylabel('Spectral Flux, W m-2 um-1');
 text(10,120000,'1600 K');
 
 
-# In[8]:
+# In[9]:
 
 
 print(f"Wiens law gives wavelength of maximum flux at: {(2989/T):3.1f} um.")
 
 
-# In[9]:
+# In[10]:
 
 
 print(f"The Stefan-Boltzmann Law gives the total flux for this object as: {(5.67e-8*T**4):4.0f} W m-2.")
@@ -80,7 +87,7 @@ print(f"The Stefan-Boltzmann Law gives the total flux for this object as: {(5.67
 
 # ## Dessler, Figure 3.2c
 
-# In[10]:
+# In[11]:
 
 
 l  = np.arange(0.01,3.5,0.01) * 1e-6      # meters
@@ -88,7 +95,7 @@ T  = 6000.                                # K
 B  = pi * 2*h*c**2 / (l**5 * (np.exp((h*c) / (l *kB * T)) - 1.)) * 1e-6      # W m-2 um-1
 
 
-# In[11]:
+# In[12]:
 
 
 plot(l/1e-6,B)
@@ -97,13 +104,13 @@ ylabel('Flux, W m-2 um-1');
 text(2.8,90e6,'6000 K');
 
 
-# In[12]:
+# In[13]:
 
 
 print(f"Wiens law gives wavelength of maximum flux at: {(2989/T):3.1f} um.")
 
 
-# In[13]:
+# In[14]:
 
 
 print(f"The Stefan-Boltzmann Law gives the total flux for this object as: {(5.67e-8*T**4):4.0f} W m-2.")

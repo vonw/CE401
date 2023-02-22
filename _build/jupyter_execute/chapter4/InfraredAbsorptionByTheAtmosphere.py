@@ -121,22 +121,59 @@ saw.index = saw.altitude*1000
 saw = saw.reindex(np.arange(0,60001,100)).interpolate(method='linear')
 
 
-# ### Set the atmospheric CO2 concentration (in ppmv)
+# ---
+
+# ## 1) Choose the standard atmosphere
+# 
+# | Standard Atmosphere | stdatm_name |
+# | ------------------- | ----------- |
+# | Tropical            |    'trp'    |
+# | Mid-Latitude Summer |    'mls'    |
+# | Mid-Latitude Winter |    'mlw'    |
+# | Sub-Arctic Summer   |    'sas'    |
+# | Sub-Arctic Winter   |    'saw'    |
 
 # In[5]:
 
 
+# Change this variable to choose the model atmosphere
+# !! NOTE that the single quotation marks are important !!
+
+stdatm_name = 'mlw'
+
+if 'trp' in stdatm_name:
+    stdatm = trp
+elif 'mls' in stdatm_name:
+    stdatm = mls
+elif 'mlw' in stdatm_name:
+    stdatm = mlw
+elif 'sas' in stdatm_name:
+    stdatm = sas
+elif 'saw' in stdatm_name:
+    stdatm = saw
+else:
+    print("ERROR: This standard atmosphere is NOT RECOGNIZED. Try setting stdatm_name again!!")
+
+
+# ## 2) Set the atmospheric CO2 concentration (in ppmv)
+
+# In[6]:
+
+
+# Set CO2 in all Standard Atmospheres.
 co2 = 330.   # ppmv; approximate concentration in 1971
+#co2 = 419.   # ppmv; current concentration in 2023
 #co2 = 280.   # ppmv; pre-industrial concentration
 #co2 = 560.   # ppmv; doubled CO2 concentration (from pre-industrial)
 
-# Set CO2 in all Standard Atmospheres.
 trp['co2'] = mls['co2'] = mlw['co2'] = sas['co2'] = saw['co2'] = co2
 
 
+# ---
+
 # ### Pressure, Temperature, and Air Density in the Standard Atmospheres
 
-# In[6]:
+# In[7]:
 
 
 fig, (ax1, ax2, ax3) = plt.subplots(figsize=(20,10), nrows=1, ncols=3, sharey=True)
@@ -180,7 +217,7 @@ ax3.legend(['TRP','MLS','MLW','SAS','SAW']);
 
 # ### Primary Greenhouse Gas Concentrations in Standard Atmospheres
 
-# In[7]:
+# In[8]:
 
 
 fig, (ax1, ax2, ax3) = plt.subplots(figsize=(20,10), nrows=1, ncols=3, sharey=True)
@@ -249,7 +286,7 @@ ax3.legend(['TRP','MLS','MLW','SAS','SAW']);
 # 
 # Accurate radiative transfer models of the atmosphere account for all of this issues.
 
-# In[8]:
+# In[9]:
 
 
 Ka_15 = 2000
@@ -257,29 +294,29 @@ Ka_14 = 10
 Ka_13 = 0.1
 Ka_12 = 0.001
 
-rhoCO2 = mlw.airDensity[:-1] * mlw.co2[:-1]/1e6     # Convert from ppmv to percent fraction
-dz   = np.diff(mlw.altitude) * 1000                 # Calculate the height of each layer by differencing levels; meters
+rhoCO2 = stdatm.airDensity[:-1] * stdatm.co2[:-1]/1e6     # Convert from ppmv to percent fraction
+dz   = np.diff(stdatm.altitude) * 1000                 # Calculate the height of each layer by differencing levels; meters
 
 # Calculate and plot the optical depth at 14.6 um for CO2 for the MLW Standard Atmosphere.
-mlw['od_15'] = Ka_15 * rhoCO2 * dz
-mlw['od_14'] = Ka_14 * rhoCO2 * dz
-mlw['od_13'] = Ka_13 * rhoCO2 * dz
-mlw['od_12'] = Ka_12 * rhoCO2 * dz
+stdatm['od_15'] = Ka_15 * rhoCO2 * dz
+stdatm['od_14'] = Ka_14 * rhoCO2 * dz
+stdatm['od_13'] = Ka_13 * rhoCO2 * dz
+stdatm['od_12'] = Ka_12 * rhoCO2 * dz
 
 
-# In[9]:
+# In[10]:
 
 
 fig, ax = plt.subplots(figsize=(10,10))
 
-mlw.plot(ax=ax, x='od_15', y='altitude', logx=True, logy=True)
-mlw.plot(ax=ax, x='od_14', y='altitude', logx=True, logy=True)
-mlw.plot(ax=ax, x='od_13', y='altitude', logx=True, logy=True)
-mlw.plot(ax=ax, x='od_12', y='altitude', logx=True, logy=True)
+stdatm.plot(ax=ax, x='od_15', y='altitude', logx=True, logy=True)
+stdatm.plot(ax=ax, x='od_14', y='altitude', logx=True, logy=True)
+stdatm.plot(ax=ax, x='od_13', y='altitude', logx=True, logy=True)
+stdatm.plot(ax=ax, x='od_12', y='altitude', logx=True, logy=True)
 ax.grid()
 ax.set_xlabel('Optical Depth');
 ax.set_ylabel('Altitude (km)');
-ax.set_title('Infrared Optical Depths for CO2 in MLW Standard Atmospheres');
+ax.set_title('Infrared Optical Depths for CO2 in ' + stdatm_name + 'Standard Atmospheres');
 ax.legend(['15 um','14 um','13 um','12 um']);
 
 
@@ -287,33 +324,33 @@ ax.legend(['15 um','14 um','13 um','12 um']);
 
 # ### As a function of altitude
 
-# In[10]:
-
-
-mlw['T_15'] = np.exp(-mlw.od_15) * 100
-mlw['T_14'] = np.exp(-mlw.od_14) * 100
-mlw['T_13'] = np.exp(-mlw.od_13) * 100
-mlw['T_12'] = np.exp(-mlw.od_12) * 100
-
-
 # In[11]:
+
+
+stdatm['T_15'] = np.exp(-stdatm.od_15) * 100
+stdatm['T_14'] = np.exp(-stdatm.od_14) * 100
+stdatm['T_13'] = np.exp(-stdatm.od_13) * 100
+stdatm['T_12'] = np.exp(-stdatm.od_12) * 100
+
+
+# In[12]:
 
 
 fig, ax = plt.subplots(figsize=(10,10))
 
-mlw.plot(ax=ax, x='T_15', y='altitude', logx=True)
-mlw.plot(ax=ax, x='T_14', y='altitude', logx=True)
-mlw.plot(ax=ax, x='T_13', y='altitude', logx=True)
-mlw.plot(ax=ax, x='T_12', y='altitude', logx=True)
+stdatm.plot(ax=ax, x='T_15', y='altitude', logx=True)
+stdatm.plot(ax=ax, x='T_14', y='altitude', logx=True)
+stdatm.plot(ax=ax, x='T_13', y='altitude', logx=True)
+stdatm.plot(ax=ax, x='T_12', y='altitude', logx=True)
 ax.axis([0.1, 120, 0, 60])
 ax.grid()
 ax.set_xlabel('Transmission');
 ax.set_ylabel('Altitude (km)');
-ax.set_title('Infrared Transmission for CO2 in MLW Standard Atmospheres');
+ax.set_title('Infrared Transmission for CO2 in ' + stdatm_name + 'Standard Atmospheres');
 ax.legend(['15 um','14 um','13 um','12 um']);
 
 
-# ### Throughout the entire atmosphere
+# ### Transmission through the entire atmosphere
 
 # The above figure shows the transmission as a function of altitude in the atmosphere. But how do we calculate the transmission through the entire atmosphere?
 # 
@@ -329,14 +366,14 @@ ax.legend(['15 um','14 um','13 um','12 um']);
 # 
 # Option 2 is much easier for us here; see the code below.
 
-# In[12]:
+# In[13]:
 
 
 # Calculate total transmission in the atmosphere by summing all optical depths
-Ttotal_15 = np.exp(-mlw.od_15.sum())
-Ttotal_14 = np.exp(-mlw.od_14.sum())
-Ttotal_13 = np.exp(-mlw.od_13.sum())
-Ttotal_12 = np.exp(-mlw.od_12.sum())
+Ttotal_15 = np.exp(-stdatm.od_15.sum())
+Ttotal_14 = np.exp(-stdatm.od_14.sum())
+Ttotal_13 = np.exp(-stdatm.od_13.sum())
+Ttotal_12 = np.exp(-stdatm.od_12.sum())
 
 # Print results
 print(f'Total transmission in atmosphere (%) at 15 um = {Ttotal_15*100:.2f} %')
@@ -366,34 +403,34 @@ print(f'Total transmission in atmosphere (%) at 12 um = {Ttotal_12*100:.2f} %')
 
 # ### As a function of altitude
 
-# In[13]:
-
-
-mlw['A_15'] = (1. - np.exp(-mlw.od_15)) * 100        # Convert from fraction to percent
-mlw['A_14'] = (1. - np.exp(-mlw.od_14)) * 100
-mlw['A_13'] = (1. - np.exp(-mlw.od_13)) * 100
-mlw['A_12'] = (1. - np.exp(-mlw.od_12)) * 100
-
-
 # In[14]:
+
+
+stdatm['A_15'] = (1. - np.exp(-stdatm.od_15)) * 100        # Convert from fraction to percent
+stdatm['A_14'] = (1. - np.exp(-stdatm.od_14)) * 100
+stdatm['A_13'] = (1. - np.exp(-stdatm.od_13)) * 100
+stdatm['A_12'] = (1. - np.exp(-stdatm.od_12)) * 100
+
+
+# In[15]:
 
 
 fig, ax = plt.subplots(figsize=(10,10))
 
-mlw.plot(ax=ax, x='A_15', y='altitude', logx=True)
-mlw.plot(ax=ax, x='A_14', y='altitude', logx=True)
-mlw.plot(ax=ax, x='A_13', y='altitude', logx=True)
-mlw.plot(ax=ax, x='A_12', y='altitude', logx=True)
+stdatm.plot(ax=ax, x='A_15', y='altitude', logx=True)
+stdatm.plot(ax=ax, x='A_14', y='altitude', logx=True)
+stdatm.plot(ax=ax, x='A_13', y='altitude', logx=True)
+stdatm.plot(ax=ax, x='A_12', y='altitude', logx=True)
 ax.grid()
 ax.set_xlabel('Absorption');
 ax.set_ylabel('Altitude (km)');
-ax.set_title('Infrared Optical Depths for CO2 in MLW Standard Atmospheres');
+ax.set_title('Infrared Absorption for CO2 in ' + stdatm_name + 'Standard Atmospheres');
 ax.legend(['15 um','14 um','13 um','12 um']);
 
 
-# ### Throughout the entire atmosphere
+# ### Absorption by the entire atmosphere
 
-# In[15]:
+# In[16]:
 
 
 # Print results
@@ -402,6 +439,8 @@ print(f'Total absorption in atmosphere (%) at 14 um = {(1 - Ttotal_14)*100:.2f} 
 print(f'Total absorption in atmosphere (%) at 13 um = {(1 - Ttotal_13)*100:.2f} %')
 print(f'Total absorption in atmosphere (%) at 12 um = {(1 - Ttotal_12)*100:.2f} %')
 
+
+# 
 
 # In[ ]:
 

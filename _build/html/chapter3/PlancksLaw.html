@@ -185,6 +185,38 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../chapter4.html">
+   A Simple Climate Model
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../chapter4/SolarConstant.html">
+     Calculation of the Solar Constant
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../chapter4/Insolation.html">
+     Insolation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../chapter4/InfraredAbsorptionByTheAtmosphere.html">
+     Infrared Absorption by the Atmosphere
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../chapter4/EquilibriumTemperatureOfEarth.html">
+     Calculation of the Equilibrium Temperature of Earth
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 
     </div>
@@ -496,6 +528,19 @@ Populating the interactive namespace from numpy and matplotlib
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l_max</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">spectralFlux</span><span class="o">==</span><span class="n">spectralFlux</span><span class="o">.</span><span class="n">max</span><span class="p">())]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">l_max</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[9.75e-06]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Wiens Law gives wavelength of maximum flux at: </span><span class="si">{</span><span class="p">(</span><span class="mi">2989</span><span class="o">/</span><span class="n">T</span><span class="p">)</span><span class="si">:</span><span class="s2">3.1f</span><span class="si">}</span><span class="s2"> um.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -541,7 +586,7 @@ Populating the interactive namespace from numpy and matplotlib
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/PlancksLaw_10_0.png" src="../_images/PlancksLaw_10_0.png" />
+<img alt="../_images/PlancksLaw_11_0.png" src="../_images/PlancksLaw_11_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -590,7 +635,7 @@ Populating the interactive namespace from numpy and matplotlib
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/PlancksLaw_15_0.png" src="../_images/PlancksLaw_15_0.png" />
+<img alt="../_images/PlancksLaw_16_0.png" src="../_images/PlancksLaw_16_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
