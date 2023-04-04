@@ -116,12 +116,12 @@ print('In other words, money loses 5% of its value each year.')
 
 
 # No discounting.
-print('You pay $1000. now, so it costs you $1000. in today''s dollars.)
+print('You pay $1000. now, so it costs you $1000. in dollars today. So, the present value is $1000.')
 
 
 # But what is the present value of \$1100. in one year.
 
-# In[12]:
+# In[6]:
 
 
 # Discount option at 5% in one year
@@ -139,7 +139,7 @@ print('The value of the money after 1 year AT A DISCOUNT RATE OF 5% is $' + f'{F
 
 # But what is the discount rate is higher, say 15%?
 
-# In[13]:
+# In[7]:
 
 
 F = 1100
@@ -152,7 +152,7 @@ print('The value of the money after 1 year AT A DISCOUNT RATE OF 15% is $' + f'{
 
 # Now the option that costs you the least amount of money is the present value using the 15% discount rate.
 # 
-# Therefore, you choose to pay \$1100. next because it will only cost you \$956 in today''s dollars.
+# Therefore, you choose to pay \$1100. next because it will only cost you \$956 in today's dollars.
 
 # ### The choice of discount rate makes a profound difference in what you choose to do.
 
@@ -162,7 +162,7 @@ print('The value of the money after 1 year AT A DISCOUNT RATE OF 15% is $' + f'{
 
 # Imagine our choice is between spending \$100 billion today or \$1 trillion in 100 years. Compare these two using a discount rate of 3%.
 
-# In[ ]:
+# In[8]:
 
 
 rate = 3
