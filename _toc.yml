@@ -23,6 +23,6 @@ chapters:
     - file: chapter4/Insolation.ipynb
     - file: chapter4/InfraredAbsorptionByTheAtmosphere.ipynb
     - file: chapter4/EquilibriumTemperatureOfEarth.ipynb
-#- file: chapter10.md
-#  sections:
-#    - file: chapter10/ExponentialGrowth_Dessler.ipynb
+- file: chapter10.md
+  sections:
+    - file: chapter10/ExponentialGrowth_Dessler.ipynb

@@ -54,6 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Exponential Growth" href="../chapter10.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -113,7 +114,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../chapter1.html">
    An Introduction to the Climate Problem
@@ -181,6 +182,55 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="../chapter3/BodiesEmittingInARoom.html">
      Bodies Emitting in a Room
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../chapter4.html">
+   A Simple Climate Model
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../chapter4/SolarConstant.html">
+     Calculation of the Solar Constant
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../chapter4/Insolation.html">
+     Insolation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../chapter4/InfraredAbsorptionByTheAtmosphere.html">
+     Infrared Absorption by the Atmosphere
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../chapter4/EquilibriumTemperatureOfEarth.html">
+     Calculation of the Equilibrium Temperature of Earth
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../chapter10.html">
+   Exponential Growth
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Exponential Growth
     </a>
    </li>
   </ul>
@@ -418,13 +468,35 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-10-1-what-would-you-do">
-     Example 10.1: What would you do?
+    <a class="reference internal nav-link" href="#the-utility-of-discounting-is-that-it-allows-one-to-compare-costs-and-benefits-that-occur-at-different-times">
+     The utility of discounting is that it allows one to compare costs and benefits that occur at different times.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-10-1-what-would-you-do-the-tv-example">
+     Example 10.1: What would you do? The TV example!
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-choice-of-discount-rate-makes-a-profound-difference-in-what-you-choose-to-do">
+     The choice of discount rate makes a profound difference in what you choose to do.
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#cost-benefit-analysis">
      Cost-Benefit Analysis
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#so-how-do-we-determine-the-correct-discount-rate-to-use">
+   So how do we determine the correct discount rate to use?
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-choice-of-discount-rate-makes-a-huge-difference-in-climate-problems">
+     The choice of discount rate makes a huge difference in climate problems.
     </a>
    </li>
   </ul>
@@ -475,13 +547,35 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-10-1-what-would-you-do">
-     Example 10.1: What would you do?
+    <a class="reference internal nav-link" href="#the-utility-of-discounting-is-that-it-allows-one-to-compare-costs-and-benefits-that-occur-at-different-times">
+     The utility of discounting is that it allows one to compare costs and benefits that occur at different times.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-10-1-what-would-you-do-the-tv-example">
+     Example 10.1: What would you do? The TV example!
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-choice-of-discount-rate-makes-a-profound-difference-in-what-you-choose-to-do">
+     The choice of discount rate makes a profound difference in what you choose to do.
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#cost-benefit-analysis">
      Cost-Benefit Analysis
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#so-how-do-we-determine-the-correct-discount-rate-to-use">
+   So how do we determine the correct discount rate to use?
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-choice-of-discount-rate-makes-a-huge-difference-in-climate-problems">
+     The choice of discount rate makes a huge difference in climate problems.
     </a>
    </li>
   </ul>
@@ -566,34 +660,78 @@ title="Print to PDF"
 <p>So, if the rate of interest is constant at 7.2%, it will take 10 years to double your money.</p>
 </section>
 </section>
+<hr class="docutils" />
 <section id="discounting">
 <h2>Discounting<a class="headerlink" href="#discounting" title="Permalink to this headline">#</a></h2>
 <p>Discounting simply solves our original equation for P.</p>
 <div class="math notranslate nohighlight">
 \[ P = \frac{F}{(1 + rate/100)^n} \]</div>
+<p>The value today of a future expense or benefit is known as the <em>present value</em>. The process of calculating the present value is referred to as <em>discounting</em>. <em>“Money today is worth more to you than money in the future.”</em></p>
+<section id="the-utility-of-discounting-is-that-it-allows-one-to-compare-costs-and-benefits-that-occur-at-different-times">
+<h3>The utility of discounting is that it allows one to compare costs and benefits that occur at different times.<a class="headerlink" href="#the-utility-of-discounting-is-that-it-allows-one-to-compare-costs-and-benefits-that-occur-at-different-times" title="Permalink to this headline">#</a></h3>
+<hr class="docutils" />
+<p>How much would we need to invest to have $25,000 in 15 years at a 5% interest rate.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># How much would we need to invest to have $25,000 in 15 years at a 5% interest rate.</span>
-<span class="n">F</span> <span class="o">=</span> <span class="mi">25000</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">F</span> <span class="o">=</span> <span class="mi">25000</span>
 <span class="n">rate</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="n">n</span> <span class="o">=</span> <span class="mi">15</span>
 <span class="n">P</span> <span class="o">=</span> <span class="n">F</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">rate</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span><span class="o">**</span><span class="n">n</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;We would need to invest $&#39;</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">P</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;We would need to invest $</span><span class="si">{</span><span class="n">P</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> now (at 5%) to have $25000 in 15 years.&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;$</span><span class="si">{</span><span class="n">P</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> is the present value.&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This calculation is called discounting.&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The rate of 5</span><span class="si">% i</span><span class="s1">s called the discount rate, because it quantifies the rate at which money loses value in the future.&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In other words, money loses 5</span><span class="si">% o</span><span class="s1">f its value each year.&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>We would need to invest $12025.43
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>We would need to invest $12025.43 now (at 5%) to have $25000 in 15 years.
+
+$12025.43 is the present value.
+This calculation is called discounting.
+
+The rate of 5% is called the discount rate, because it quantifies the rate at which money loses value in the future.
+In other words, money loses 5% of its value each year.
 </pre></div>
 </div>
 </div>
 </div>
-<section id="example-10-1-what-would-you-do">
-<h3>Example 10.1: What would you do?<a class="headerlink" href="#example-10-1-what-would-you-do" title="Permalink to this headline">#</a></h3>
+</section>
+<hr class="docutils" />
+<section id="example-10-1-what-would-you-do-the-tv-example">
+<h3>Example 10.1: What would you do? The TV example!<a class="headerlink" href="#example-10-1-what-would-you-do-the-tv-example" title="Permalink to this headline">#</a></h3>
+<p>Discounting can be used to help make financial decisions.</p>
+<p>Let’s say you’re buying a new TV and you’re given two payment options:</p>
+<ol class="simple">
+<li><p>Pay $1000. now.</p></li>
+<li><p>Get it with no money down and pay $1100. in 1 year.</p></li>
+</ol>
+<p>Which option is best for you?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="mi">1000</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># No discounting.</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;You pay $1000. now, so it costs you $1000. in today&#39;&#39;s dollars.)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Input</span> <span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;You pay $1000. now, so it costs you $1000. in today&#39;&#39;s dollars.)</span>
+                                                               <span class="o">^</span>
+<span class="ne">SyntaxError</span>: unterminated string literal (detected at line 2)
+</pre></div>
+</div>
+</div>
+</div>
+<p>But what is the present value of $1100. in one year.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Discount option at 5% in one year</span>
+<span class="n">P</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">discountRate</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">F</span> <span class="o">=</span> <span class="n">P</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">discountRate</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span><span class="o">**</span><span class="n">n</span>
@@ -608,6 +746,9 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<p>The option that costs you the least amount of money is the one with the lowest present value.</p>
+<p>Therefore, you choose to pay <span class="math notranslate nohighlight">\(1000. now (because the present value of \)</span>1100. in one year from now, discounted at 5%, is $1050.)</p>
+<p>But what is the discount rate is higher, say 15%?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">F</span> <span class="o">=</span> <span class="mi">1100</span>
@@ -625,7 +766,13 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<p>Now the option that costs you the least amount of money is the present value using the 15% discount rate.</p>
+<p>Therefore, you choose to pay <span class="math notranslate nohighlight">\(1100. next because it will only cost you \)</span>956 in today’’s dollars.</p>
 </section>
+<section id="the-choice-of-discount-rate-makes-a-profound-difference-in-what-you-choose-to-do">
+<h3>The choice of discount rate makes a profound difference in what you choose to do.<a class="headerlink" href="#the-choice-of-discount-rate-makes-a-profound-difference-in-what-you-choose-to-do" title="Permalink to this headline">#</a></h3>
+</section>
+<hr class="docutils" />
 <section id="cost-benefit-analysis">
 <h3>Cost-Benefit Analysis<a class="headerlink" href="#cost-benefit-analysis" title="Permalink to this headline">#</a></h3>
 <p>Imagine our choice is between spending 100 billion today or 1 trillion in 100 years. Compare these two using a discount rate of 3%.</p>
@@ -640,13 +787,24 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The value of the money after 100 years AT A DISCOUNT RATE OF 3% is $52032839850.21
-</pre></div>
-</div>
-</div>
 </div>
 <p>Note that this equals only 52 billion, so we would prefer to pay 1 trillion in 100 years than pay 100 billion today</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="so-how-do-we-determine-the-correct-discount-rate-to-use">
+<h2>So how do we determine the correct discount rate to use?<a class="headerlink" href="#so-how-do-we-determine-the-correct-discount-rate-to-use" title="Permalink to this headline">#</a></h2>
+<p>The discount rate is a combination of two different judgements:</p>
+<ol class="simple">
+<li><p><em>Time discounting</em>, which is the preference to consume now rather than later.
+Positive time discounting means that goods and services now are worth more than they are later.</p></li>
+<li><p><em>Growth discounting</em> is the fact that a dollar means more to poor people than it does to rich people.
+Would you pick up a <span class="math notranslate nohighlight">\(1 bill if you saw it on the street? What about a \)</span>20 bill?</p></li>
+</ol>
+<p>The discount rate used in present-value calculations is determined by combining the time and growth discount rates.</p>
+<p>BUT economists argue about which rate to use: 1% to 4%.</p>
+<section id="the-choice-of-discount-rate-makes-a-huge-difference-in-climate-problems">
+<h3>The choice of discount rate makes a huge difference in climate problems.<a class="headerlink" href="#the-choice-of-discount-rate-makes-a-huge-difference-in-climate-problems" title="Permalink to this headline">#</a></h3>
 </section>
 </section>
 </section>
@@ -678,6 +836,13 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../chapter10.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Exponential Growth</p>
+        </div>
+    </a>
 </div>
             </footer>
         </div>

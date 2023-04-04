@@ -161,10 +161,10 @@ else:
 
 
 # Set CO2 in all Standard Atmospheres.
-co2 = 330.   # ppmv; approximate concentration in 1971
+#co2 = 330.   # ppmv; approximate concentration in 1971
 #co2 = 419.   # ppmv; current concentration in 2023
 #co2 = 280.   # ppmv; pre-industrial concentration
-#co2 = 560.   # ppmv; doubled CO2 concentration (from pre-industrial)
+co2 = 560.   # ppmv; doubled CO2 concentration (from pre-industrial)
 
 trp['co2'] = mls['co2'] = mlw['co2'] = sas['co2'] = saw['co2'] = co2
 
