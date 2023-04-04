@@ -714,15 +714,12 @@ In other words, money loses 5% of its value each year.
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># No discounting.</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;You pay $1000. now, so it costs you $1000. in today&#39;&#39;s dollars.)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;You pay $1000. now, so it costs you $1000. in dollars today. So, the present value is $1000.&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Input</span> <span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;You pay $1000. now, so it costs you $1000. in today&#39;&#39;s dollars.)</span>
-                                                               <span class="o">^</span>
-<span class="ne">SyntaxError</span>: unterminated string literal (detected at line 2)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>You pay $1000. now, so it costs you $1000. in dollars today. So, the present value is $1000.
 </pre></div>
 </div>
 </div>
@@ -767,7 +764,7 @@ In other words, money loses 5% of its value each year.
 </div>
 </div>
 <p>Now the option that costs you the least amount of money is the present value using the 15% discount rate.</p>
-<p>Therefore, you choose to pay $1100. next because it will only cost you $956 in today’’s dollars.</p>
+<p>Therefore, you choose to pay $1100. next because it will only cost you $956 in today’s dollars.</p>
 </section>
 <section id="the-choice-of-discount-rate-makes-a-profound-difference-in-what-you-choose-to-do">
 <h3>The choice of discount rate makes a profound difference in what you choose to do.<a class="headerlink" href="#the-choice-of-discount-rate-makes-a-profound-difference-in-what-you-choose-to-do" title="Permalink to this headline">#</a></h3>
@@ -784,6 +781,11 @@ In other words, money loses 5% of its value each year.
 <span class="n">P</span> <span class="o">=</span> <span class="n">F</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">rate</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span><span class="o">**</span><span class="n">n</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The value of the money after 100 years AT A DISCOUNT RATE OF 3</span><span class="si">% i</span><span class="s1">s $&#39;</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">P</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The value of the money after 100 years AT A DISCOUNT RATE OF 3% is $52032839850.21
 </pre></div>
 </div>
 </div>
