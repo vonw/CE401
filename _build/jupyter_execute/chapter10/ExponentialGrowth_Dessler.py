@@ -80,7 +80,7 @@ np.log(2) * r / np.log(1 + r)
 
 # ---
 
-# How much would we need to invest to have $25,000 in 15 years at a 5% interest rate.
+# How much would we need to invest to have \$25,000 in 15 years at a 5% interest rate.
 
 # In[4]:
 
@@ -107,8 +107,8 @@ print('In other words, money loses 5% of its value each year.')
 # 
 # Let's say you're buying a new TV and you're given two payment options:
 # 
-# 1. Pay $1000. now.
-# 2. Get it with no money down and pay $1100. in 1 year.
+# 1. Pay \$1000. now.
+# 2. Get it with no money down and pay \$1100. in 1 year.
 # 
 # Which option is best for you?
 
@@ -119,7 +119,7 @@ print('In other words, money loses 5% of its value each year.')
 print('You pay $1000. now, so it costs you $1000. in today''s dollars.)
 
 
-# But what is the present value of $1100. in one year.
+# But what is the present value of \$1100. in one year.
 
 # In[12]:
 
@@ -135,7 +135,7 @@ print('The value of the money after 1 year AT A DISCOUNT RATE OF 5% is $' + f'{F
 
 # The option that costs you the least amount of money is the one with the lowest present value.
 # 
-# Therefore, you choose to pay $1000. now (because the present value of $1100. in one year from now, discounted at 5%, is $1050.)
+# Therefore, you choose to pay \$1000. now (because the present value of \$1100. in one year from now, discounted at 5%, is \$1050.)
 
 # But what is the discount rate is higher, say 15%?
 
@@ -152,7 +152,7 @@ print('The value of the money after 1 year AT A DISCOUNT RATE OF 15% is $' + f'{
 
 # Now the option that costs you the least amount of money is the present value using the 15% discount rate.
 # 
-# Therefore, you choose to pay $1100. next because it will only cost you $956 in today''s dollars.
+# Therefore, you choose to pay \$1100. next because it will only cost you \$956 in today''s dollars.
 
 # ### The choice of discount rate makes a profound difference in what you choose to do.
 
@@ -160,7 +160,7 @@ print('The value of the money after 1 year AT A DISCOUNT RATE OF 15% is $' + f'{
 
 # ### Cost-Benefit Analysis
 
-# Imagine our choice is between spending 100 billion today or 1 trillion in 100 years. Compare these two using a discount rate of 3%.
+# Imagine our choice is between spending \$100 billion today or \$1 trillion in 100 years. Compare these two using a discount rate of 3%.
 
 # In[ ]:
 
@@ -173,7 +173,7 @@ P = F / (1 + rate/100)**n
 print('The value of the money after 100 years AT A DISCOUNT RATE OF 3% is $' + f'{P:.2f}')
 
 
-# Note that this equals only 52 billion, so we would prefer to pay 1 trillion in 100 years than pay 100 billion today
+# Note that this equals only \$52 billion, so we would prefer to pay \$1 trillion in 100 years than pay \$100 billion today
 
 # ---
 
@@ -185,7 +185,7 @@ print('The value of the money after 100 years AT A DISCOUNT RATE OF 3% is $' + f
 #   Positive time discounting means that goods and services now are worth more than they are later.
 # 
 # 1. *Growth discounting* is the fact that a dollar means more to poor people than it does to rich people.
-#   Would you pick up a $1 bill if you saw it on the street? What about a $20 bill?
+#   Would you pick up a \$1 bill if you saw it on the street? What about a \$20 bill?
 
 # The discount rate used in present-value calculations is determined by combining the time and growth discount rates. 
 # 
