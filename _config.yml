@@ -28,6 +28,8 @@ repository:
 # Use JupyterLab (instead of Classic notebook)
 launch_buttons:
   notebook_interface: "jupyterlab"  # or "classic"
+  binderhub_url: "https://mybinder.org" 
+  jupyterhub_url: "https://134.121.21.204:8000/"
 
 # Add GitHub buttons to your book
 # See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
