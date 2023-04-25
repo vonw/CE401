@@ -4,5 +4,6 @@ numpy
 scipy
 xarray
 pandas
+proj==8.2.1
 requests
 cartopy
