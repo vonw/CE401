@@ -87,9 +87,19 @@ def Qday_avg(latitude,day):
     return Q
 
 
+# In[6]:
+
+
+lat = 46.7
+day = 31+28+22
+print('Declination = ', declination(day))
+print('Earth distance = ', earth_sun_distance(day))
+print('Q =', Qday_avg(lat, day))
+
+
 # ### Geographic distribution of insolation (solar radition) at TOA
 
-# In[6]:
+# In[7]:
 
 
 lats = np.arange(-90.,91.)
@@ -111,7 +121,7 @@ plt.ylabel('Latitude (deg)');
 plt.title('TOA Insolation as a function of Day of Year and Latitude');
 
 
-# In[7]:
+# In[8]:
 
 
 mar20 = 31+28+20
@@ -133,7 +143,7 @@ plt.legend(['June Solstice', 'December Solstice', 'March Equinox', 'September Eq
 
 # ## Daily Average Insolation over Pullman, WA
 
-# In[8]:
+# In[9]:
 
 
 days = np.arange(1.,366.)
