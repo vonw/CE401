@@ -12,9 +12,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-# ### Calculates the insolation at the top of the atmosphere (TOA) as a function of time and location.
+# ## Calculates the insolation at the top of the atmosphere (TOA) as a function of time and location.
 
-# #### Solar flux per unit area at TOA (Equations from Hartmann, <i>Global Physical Climatology</i>)
+# ### Solar flux per unit area at TOA (Equations from Hartmann, <i>Global Physical Climatology</i>)
 
 # $$Q = S_o (d_m/d)^2 \cos(\theta_s)$$ 
 # where So is the solar "constant", dm is the mean distance between the Earth and Sun, d is the actual distance between the Earth and Sun, and theta(s) is the solar zenith angle.
@@ -97,7 +97,7 @@ print('Earth distance = ', earth_sun_distance(day))
 print('Q =', Qday_avg(lat, day))
 
 
-# ### Geographic distribution of insolation (solar radition) at TOA
+# ## Geographic distribution of insolation (solar radition) at TOA
 
 # In[7]:
 
