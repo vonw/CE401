@@ -29,9 +29,9 @@ import matplotlib.pyplot as plt
 # 
 # d is the distance between the Earth and Sun on any given day, where the closest approach (perihelion) occurs on 3 January.
 # 
-# $$ d = \frac{a(1+\epsilon^2)}{1 + \epsilon cos(\theta)} $$
+# $$ d = \frac{a(1-\epsilon^2)}{1 + \epsilon cos(\theta)} $$
 # 
-# where $ \epsilon $ is the eccentricity of Earth's orbit (0.017) and $ \theta $ is an angle that relates the day number to the correct location of Earth in the elliptical orbit for that day.
+# where $ \epsilon $ is the eccentricity of Earth's orbit (0.017), a is the semi major axis of Earth's orbit, and $ \theta $ is an angle that relates the day number to the correct location of Earth in the elliptical orbit for that day.
 
 # $Q_{dayavg} = (S_o/\pi)(d_m/d)^2[h_o\sin{\phi}\sin{\delta}+\cos{\phi}\cos{\delta}\sin{h_o}]$, where cos($h_o) = -\tan{\phi}\tan{\delta}$.
 
@@ -111,8 +111,6 @@ plt.ylabel('Latitude (deg)');
 plt.title('TOA Insolation as a function of Day of Year and Latitude');
 
 
-# ### Latitudinal variation of TOA insolation on solstices and equinoxes
-
 # In[7]:
 
 
@@ -131,4 +129,31 @@ plt.xlabel('Latitude (degrees)');
 plt.ylabel('Insolation (W m-2)');
 plt.title('Insolation for the Solstices and Equinoxes');
 plt.legend(['June Solstice', 'December Solstice', 'March Equinox', 'September Equinox'])
+
+
+# ## Daily Average Insolation over Pullman, WA
+
+# In[8]:
+
+
+days = np.arange(1.,366.)
+lat  = 46.7298
+lon  = -117.1817
+
+Q = np.array([])
+for day in days:
+    Q = np.append(Q, Qday_avg(lat,day))
+
+plt.figure(figsize=(12,6))
+plt.plot(days, Q)
+plt.grid()
+plt.xlabel('Day of Year')
+plt.ylabel('Daily-Average Insolation (W m-2)')
+plt.title('TOA Insolation over Pullman, WA')
+
+
+# In[ ]:
+
+
+
 

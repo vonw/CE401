@@ -482,8 +482,8 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#latitudinal-variation-of-toa-insolation-on-solstices-and-equinoxes">
-   Latitudinal variation of TOA insolation on solstices and equinoxes
+  <a class="reference internal nav-link" href="#daily-average-insolation-over-pullman-wa">
+   Daily Average Insolation over Pullman, WA
   </a>
  </li>
 </ul>
@@ -527,8 +527,8 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#latitudinal-variation-of-toa-insolation-on-solstices-and-equinoxes">
-   Latitudinal variation of TOA insolation on solstices and equinoxes
+  <a class="reference internal nav-link" href="#daily-average-insolation-over-pullman-wa">
+   Daily Average Insolation over Pullman, WA
   </a>
  </li>
 </ul>
@@ -565,8 +565,8 @@ title="Print to PDF"
 <p><span class="math notranslate nohighlight">\( d_m \)</span> is the mean distance from the Sun to the Earth, and is equal to the length of semi-major axis (a) of the elliptical orbit (which is 149.6 million km).</p>
 <p>d is the distance between the Earth and Sun on any given day, where the closest approach (perihelion) occurs on 3 January.</p>
 <div class="math notranslate nohighlight">
-\[ d = \frac{a(1+\epsilon^2)}{1 + \epsilon cos(\theta)} \]</div>
-<p>where <span class="math notranslate nohighlight">\( \epsilon \)</span> is the eccentricity of Earth’s orbit (0.017) and <span class="math notranslate nohighlight">\( \theta \)</span> is an angle that relates the day number to the correct location of Earth in the elliptical orbit for that day.</p>
+\[ d = \frac{a(1-\epsilon^2)}{1 + \epsilon cos(\theta)} \]</div>
+<p>where <span class="math notranslate nohighlight">\( \epsilon \)</span> is the eccentricity of Earth’s orbit (0.017), a is the semi major axis of Earth’s orbit, and <span class="math notranslate nohighlight">\( \theta \)</span> is an angle that relates the day number to the correct location of Earth in the elliptical orbit for that day.</p>
 <p><span class="math notranslate nohighlight">\(Q_{dayavg} = (S_o/\pi)(d_m/d)^2[h_o\sin{\phi}\sin{\delta}+\cos{\phi}\cos{\delta}\sin{h_o}]\)</span>, where cos(<span class="math notranslate nohighlight">\(h_o) = -\tan{\phi}\tan{\delta}\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -654,9 +654,6 @@ title="Print to PDF"
 <img alt="../_images/Insolation_16_0.png" src="../_images/Insolation_16_0.png" />
 </div>
 </div>
-</section>
-<section id="latitudinal-variation-of-toa-insolation-on-solstices-and-equinoxes">
-<h2>Latitudinal variation of TOA insolation on solstices and equinoxes<a class="headerlink" href="#latitudinal-variation-of-toa-insolation-on-solstices-and-equinoxes" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mar20</span> <span class="o">=</span> <span class="mi">31</span><span class="o">+</span><span class="mi">28</span><span class="o">+</span><span class="mi">20</span>
@@ -678,10 +675,39 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x110492200&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x11d27a4a0&gt;
 </pre></div>
 </div>
-<img alt="../_images/Insolation_18_1.png" src="../_images/Insolation_18_1.png" />
+<img alt="../_images/Insolation_17_1.png" src="../_images/Insolation_17_1.png" />
+</div>
+</div>
+</section>
+<section id="daily-average-insolation-over-pullman-wa">
+<h2>Daily Average Insolation over Pullman, WA<a class="headerlink" href="#daily-average-insolation-over-pullman-wa" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">days</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span><span class="mf">366.</span><span class="p">)</span>
+<span class="n">lat</span>  <span class="o">=</span> <span class="mf">46.7298</span>
+<span class="n">lon</span>  <span class="o">=</span> <span class="o">-</span><span class="mf">117.1817</span>
+
+<span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+<span class="k">for</span> <span class="n">day</span> <span class="ow">in</span> <span class="n">days</span><span class="p">:</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">Qday_avg</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span><span class="n">day</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">days</span><span class="p">,</span> <span class="n">Q</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Day of Year&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Daily-Average Insolation (W m-2)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;TOA Insolation over Pullman, WA&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;TOA Insolation over Pullman, WA&#39;)
+</pre></div>
+</div>
+<img alt="../_images/Insolation_19_1.png" src="../_images/Insolation_19_1.png" />
 </div>
 </div>
 </section>
