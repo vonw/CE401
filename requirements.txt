@@ -5,4 +5,5 @@ scipy
 xarray
 pandas
 requests
+geos
 cartopy
