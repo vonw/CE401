@@ -4,6 +4,10 @@
 format: jb-book
 root: intro
 chapters:
+- file: chapter0.md
+  sections:
+    - file: chapter0/softwareCarpentry_PythonFundamentals.ipynb
+    - file: chapter0/softwareCarpentry_AnalyzingPatientData.ipynb
 - file: chapter1.md
   sections:
     - file: chapter1/FairbanksTemperatures.ipynb
