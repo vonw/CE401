@@ -1,4 +1,4 @@
-# Background - Blank Notebooks for Programming in Python (by Software Carpentry)
+# Using Python
 
 Chapter 0 includes the following computational notebooks:
 - Software Carpentry's Python Fundamentals
