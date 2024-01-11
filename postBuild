@@ -2,4 +2,4 @@
 
 set -e
 
-wget -q -O Land_and_Ocean_LatLong1.nc "http://berkeleyearth.lbl.gov/auto/Global/Gridded/Land_and_Ocean_LatLong1.nc"
+#wget -q -O Land_and_Ocean_LatLong1.nc "http://berkeleyearth.lbl.gov/auto/Global/Gridded/Land_and_Ocean_LatLong1.nc"
