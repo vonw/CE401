@@ -1,8 +1,8 @@
-jupyter-book
 matplotlib
 numpy
 scipy
 xarray
+netcdf4
 pandas
 requests
 geos
