@@ -1,0 +1,709 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculation of the Solar Constant &#8212; My sample book</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome to your Jupyter Book
+  </a>
+ </li>
+</ul>
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/chapter4/Solar Constant.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fchapter4/Solar Constant.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/chapter4/Solar Constant.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#useful-links">
+   Useful links
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#information-on-the-solar-constant">
+     Information on the Solar “Constant”
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#information-on-earth-s-orbit">
+     Information on Earth’s orbit
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-calculate-the-flux-emitted-by-the-sun-in-w-m-2-using-the-stefan-boltzmann-law">
+     a) Calculate the flux emitted by the Sun in W m-2 using the Stefan-Boltzmann Law.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#b-calculate-the-total-power-emitted-by-the-sun-s-surface">
+     b) Calculate the total power emitted by the Sun’s surface.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#now-determine-the-flux-in-w-m-2-from-the-sun-but-at-the-distance-of-the-earth-s-orbit-note-that-the-total-power-from-the-sun-is-spread-over-a-very-large-area-in-space">
+     Now determine the flux (in W m-2) from the Sun, but at the distance of the Earth’s orbit. NOTE that the total power from the Sun is spread over a very large area (in space…)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#now-how-much-power-is-intercepted-by-the-earth-as-the-sun-s-rays-pass-by-it">
+     Now how much power is intercepted by the Earth as the Sun’s rays pass by it.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#convert-this-to-terawatts-tw-1-tw-1e12-w">
+     Convert this to Terawatts (TW); 1 TW = 1e12 W
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#as-dessler-explains-all-of-human-society-currently-consumes-only-16-tw-so-we-only-need-to-capture-0-01-of-the-sun-s-power-to-meet-all-of-our-energy-needs">
+   As Dessler explains, all of human society currently consumes only 16 TW. So we only need to capture 0.01% of the Sun’s power to meet all of our energy needs.
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#note-that-s-4-is-equal-to-342-w-m-2">
+     Note that S/4 is equal to 342 W m-2.
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sensitivity-to-earth-sun-distance">
+   Sensitivity to Earth-Sun Distance
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sensitivity-to-sun-s-surface-temperature">
+   Sensitivity to Sun’s surface temperature.
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#note-that-the-solar-constant-varies-by-about-0-1-1-3-w-m-2-during-the-11-year-solar-cycle-from-about-1361-to-1362-3-w-m-2-http-acrim-com-tsi-monitoring-htm">
+     Note that the solar constant varies by about 0.1% (1.3 W m-2) during the 11-year solar cycle, from about 1361 to 1362.3 W m-2. http://acrim.com/TSI Monitoring.htm
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Calculation of the Solar Constant</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#useful-links">
+   Useful links
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#information-on-the-solar-constant">
+     Information on the Solar “Constant”
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#information-on-earth-s-orbit">
+     Information on Earth’s orbit
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-calculate-the-flux-emitted-by-the-sun-in-w-m-2-using-the-stefan-boltzmann-law">
+     a) Calculate the flux emitted by the Sun in W m-2 using the Stefan-Boltzmann Law.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#b-calculate-the-total-power-emitted-by-the-sun-s-surface">
+     b) Calculate the total power emitted by the Sun’s surface.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#now-determine-the-flux-in-w-m-2-from-the-sun-but-at-the-distance-of-the-earth-s-orbit-note-that-the-total-power-from-the-sun-is-spread-over-a-very-large-area-in-space">
+     Now determine the flux (in W m-2) from the Sun, but at the distance of the Earth’s orbit. NOTE that the total power from the Sun is spread over a very large area (in space…)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#now-how-much-power-is-intercepted-by-the-earth-as-the-sun-s-rays-pass-by-it">
+     Now how much power is intercepted by the Earth as the Sun’s rays pass by it.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#convert-this-to-terawatts-tw-1-tw-1e12-w">
+     Convert this to Terawatts (TW); 1 TW = 1e12 W
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#as-dessler-explains-all-of-human-society-currently-consumes-only-16-tw-so-we-only-need-to-capture-0-01-of-the-sun-s-power-to-meet-all-of-our-energy-needs">
+   As Dessler explains, all of human society currently consumes only 16 TW. So we only need to capture 0.01% of the Sun’s power to meet all of our energy needs.
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#note-that-s-4-is-equal-to-342-w-m-2">
+     Note that S/4 is equal to 342 W m-2.
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sensitivity-to-earth-sun-distance">
+   Sensitivity to Earth-Sun Distance
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sensitivity-to-sun-s-surface-temperature">
+   Sensitivity to Sun’s surface temperature.
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#note-that-the-solar-constant-varies-by-about-0-1-1-3-w-m-2-during-the-11-year-solar-cycle-from-about-1361-to-1362-3-w-m-2-http-acrim-com-tsi-monitoring-htm">
+     Note that the solar constant varies by about 0.1% (1.3 W m-2) during the 11-year solar cycle, from about 1361 to 1362.3 W m-2. http://acrim.com/TSI Monitoring.htm
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="calculation-of-the-solar-constant">
+<h1>Calculation of the Solar Constant<a class="headerlink" href="#calculation-of-the-solar-constant" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="useful-links">
+<h2>Useful links<a class="headerlink" href="#useful-links" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="information-on-the-solar-constant">
+<h3><a class="reference external" href="https://en.wikipedia.org/wiki/Solar_cycle">Information on the Solar “Constant”</a><a class="headerlink" href="#information-on-the-solar-constant" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="information-on-earth-s-orbit">
+<h3><a class="reference external" href="https://en.wikipedia.org/wiki/Earth%27s_orbit">Information on Earth’s orbit</a><a class="headerlink" href="#information-on-earth-s-orbit" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">pylab</span> inline
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>%pylab is deprecated, use %matplotlib inline and import the required libraries.
+Populating the interactive namespace from numpy and matplotlib
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="a-calculate-the-flux-emitted-by-the-sun-in-w-m-2-using-the-stefan-boltzmann-law">
+<h3>a) Calculate the flux emitted by the Sun in W m-2 using the Stefan-Boltzmann Law.<a class="headerlink" href="#a-calculate-the-flux-emitted-by-the-sun-in-w-m-2-using-the-stefan-boltzmann-law" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Tsun</span> <span class="o">=</span> <span class="mi">5772</span>                     <span class="c1"># K; chosen to yield S = 1361 W m-2</span>
+<span class="n">E</span>    <span class="o">=</span> <span class="mf">5.67e-8</span> <span class="o">*</span> <span class="n">Tsun</span><span class="o">**</span><span class="mi">4</span>        <span class="c1"># W m-2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The flux from the Sun is:&#39;</span><span class="p">,</span><span class="n">E</span><span class="p">,</span> <span class="s1">&#39;W m-2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The flux from the Sun is: 62934436.58666411 W m-2
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="b-calculate-the-total-power-emitted-by-the-sun-s-surface">
+<h3>b) Calculate the total power emitted by the Sun’s surface.<a class="headerlink" href="#b-calculate-the-total-power-emitted-by-the-sun-s-surface" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Rs</span>   <span class="o">=</span> <span class="mf">695.7e6</span>                    <span class="c1"># meters</span>
+<span class="n">As</span>   <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">Rs</span><span class="o">**</span><span class="mi">2</span>                 <span class="c1"># m2</span>
+<span class="n">Psun</span> <span class="o">=</span> <span class="n">E</span> <span class="o">*</span> <span class="n">As</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Power emitted by the Sun is:&#39;</span><span class="p">,</span> <span class="n">Psun</span><span class="p">,</span> <span class="s1">&#39;Watts&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Power emitted by the Sun is: 3.8277381380933445e+26 Watts
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="now-determine-the-flux-in-w-m-2-from-the-sun-but-at-the-distance-of-the-earth-s-orbit-note-that-the-total-power-from-the-sun-is-spread-over-a-very-large-area-in-space">
+<h3>Now determine the flux (in W m-2) from the Sun, but at the distance of the Earth’s orbit. NOTE that the total power from the Sun is spread over a very large area (in space…)<a class="headerlink" href="#now-determine-the-flux-in-w-m-2-from-the-sun-but-at-the-distance-of-the-earth-s-orbit-note-that-the-total-power-from-the-sun-is-spread-over-a-very-large-area-in-space" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Average radius of Earth&#39;s orbit around the Sun.</span>
+<span class="n">Res</span>   <span class="o">=</span> <span class="mf">149.6e9</span>                    <span class="c1"># meters</span>
+<span class="c1"># Surface area of a sphere with radius equal to Re.</span>
+<span class="n">Aes</span>   <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">Res</span><span class="o">**</span><span class="mi">2</span>                <span class="c1"># m2</span>
+<span class="c1"># Solar Constant</span>
+<span class="n">S</span>     <span class="o">=</span> <span class="n">Psun</span> <span class="o">/</span> <span class="n">Aes</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The Solar Constant for Earth is:&#39;</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="s1">&#39;W m-2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Solar Constant for Earth is: 1361.0346073015646 W m-2
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="now-how-much-power-is-intercepted-by-the-earth-as-the-sun-s-rays-pass-by-it">
+<h3>Now how much power is intercepted by the Earth as the Sun’s rays pass by it.<a class="headerlink" href="#now-how-much-power-is-intercepted-by-the-earth-as-the-sun-s-rays-pass-by-it" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Re</span>   <span class="o">=</span> <span class="mf">6.4e6</span>                        <span class="c1"># meters</span>
+<span class="n">Aint</span> <span class="o">=</span> <span class="n">pi</span><span class="o">*</span><span class="n">Re</span><span class="o">**</span><span class="mi">2</span>                     <span class="c1"># Area intercepted by Earth in m2</span>
+<span class="n">Pe</span>   <span class="o">=</span> <span class="n">S</span> <span class="o">*</span> <span class="n">Aint</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The amount of power (in Watts) that is constantly intercepted by Earth is:&#39;</span><span class="p">,</span> <span class="n">Pe</span><span class="p">,</span> <span class="s1">&#39;Watts&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The amount of power (in Watts) that is constantly intercepted by Earth is: 1.7513743661383942e+17 Watts
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="convert-this-to-terawatts-tw-1-tw-1e12-w">
+<h3>Convert this to Terawatts (TW); 1 TW = 1e12 W<a class="headerlink" href="#convert-this-to-terawatts-tw-1-tw-1e12-w" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The amount of power (in TW) that is constantly intercepted by Earth is:&#39;</span><span class="p">,</span> <span class="n">Pe</span><span class="o">/</span><span class="mf">1e12</span><span class="p">,</span> <span class="s1">&#39;TW&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The amount of power (in TW) that is constantly intercepted by Earth is: 175137.4366138394 TW
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="as-dessler-explains-all-of-human-society-currently-consumes-only-16-tw-so-we-only-need-to-capture-0-01-of-the-sun-s-power-to-meet-all-of-our-energy-needs">
+<h2>As Dessler explains, all of human society currently consumes only 16 TW. So we only need to capture 0.01% of the Sun’s power to meet all of our energy needs.<a class="headerlink" href="#as-dessler-explains-all-of-human-society-currently-consumes-only-16-tw-so-we-only-need-to-capture-0-01-of-the-sun-s-power-to-meet-all-of-our-energy-needs" title="Permalink to this headline">¶</a></h2>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mf">0.3</span>                               <span class="c1"># Earth&#39;s albedo; unitless</span>
+<span class="n">S</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>238.1810562777738
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="note-that-s-4-is-equal-to-342-w-m-2">
+<h3>Note that S/4 is equal to 342 W m-2.<a class="headerlink" href="#note-that-s-4-is-equal-to-342-w-m-2" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">S</span><span class="o">/</span><span class="mi">4</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>340.25865182539115
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="sensitivity-to-earth-sun-distance">
+<h2>Sensitivity to Earth-Sun Distance<a class="headerlink" href="#sensitivity-to-earth-sun-distance" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SensRes</span>                   <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Earth-Sun Distance&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">147.1e9</span><span class="p">,</span><span class="mf">149.6e9</span><span class="p">,</span><span class="mf">152.1e9</span><span class="p">]})</span>
+<span class="n">SensRes</span><span class="p">[</span><span class="s1">&#39;Area&#39;</span><span class="p">]</span>           <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">SensRes</span><span class="p">[</span><span class="s1">&#39;Earth-Sun Distance&#39;</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">SensRes</span><span class="p">[</span><span class="s1">&#39;Solar Constant&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Psun</span> <span class="o">/</span> <span class="n">SensRes</span><span class="p">[</span><span class="s1">&#39;Area&#39;</span><span class="p">]</span>
+<span class="n">SensRes</span><span class="p">[</span><span class="s1">&#39;</span><span class="si">% d</span><span class="s1">ifference&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="p">(</span><span class="n">SensRes</span><span class="p">[</span><span class="s1">&#39;Solar Constant&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">SensRes</span><span class="p">[</span><span class="s1">&#39;Solar Constant&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">SensRes</span><span class="p">[</span><span class="s1">&#39;Solar Constant&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">SensRes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Earth-Sun Distance</th>
+      <th>Area</th>
+      <th>Solar Constant</th>
+      <th>% difference</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.471000e+11</td>
+      <td>2.719163e+23</td>
+      <td>1407.689949</td>
+      <td>3.427932</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.496000e+11</td>
+      <td>2.812374e+23</td>
+      <td>1361.034607</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.521000e+11</td>
+      <td>2.907156e+23</td>
+      <td>1316.660865</td>
+      <td>-3.260295</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="sensitivity-to-sun-s-surface-temperature">
+<h2>Sensitivity to Sun’s surface temperature.<a class="headerlink" href="#sensitivity-to-sun-s-surface-temperature" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="note-that-the-solar-constant-varies-by-about-0-1-1-3-w-m-2-during-the-11-year-solar-cycle-from-about-1361-to-1362-3-w-m-2-http-acrim-com-tsi-monitoring-htm">
+<h3>Note that the solar constant varies by about 0.1% (1.3 W m-2) during the 11-year solar cycle, from about 1361 to 1362.3 W m-2. <a class="reference external" href="http://acrim.com/TSI%20Monitoring.htm">http://acrim.com/TSI Monitoring.htm</a><a class="headerlink" href="#note-that-the-solar-constant-varies-by-about-0-1-1-3-w-m-2-during-the-11-year-solar-cycle-from-about-1361-to-1362-3-w-m-2-http-acrim-com-tsi-monitoring-htm" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Tsun</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5772</span><span class="p">,</span> <span class="mf">5773.5</span><span class="p">])</span>   <span class="c1"># K; chosen to yield S = 1361 W m-2</span>
+<span class="n">E</span>    <span class="o">=</span> <span class="mf">5.67e-8</span> <span class="o">*</span> <span class="n">Tsun</span><span class="o">**</span><span class="mi">4</span>        <span class="c1"># W m-2</span>
+<span class="n">Rs</span>   <span class="o">=</span> <span class="mf">695.7e6</span>                  <span class="c1"># meters</span>
+<span class="n">As</span>   <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">Rs</span><span class="o">**</span><span class="mi">2</span>               <span class="c1"># m2</span>
+<span class="n">Psun</span> <span class="o">=</span> <span class="n">E</span> <span class="o">*</span> <span class="n">As</span>
+<span class="c1"># Average radius of Earth&#39;s orbit around the Sun.</span>
+<span class="n">Res</span>   <span class="o">=</span> <span class="mf">149.6e9</span>                 <span class="c1"># meters</span>
+<span class="c1"># Surface area of a sphere with radius equal to Re.</span>
+<span class="n">Aes</span>   <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">Res</span><span class="o">**</span><span class="mi">2</span>             <span class="c1"># m2</span>
+<span class="c1"># Solar Constant</span>
+<span class="n">S</span>     <span class="o">=</span> <span class="n">Psun</span> <span class="o">/</span> <span class="n">Aes</span>
+
+<span class="n">SensTsun</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Temperature of Sun&#39;</span><span class="p">:</span>   <span class="n">Tsun</span><span class="p">,</span>
+                         <span class="s1">&#39;Power Emitted by Sun&#39;</span><span class="p">:</span> <span class="n">Psun</span><span class="p">,</span>
+                         <span class="s1">&#39;Solar Constant&#39;</span><span class="p">:</span>       <span class="n">S</span><span class="p">,</span>
+                         <span class="s1">&#39;</span><span class="si">% d</span><span class="s1">ifference&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">S</span><span class="o">-</span><span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="p">})</span>
+<span class="n">SensTsun</span><span class="p">[[</span><span class="s1">&#39;Temperature of Sun&#39;</span><span class="p">,</span> <span class="s1">&#39;Power Emitted by Sun&#39;</span><span class="p">,</span> <span class="s1">&#39;Solar Constant&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">% d</span><span class="s1">ifference&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Temperature of Sun</th>
+      <th>Power Emitted by Sun</th>
+      <th>Solar Constant</th>
+      <th>% difference</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5772.0</td>
+      <td>3.827738e+26</td>
+      <td>1361.034607</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5773.5</td>
+      <td>3.831719e+26</td>
+      <td>1362.449956</td>
+      <td>0.103883</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapter4"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                
+
+
+
+<div class='prev-next-bottom'>
+    
+
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Jupyter Book Community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
