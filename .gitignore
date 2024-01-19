@@ -6,3 +6,5 @@ _build/.DS_Store
 _build/html/.DS_Store
 _build/jupyter_execute/.DS_Store
 chapter2/.DS_Store
+
+/.quarto/
