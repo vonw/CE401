@@ -1,7 +1,53 @@
-![](ce401.png)
+---
+title: Computational Notebooks
+author:
+  - name: Von P. Walden
+    email: v.walden@wsu.edu
+    affiliations:
+      - Washington State University
+date: last-modified
+jupyter: python3
+---
 
-# Computational Notebooks
+## Introduction
+
+![](ce401.png)
 
 <i>© Von P. Walden, Washington State University</i>
 
 These computational notebooks were developed by Von P. Walden at Washington State University as part of the course CE401 - Climate Change Science and Engineering. Some of the notebooks are closely associated with Andrew Dessler's book, *Introduction to Modern Climate Change*, and are designed to provide engineering students with more background in how to calculate parameters that are related to Earth's climate and climate change.
+
+## Chapter 0 - Using Python
+
+{{< embed chapter0/softwareCarpentry_PythonFundamentals.ipynb >}}
+{{< embed chapter0/softwareCarpentry_AnalyzingPatientData.ipynb >}}
+[inflammation-01.csv](chapter0/inflammation-01.csv)
+
+## Chapter 1 - An Introduction to the Climate Problem
+{{< embed chapter1/HoustonTemperatures.ipynb >}}
+
+## Chapter 2 - Is the Climate Changing?
+{{< embed chapter2/LaurentideIceSheet_and_SeaLevel.ipynb >}}
+{{< embed chapter2/plotBerkeleyEarth.ipynb >}}
+[Land_and_Ocean_LatLong1.nc](https://berkeley-earth-temperature.s3.us-west-1.amazonaws.com/Global/Gridded/Land_and_Ocean_LatLong1.nc)
+
+## Chapter 3 - Radiation and Energy Balance
+{{< embed chapter3/PlancksLaw.ipynb >}}
+{{< embed chapter3/RadiationInSpectralBands.ipynb >}}
+[mls.dat](chapter3/mls.dat)
+[mlw.dat](chapter3/mlw.dat)
+[sas.dat](chapter3/sas.dat)
+[saw.dat](chapter3/saw.dat)
+[trp.dat](chapter3/trp.dat)
+{{< embed chapter3/PowerEmittedByHuman.ipynb >}}
+{{< embed chapter3/BodiesEmittingInARoom.ipynb >}}
+
+## Chapter 4 - A Simple Climate Model
+{{< embed chapter4/Insolation.ipynb >}}
+{{< embed chapter4/EquilibriumTemperatureOfEarth.ipynb >}}
+{{< embed chapter4/ASHRAE_Irradiance.ipynb >}}
+- Calculation of the Solar "Constant"
+- Infrared Absorption by Earth's Atmosphere
+
+## Chapter 10 - Exponential Growth
+- Exponential growth

@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Von P. Walden">
+<meta name="dcterms.date" content="2024-01-22">
 
-<title>CE401</title>
+<title>ASHRAE Irradiance sample calculation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,13 +25,7 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -39,273 +35,336 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
-  "copy-button": false,
-  "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
-  "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
-  }
-}</script>
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
+<meta name="citation_title" content="Computational Notebooks">
+<meta name="citation_author" content="Von P. Walden">
+<meta name="citation_publication_date" content="2024-01-22">
+<meta name="citation_cover_date" content="2024-01-22">
+<meta name="citation_year" content="2024">
+<meta name="citation_online_date" content="2024-01-22">
+<meta name="citation_language" content="en">
 </head>
 
-<body class="nav-sidebar docked nav-fixed">
+<body>
 
-<div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">CE401</span>
-    </a>
-  </div>
-        <div class="quarto-navbar-tools">
-    <div class="dropdown">
-      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label=""><i class="bi bi-github"></i></a>
-      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="quarto-navigation-tool-dropdown-0">
-          <li>
-            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/vonw/CE401">
-            Source Code
-            </a>
-          </li>
-      </ul>
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">ASHRAE Irradiance sample calculation</h1>
+          </div>
+
+    
+    <div class="quarto-title-meta-container">
+      <div class="quarto-title-meta-column-start">
+            <div class="quarto-title-meta-author">
+          <div class="quarto-title-meta-heading">Author</div>
+          <div class="quarto-title-meta-heading">Affiliation</div>
+          
+                <div class="quarto-title-meta-contents">
+            <p class="author">Von P. Walden <a href="mailto:v.walden@wsu.edu" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+          </div>
+                <div class="quarto-title-meta-contents">
+                    <p class="affiliation">
+                        Washington State University
+                      </p>
+                  </div>
+                    </div>
+        
+        <div class="quarto-title-meta">
+
+                      
+                <div>
+            <div class="quarto-title-meta-heading">Published</div>
+            <div class="quarto-title-meta-contents">
+              <p class="date">January 22, 2024</p>
+            </div>
+          </div>
+          
+                
+              </div>
+      </div>
+      <div class="quarto-title-meta-column-end quarto-other-formats-target">
+      </div>
     </div>
-</div>
-          <div id="quarto-search" class="" title="Search"></div>
-      </div> <!-- /container-fluid -->
-    </nav>
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Computational Notebooks</a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-    </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
-<!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Computational Notebooks</span></a>
-  </div>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
- <span class="menu-text">Chapter 0</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./chapter0/softwareCarpentry_PythonFundamentals.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Software Carpentry - Python Fundamentals</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./chapter0/softwareCarpentry_AnalyzingPatientData.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Software Carpentry - Analyzing Patient Data</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
- <span class="menu-text">Chapter 1</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./chapter1/HoustonTemperatures.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Comparing temperature distributions</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
- <span class="menu-text">Chapter 2</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./chapter2/LaurentideIceSheet_and_SeaLevel.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Approximate the Decrease in Sea-level from the Laurentide Ice Sheet</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./chapter2/plotBerkeleyEarth.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Plot global temperature anomalies from Berkeley Earth</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
- <span class="menu-text">Chapter 3</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./chapter3/BodiesEmittingInARoom.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Bodies Emitting in a Room</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./chapter3/PlancksLaw.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Calculate Planck curves as a function of wavelength and temperature</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./chapter3/PowerEmittedByHuman.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Calculate the Power Emitted by a Human</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./chapter3/RadiationInSpectralBands.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Calculate Percentage of Radiation in Spectral Bands</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
- <span class="menu-text">Chapter 4</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./chapter4/ASHRAE_Irradiance.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ASHRAE Irradiance sample calculation</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./chapter4/EquilibriumTemperatureOfEarth.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Calculation of the Equilibrium Temperature of Earth</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./chapter4/InfraredAbsorptionByTheAtmosphere.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Infrared Absorption by the Atmosphere</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./chapter4/Insolation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Insolation</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./chapter4/SolarConstant.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Calculation of the Solar Constant</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
- <span class="menu-text">Chapter 10</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./chapter10/ExponentialGrowth_Dessler.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exponential Growth</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+
+
+
+    <div class="quarto-other-links-text-target">
+    </div>  </div>
+</header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#computational-notebooks" id="toc-computational-notebooks" class="nav-link active" data-scroll-target="#computational-notebooks">Computational Notebooks</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#chapter-0---using-python" id="toc-chapter-0---using-python" class="nav-link" data-scroll-target="#chapter-0---using-python">Chapter 0 - Using Python</a>
+  <ul class="collapse">
+  <li><a href="#software-carpentry---python-fundamentals" id="toc-software-carpentry---python-fundamentals" class="nav-link" data-scroll-target="#software-carpentry---python-fundamentals">Software Carpentry - Python Fundamentals</a></li>
+  <li><a href="#software-carpentry---analyzing-patient-data" id="toc-software-carpentry---analyzing-patient-data" class="nav-link" data-scroll-target="#software-carpentry---analyzing-patient-data">Software Carpentry - Analyzing Patient Data</a></li>
+  </ul></li>
+  <li><a href="#chapter-1---an-introduction-to-the-climate-problem" id="toc-chapter-1---an-introduction-to-the-climate-problem" class="nav-link" data-scroll-target="#chapter-1---an-introduction-to-the-climate-problem">Chapter 1 - An Introduction to the Climate Problem</a>
+  <ul class="collapse">
+  <li><a href="#comparing-temperature-distributions" id="toc-comparing-temperature-distributions" class="nav-link" data-scroll-target="#comparing-temperature-distributions">Comparing temperature distributions</a></li>
+  </ul></li>
+  <li><a href="#chapter-2---is-the-climate-changing" id="toc-chapter-2---is-the-climate-changing" class="nav-link" data-scroll-target="#chapter-2---is-the-climate-changing">Chapter 2 - Is the Climate Changing?</a>
+  <ul class="collapse">
+  <li><a href="#approximate-the-decrease-in-sea-level-from-the-laurentide-ice-sheet" id="toc-approximate-the-decrease-in-sea-level-from-the-laurentide-ice-sheet" class="nav-link" data-scroll-target="#approximate-the-decrease-in-sea-level-from-the-laurentide-ice-sheet">Approximate the Decrease in Sea-level from the Laurentide Ice Sheet</a></li>
+  <li><a href="#plot-global-temperature-anomalies-from-berkeley-earth" id="toc-plot-global-temperature-anomalies-from-berkeley-earth" class="nav-link" data-scroll-target="#plot-global-temperature-anomalies-from-berkeley-earth">Plot global temperature anomalies from Berkeley Earth</a></li>
+  </ul></li>
+  <li><a href="#chapter-3---radiation-and-energy-balance" id="toc-chapter-3---radiation-and-energy-balance" class="nav-link" data-scroll-target="#chapter-3---radiation-and-energy-balance">Chapter 3 - Radiation and Energy Balance</a>
+  <ul class="collapse">
+  <li><a href="#calculate-planck-curves-as-a-function-of-wavelength-and-temperature" id="toc-calculate-planck-curves-as-a-function-of-wavelength-and-temperature" class="nav-link" data-scroll-target="#calculate-planck-curves-as-a-function-of-wavelength-and-temperature">Calculate Planck curves as a function of wavelength and temperature</a></li>
+  <li><a href="#calculate-percentage-of-radiation-in-spectral-bands" id="toc-calculate-percentage-of-radiation-in-spectral-bands" class="nav-link" data-scroll-target="#calculate-percentage-of-radiation-in-spectral-bands">Calculate Percentage of Radiation in Spectral Bands</a></li>
+  <li><a href="#calculate-the-power-emitted-by-a-human" id="toc-calculate-the-power-emitted-by-a-human" class="nav-link" data-scroll-target="#calculate-the-power-emitted-by-a-human">Calculate the Power Emitted by a Human</a></li>
+  <li><a href="#bodies-emitting-in-a-room" id="toc-bodies-emitting-in-a-room" class="nav-link" data-scroll-target="#bodies-emitting-in-a-room">Bodies Emitting in a Room</a></li>
+  </ul></li>
+  <li><a href="#chapter-4---a-simple-climate-model" id="toc-chapter-4---a-simple-climate-model" class="nav-link" data-scroll-target="#chapter-4---a-simple-climate-model">Chapter 4 - A Simple Climate Model</a>
+  <ul class="collapse">
+  <li><a href="#insolation" id="toc-insolation" class="nav-link" data-scroll-target="#insolation">Insolation</a></li>
+  <li><a href="#calculation-of-the-equilibrium-temperature-of-earth" id="toc-calculation-of-the-equilibrium-temperature-of-earth" class="nav-link" data-scroll-target="#calculation-of-the-equilibrium-temperature-of-earth">Calculation of the Equilibrium Temperature of Earth</a></li>
+  <li><a href="#ashrae-irradiance-sample-calculation" id="toc-ashrae-irradiance-sample-calculation" class="nav-link" data-scroll-target="#ashrae-irradiance-sample-calculation">ASHRAE Irradiance sample calculation</a></li>
+  </ul></li>
+  <li><a href="#chapter-10---exponential-growth" id="toc-chapter-10---exponential-growth" class="nav-link" data-scroll-target="#chapter-10---exponential-growth">Chapter 10 - Exponential Growth</a></li>
   </ul>
-</nav>
-    </div>
-<!-- main -->
-<main class="content" id="quarto-document-content">
+<div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="chapter1/HoustonTemperatures-preview.html"><i class="bi bi-journal-code"></i>Comparing temperature distributions</a></li><li><a href="chapter0/softwareCarpentry_AnalyzingPatientData-preview.html"><i class="bi bi-journal-code"></i>Software Carpentry - Analyzing Patient Data</a></li><li><a href="chapter0/softwareCarpentry_PythonFundamentals-preview.html"><i class="bi bi-journal-code"></i>Software Carpentry - Python Fundamentals</a></li><li><a href="chapter2/plotBerkeleyEarth-preview.html"><i class="bi bi-journal-code"></i>Plot Berkeley Earth</a></li><li><a href="chapter2/LaurentideIceSheet_and_SeaLevel-preview.html"><i class="bi bi-journal-code"></i>Laurentide Ice Sheet and Sea Level</a></li><li><a href="chapter3/PlancksLaw-preview.html"><i class="bi bi-journal-code"></i>Planck's Law</a></li><li><a href="chapter3/PowerEmittedByHuman-preview.html"><i class="bi bi-journal-code"></i>Power Emitted by a Human</a></li><li><a href="chapter3/RadiationInSpectralBands-preview.html"><i class="bi bi-journal-code"></i>Percent Radiation in a Spectral Band</a></li><li><a href="chapter3/BodiesEmittingInARoom-preview.html"><i class="bi bi-journal-code"></i>Bodies Emitting in a Room</a></li><li><a href="chapter4/EquilibriumTemperatureOfEarth-preview.html"><i class="bi bi-journal-code"></i>Equilibrium Temperature of Earth</a></li><li><a href="chapter4/Insolation-preview.html"><i class="bi bi-journal-code"></i>Insolation</a></li><li><a href="chapter4/ASHRAE_Irradiance-preview.html"><i class="bi bi-journal-code"></i>ASHRAE Irradiance sample calculation</a></li></ul></div></nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
+  
 
-<p><img src="ce401.png" class="img-fluid"></p>
-<section id="computational-notebooks" class="level1">
-<h1>Computational Notebooks</h1>
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p><a href="ce401.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="ce401.png" class="img-fluid"></a></p>
 <p><i>© Von P. Walden, Washington State University</i></p>
 <p>These computational notebooks were developed by Von P. Walden at Washington State University as part of the course CE401 - Climate Change Science and Engineering. Some of the notebooks are closely associated with Andrew Dessler’s book, <em>Introduction to Modern Climate Change</em>, and are designed to provide engineering students with more background in how to calculate parameters that are related to Earth’s climate and climate change.</p>
-
-
+</section>
+<section id="chapter-0---using-python" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-0---using-python">Chapter 0 - Using Python</h2>
+<section id="software-carpentry---python-fundamentals" class="level3 quarto-embed-nb-cell">
+<h3 class="anchored" data-anchor-id="software-carpentry---python-fundamentals">Software Carpentry - Python Fundamentals</h3>
+<p>Read <a href="https://swcarpentry.github.io/python-novice-inflammation/01-intro.html">Software Carpentry’s Python Fundamentals</a>. Start by scrolling down to the section on Variables.</p>
+<p>Using notebook cells below, type in the commands in the instructions to check your knowledge of Python variables. (The cell below is the first example.)</p>
+<a class="quarto-notebook-link" id="nblink-1" href="chapter0/softwareCarpentry_PythonFundamentals-preview.html#cell-0">Source: Software Carpentry - Python Fundamentals</a></section>
+<section id="software-carpentry---analyzing-patient-data" class="level3 quarto-embed-nb-cell">
+<h3 class="anchored" data-anchor-id="software-carpentry---analyzing-patient-data">Software Carpentry - Analyzing Patient Data</h3>
+<p>Read <a href="https://swcarpentry.github.io/python-novice-inflammation/02-numpy.html">Software Carpentry’s Analyzing Patient Data</a>.</p>
+<p>Using notebook cells below, type in the commands in the instructions to check your knowledge of Python variables. (The two cells below will get you started.)</p>
+<a class="quarto-notebook-link" id="nblink-2" href="chapter0/softwareCarpentry_AnalyzingPatientData-preview.html#cell-0">Source: Software Carpentry - Analyzing Patient Data</a></section>
+<p><a href="chapter0/inflammation-01.csv">inflammation-01.csv</a></p>
+</section>
+<section id="chapter-1---an-introduction-to-the-climate-problem" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-1---an-introduction-to-the-climate-problem">Chapter 1 - An Introduction to the Climate Problem</h2>
+<section id="comparing-temperature-distributions" class="level3 quarto-embed-nb-cell">
+<h3 class="anchored" data-anchor-id="comparing-temperature-distributions">Comparing temperature distributions</h3>
+<p><i>© Von P. Walden, Washington State University</i></p>
+<p>This notebook compares two distributions that differ slightly in their mean values. The idea is to simulate the two distributions in Figure 1.1 in Dessler’s book, and to then subtract the distributions to show where they differ the most.</p>
+<section id="generate-two-distributions-of-temperatures-that-approximate-those-measured-in-houston-tx-in-the-1970s-and-2010s." class="level4">
+<h4 class="anchored" data-anchor-id="generate-two-distributions-of-temperatures-that-approximate-those-measured-in-houston-tx-in-the-1970s-and-2010s.">Generate two distributions of temperatures that approximate those measured in Houston, TX in the 1970s and 2010s.</h4>
+</section>
+<a class="quarto-notebook-link" id="nblink-3" href="chapter1/HoustonTemperatures-preview.html#cell-0">Source: Comparing temperature distributions</a></section>
+</section>
+<section id="chapter-2---is-the-climate-changing" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-2---is-the-climate-changing">Chapter 2 - Is the Climate Changing?</h2>
+<section id="approximate-the-decrease-in-sea-level-from-the-laurentide-ice-sheet" class="level3 quarto-embed-nb-cell">
+<h3 class="anchored" data-anchor-id="approximate-the-decrease-in-sea-level-from-the-laurentide-ice-sheet">Approximate the Decrease in Sea-level from the Laurentide Ice Sheet</h3>
+<p><i>© Von P. Walden, Washington State University</i></p>
+<p>This notebook does a quick calculation of how much ice was contained in the Laurentide Ice Sheet about 20,000 years ago, and how that may have affected sea level at that time.</p>
+<section id="the-actual-value-at-the-height-of-the-last-ice-age-was-actually-about-120-meters." class="level4">
+<h4 class="anchored" data-anchor-id="the-actual-value-at-the-height-of-the-last-ice-age-was-actually-about-120-meters.">The actual value at the height of the last ice age was actually about 120 meters.</h4>
+<p><a href="https://www.giss.nasa.gov/research/briefs/gornitz_09/">Sea Level Rise, After the Ice Melted and Today</a></p>
+<section id="where-might-we-have-underestimated-our-calculation-the-density-of-ice" class="level5">
+<h5 class="anchored" data-anchor-id="where-might-we-have-underestimated-our-calculation-the-density-of-ice">Where might we have underestimated our calculation? The density of ice !!</h5>
+<p>So find the necessary density of ice to get 120 meters of sea level.</p>
+</section>
+</section>
+<section id="so-the-density-of-ice-would-have-had-to-be-much-lower-400-kgm3." class="level4">
+<h4 class="anchored" data-anchor-id="so-the-density-of-ice-would-have-had-to-be-much-lower-400-kgm3.">So the density of ice would have had to be much lower; 400 kg/m^3.</h4>
+</section>
+<a class="quarto-notebook-link" id="nblink-4" href="chapter2/LaurentideIceSheet_and_SeaLevel-preview.html#cell-0">Source: Laurentide Ice Sheet and Sea Level</a></section>
+<section id="plot-global-temperature-anomalies-from-berkeley-earth" class="level3 quarto-embed-nb-cell">
+<h3 class="anchored" data-anchor-id="plot-global-temperature-anomalies-from-berkeley-earth">Plot global temperature anomalies from Berkeley Earth</h3>
+<p><i>© Von P. Walden, Washington State University</i></p>
+<p>The data used in this notebook are from <a href="http://berkeleyearth.org/data">Berkeley Earth</a>: Land_and_Ocean_LatLong1.nc</p>
+<section id="working-from-your-local-computer" class="level4">
+<h4 class="anchored" data-anchor-id="working-from-your-local-computer">Working from your local computer</h4>
+<p>If you are running this notebook from your local computer, you will need to:</p>
+<ol type="1">
+<li><p>Download a large (400 MB) data file from Berkeley Earth by clicking on <a href="https://berkeley-earth-temperature.s3.us-west-1.amazonaws.com/Global/Gridded/Land_and_Ocean_LatLong1.nc">this link</a></p></li>
+<li><p>Edit the code cell below by replacing ‘../Land_and_Ocean_LatLong1.nc’ with the pathname to the data file on your local hard drive.</p></li>
+</ol>
+</section>
+<section id="plot-geographic-distribution-of-1951-1980-climatology" class="level4">
+<h4 class="anchored" data-anchor-id="plot-geographic-distribution-of-1951-1980-climatology">Plot geographic distribution of 1951-1980 climatology</h4>
+</section>
+<section id="plot-geographic-distribution-of-temperature-anomalies-for-given-year-and-month" class="level4">
+<h4 class="anchored" data-anchor-id="plot-geographic-distribution-of-temperature-anomalies-for-given-year-and-month">Plot geographic distribution of temperature anomalies for given year and month</h4>
+</section>
+<section id="plot-geographic-distribution-of-actual-temperatures-for-given-year-and-month" class="level4">
+<h4 class="anchored" data-anchor-id="plot-geographic-distribution-of-actual-temperatures-for-given-year-and-month">Plot geographic distribution of actual temperatures for given year and month</h4>
+</section>
+<section id="calculate-global-annual-temperature-anomalies" class="level4">
+<h4 class="anchored" data-anchor-id="calculate-global-annual-temperature-anomalies">Calculate global annual temperature anomalies</h4>
+</section>
+<section id="calculate-longitudinally-averaged-temperature-anomalies" class="level4">
+<h4 class="anchored" data-anchor-id="calculate-longitudinally-averaged-temperature-anomalies">Calculate longitudinally-averaged temperature anomalies</h4>
+</section>
+<a class="quarto-notebook-link" id="nblink-5" href="chapter2/plotBerkeleyEarth-preview.html#7904d19e">Source: Plot Berkeley Earth</a></section>
+<p><a href="https://berkeley-earth-temperature.s3.us-west-1.amazonaws.com/Global/Gridded/Land_and_Ocean_LatLong1.nc">Land_and_Ocean_LatLong1.nc</a></p>
+</section>
+<section id="chapter-3---radiation-and-energy-balance" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-3---radiation-and-energy-balance">Chapter 3 - Radiation and Energy Balance</h2>
+<section id="calculate-planck-curves-as-a-function-of-wavelength-and-temperature" class="level3 quarto-embed-nb-cell">
+<h3 class="anchored" data-anchor-id="calculate-planck-curves-as-a-function-of-wavelength-and-temperature">Calculate Planck curves as a function of wavelength and temperature</h3>
+<p><i>© Von P. Walden, Washington State University</i></p>
+<section id="dessler-figure-3.2a" class="level4">
+<h4 class="anchored" data-anchor-id="dessler-figure-3.2a">Dessler, Figure 3.2a</h4>
+</section>
+<section id="dessler-figure-3.2b" class="level4">
+<h4 class="anchored" data-anchor-id="dessler-figure-3.2b">Dessler, Figure 3.2b</h4>
+</section>
+<section id="dessler-figure-3.2c" class="level4">
+<h4 class="anchored" data-anchor-id="dessler-figure-3.2c">Dessler, Figure 3.2c</h4>
+</section>
+<a class="quarto-notebook-link" id="nblink-6" href="chapter3/PlancksLaw-preview.html#cell-0">Source: Planck's Law</a></section>
+<section id="calculate-percentage-of-radiation-in-spectral-bands" class="level3 quarto-embed-nb-cell">
+<h3 class="anchored" data-anchor-id="calculate-percentage-of-radiation-in-spectral-bands">Calculate Percentage of Radiation in Spectral Bands</h3>
+<p><i>© Von P. Walden, Washington State University</i></p>
+<section id="for-a-given-temperature-t-calculate-the-proportion-of-radiation-emitted-in-various-spectral-bands-uv-visible-near-infrared-and-infrared." class="level5">
+<h5 class="anchored" data-anchor-id="for-a-given-temperature-t-calculate-the-proportion-of-radiation-emitted-in-various-spectral-bands-uv-visible-near-infrared-and-infrared.">For a given temperature T, calculate the proportion of radiation emitted in various spectral bands (UV, visible, near-infrared, and infrared).</h5>
+</section>
+<a class="quarto-notebook-link" id="nblink-7" href="chapter3/RadiationInSpectralBands-preview.html#cell-0">Source: Percent Radiation in a Spectral Band</a></section>
+<p><a href="chapter3/mls.dat">mls.dat</a> <a href="chapter3/mlw.dat">mlw.dat</a> <a href="chapter3/sas.dat">sas.dat</a> <a href="chapter3/saw.dat">saw.dat</a> <a href="chapter3/trp.dat">trp.dat</a></p>
+<section id="calculate-the-power-emitted-by-a-human" class="level3 quarto-embed-nb-cell">
+<h3 class="anchored" data-anchor-id="calculate-the-power-emitted-by-a-human">Calculate the Power Emitted by a Human</h3>
+<p><i>© Von P. Walden, Washington State University</i></p>
+<p>Estimate the power (in W) given off by an average human being if they consume 2000 calories of food each day.</p>
+<a class="quarto-notebook-link" id="nblink-8" href="chapter3/PowerEmittedByHuman-preview.html#cell-0">Source: Power Emitted by a Human</a></section>
+<section id="bodies-emitting-in-a-room" class="level3 quarto-embed-nb-cell">
+<h3 class="anchored" data-anchor-id="bodies-emitting-in-a-room">Bodies Emitting in a Room</h3>
+<p><i>© Von P. Walden, Washington State University</i></p>
+<section id="stefan-boltzmann-constant" class="level5">
+<h5 class="anchored" data-anchor-id="stefan-boltzmann-constant">Stefan-Boltzmann constant</h5>
+</section>
+<section id="radiation-from-the-walls-of-the-room" class="level4">
+<h4 class="anchored" data-anchor-id="radiation-from-the-walls-of-the-room">Radiation from the walls of the room</h4>
+</section>
+<section id="radiation-from-the-bodies-in-the-room" class="level4">
+<h4 class="anchored" data-anchor-id="radiation-from-the-bodies-in-the-room">Radiation from the bodies in the room</h4>
+<section id="actual-body-temperature-in-deg-c" class="level5">
+<h5 class="anchored" data-anchor-id="actual-body-temperature-in-deg-c">Actual Body Temperature (in deg C)</h5>
+</section>
+</section>
+<section id="radiation-from-the-bodies-in-the-room-including-emissivity" class="level4">
+<h4 class="anchored" data-anchor-id="radiation-from-the-bodies-in-the-room-including-emissivity">Radiation from the bodies in the room (including emissivity)</h4>
+<section id="so-if-the-emissivity-of-our-bodies-is-0.89-or-89-then-we-emit-the-same-radiation-as-a-blackbody-at-28-c." class="level5">
+<h5 class="anchored" data-anchor-id="so-if-the-emissivity-of-our-bodies-is-0.89-or-89-then-we-emit-the-same-radiation-as-a-blackbody-at-28-c.">So if the emissivity of our bodies is 0.89 (or 89%), then we emit the same radiation as a blackbody at 28 C.</h5>
+</section>
+</section>
+<a class="quarto-notebook-link" id="nblink-9" href="chapter3/BodiesEmittingInARoom-preview.html#cell-0">Source: Bodies Emitting in a Room</a></section>
+</section>
+<section id="chapter-4---a-simple-climate-model" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-4---a-simple-climate-model">Chapter 4 - A Simple Climate Model</h2>
+<section id="insolation" class="level3 quarto-embed-nb-cell">
+<h3 class="anchored" data-anchor-id="insolation">Insolation</h3>
+<p><i>© Von P. Walden, Washington State University</i></p>
+<section id="calculates-the-insolation-at-the-top-of-the-atmosphere-toa-as-a-function-of-time-and-location." class="level4">
+<h4 class="anchored" data-anchor-id="calculates-the-insolation-at-the-top-of-the-atmosphere-toa-as-a-function-of-time-and-location.">Calculates the insolation at the top of the atmosphere (TOA) as a function of time and location.</h4>
+<section id="solar-flux-per-unit-area-at-toa-equations-from-hartmann-global-physical-climatology" class="level5">
+<h5 class="anchored" data-anchor-id="solar-flux-per-unit-area-at-toa-equations-from-hartmann-global-physical-climatology">Solar flux per unit area at TOA (Equations from Hartmann, <i>Global Physical Climatology</i>)</h5>
+<p><span class="math inline">\(Q = S_o (d_m/d)^2 \cos(\theta_s)\)</span> where So is the solar “constant”, dm is the mean distance between the Earth and Sun, d is the actual distance between the Earth and Sun, and theta(s) is the solar zenith angle.</p>
+<p><span class="math inline">\(\delta = -23.44^{\circ}\cos{[(t_j+10 days)*(360^{\circ}/365.25 days)]}\)</span> is the declination angle.</p>
+<p><span class="math inline">\(\cos{\theta_s} = \sin{\phi}sin{\delta} + \cos{\phi}\cos{\delta}\cos{h}\)</span>, where phi is the latitude and h is the hour angle.</p>
+<p><span class="math inline">\(h=(12-t)*(15^{\circ} / 1 hour)\)</span>, where t is the local time and 15 is the number of degrees that the Earth rotates in one hour. The conversion factor converts hours to degrees.</p>
+<p>$ d_m $ is the mean distance from the Sun to the Earth, and is equal to the length of semi-major axis (a) of the elliptical orbit (which is 149.6 million km).</p>
+<p>d is the distance between the Earth and Sun on any given day, where the closest approach (perihelion) occurs on 3 January.</p>
+<p>$ d = $</p>
+<p>where $ $ is the eccentricity of Earth’s orbit (0.017), a is the semi major axis of Earth’s orbit, and $ $ is an angle that relates the day number to the correct location of Earth in the elliptical orbit for that day.</p>
+<p><span class="math inline">\(Q_{dayavg} = (S_o/\pi)(d_m/d)^2[h_o\sin{\phi}\sin{\delta}+\cos{\phi}\cos{\delta}\sin{h_o}]\)</span>, where cos(<span class="math inline">\(h_o) = -\tan{\phi}\tan{\delta}\)</span>.</p>
+</section>
+</section>
+<section id="geographic-distribution-of-insolation-solar-radition-at-toa" class="level4">
+<h4 class="anchored" data-anchor-id="geographic-distribution-of-insolation-solar-radition-at-toa">Geographic distribution of insolation (solar radition) at TOA</h4>
+</section>
+<section id="daily-average-insolation-over-pullman-wa" class="level4">
+<h4 class="anchored" data-anchor-id="daily-average-insolation-over-pullman-wa">Daily Average Insolation over Pullman, WA</h4>
+</section>
+<a class="quarto-notebook-link" id="nblink-10" href="chapter4/Insolation-preview.html#cell-0">Source: Insolation</a></section>
+<section id="calculation-of-the-equilibrium-temperature-of-earth" class="level3 quarto-embed-nb-cell">
+<h3 class="anchored" data-anchor-id="calculation-of-the-equilibrium-temperature-of-earth">Calculation of the Equilibrium Temperature of Earth</h3>
+<section id="equation-4.3b-in-dessler." class="level4">
+<h4 class="anchored" data-anchor-id="equation-4.3b-in-dessler.">Equation 4.3(b) in Dessler.</h4>
+</section>
+<a class="quarto-notebook-link" id="nblink-11" href="chapter4/EquilibriumTemperatureOfEarth-preview.html#cell-0">Source: Equilibrium Temperature of Earth</a></section>
+<section id="ashrae-irradiance-sample-calculation" class="level3 quarto-embed-nb-cell">
+<h3 class="anchored" data-anchor-id="ashrae-irradiance-sample-calculation">ASHRAE Irradiance sample calculation</h3>
+<p>ASHRAE provides a formula for calculating the irradiance at the surface on a plane that is perpendicular to the incoming solar radiation. This equation is:</p>
+<p>$ I_B = A e^{-Km} $</p>
+<p>where</p>
+<p>$ A = 1160 + 75 sin[360(n - 275)/365] $</p>
+<p>$ K = 0.174 + 0.035 sin[360(n - 100)/365] $</p>
+<p>$ m = 1/ sin() $</p>
+<p>$ = 90 - Latitude + Declination $</p>
+<p>$ Declination = = 23.45 sin[360/365 (n - 81)] $</p>
+<p>and n is the day number (e.g., May 1 = 31 + 28 + 31 + 30 + 1 = 121). A is the irradiance (W m-2), K is the attenuation per air mass, and m is the air mass.</p>
+<section id="now-create-an-annual-cycle-of-solar-radiation" class="level4">
+<h4 class="anchored" data-anchor-id="now-create-an-annual-cycle-of-solar-radiation">Now create an annual cycle of solar radiation</h4>
+<p>NOTE THAT this is the solar radiation (in W m-2) on a surface that is always perpendicular to the sunlight. This is quite different from the TOA insolation that we calculated before. See the figures in the <a href="https://www.cableizer.com/blog/post/solar-radiation-calculator/">Solar Radiation Calculator</a> for another example.</p>
+</section>
+<a class="quarto-notebook-link" id="nblink-12" href="chapter4/ASHRAE_Irradiance-preview.html#cell-0">Source: ASHRAE Irradiance sample calculation</a></section>
+<ul>
+<li>Calculation of the Solar “Constant”</li>
+<li>Infrared Absorption by Earth’s Atmosphere</li>
+</ul>
+</section>
+<section id="chapter-10---exponential-growth" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-10---exponential-growth">Chapter 10 - Exponential Growth</h2>
+<ul>
+<li>Exponential growth</li>
+</ul>
 </section>
 
-</main> <!-- /main -->
+</main>
+<!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -689,6 +748,31 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom"});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
+
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
+
+};
+          </script>
 
 
 

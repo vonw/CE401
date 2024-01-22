@@ -1,42 +1,16 @@
 project:
-  type: website
+  type: manuscript
   output-dir: docs
 
-website:
-  title: "CE401"
-  navbar:
-    search: true
-    tools: 
-      - icon: github
-        menu:
-          - text: Source Code
-            url: https://github.com/vonw/CE401
+execute: 
+  freeze: true
 
-  sidebar:
-    style: "docked"
-    collapse-level: 1
-    contents:
-      - index.qmd
-      - section: "Chapter 0"
-        contents:
-        - chapter0/softwareCarpentry_PythonFundamentals.ipynb
-        - chapter0/softwareCarpentry_AnalyzingPatientData.ipynb
-      - section: "Chapter 1"
-        contents: chapter1/*
-      - section: "Chapter 2"
-        contents: chapter2/*
-      - section: "Chapter 3"
-        contents: chapter3/*
-      - section: "Chapter 4"
-        contents: chapter4/*
-      - section: "Chapter 10"
-        contents: chapter10/*
-      
+collapse: true
+
 format:
   html:
+    toc: true
+    docx: default
+    pdf: default
     theme: cosmo
     css: styles.css
-    toc: true
-
-
-
