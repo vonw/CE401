@@ -1,878 +1,795 @@
-
-
 <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<html lang="en" data-content_root="" >
+<title>Calculation of the Solar Constant</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
 
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Calculation of the Solar Constant &#8212; Climate Change Science and Engineering</title>
-  
-  
-  
-  <script data-cfasync="false">
-    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
-  </script>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-6bd9cfa162949bde0a231f530c97869d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
 
-  
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
-  
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
-  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'chapter4/SolarConstant';</script>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Insolation" href="Insolation.html" />
-    <link rel="prev" title="A Simple Climate Model" href="../chapter4.html" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+<link rel="stylesheet" href="../styles.css">
+</head>
 
-  
-  
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  
-  <div id="pst-scroll-pixel-helper"></div>
+<body>
 
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#useful-links" id="toc-useful-links" class="nav-link active" data-scroll-target="#useful-links">Useful links</a>
+  <ul class="collapse">
+  <li><a href="#information-on-the-solar-constant" id="toc-information-on-the-solar-constant" class="nav-link" data-scroll-target="#information-on-the-solar-constant">Information on the Solar “Constant”</a></li>
+  <li><a href="#information-on-earths-orbit" id="toc-information-on-earths-orbit" class="nav-link" data-scroll-target="#information-on-earths-orbit">Information on Earth’s orbit</a></li>
+  <li><a href="#a-calculate-the-flux-emitted-by-the-sun-in-w-m-2-using-the-stefan-boltzmann-law." id="toc-a-calculate-the-flux-emitted-by-the-sun-in-w-m-2-using-the-stefan-boltzmann-law." class="nav-link" data-scroll-target="#a-calculate-the-flux-emitted-by-the-sun-in-w-m-2-using-the-stefan-boltzmann-law.">a) Calculate the flux emitted by the Sun in W m-2 using the Stefan-Boltzmann Law.</a></li>
+  <li><a href="#b-calculate-the-total-power-emitted-by-the-suns-surface." id="toc-b-calculate-the-total-power-emitted-by-the-suns-surface." class="nav-link" data-scroll-target="#b-calculate-the-total-power-emitted-by-the-suns-surface.">b) Calculate the total power emitted by the Sun’s surface.</a></li>
+  <li><a href="#now-determine-the-flux-in-w-m-2-from-the-sun-but-at-the-distance-of-the-earths-orbit.-note-that-the-total-power-from-the-sun-is-spread-over-a-very-large-area-in-space" id="toc-now-determine-the-flux-in-w-m-2-from-the-sun-but-at-the-distance-of-the-earths-orbit.-note-that-the-total-power-from-the-sun-is-spread-over-a-very-large-area-in-space" class="nav-link" data-scroll-target="#now-determine-the-flux-in-w-m-2-from-the-sun-but-at-the-distance-of-the-earths-orbit.-note-that-the-total-power-from-the-sun-is-spread-over-a-very-large-area-in-space">Now determine the flux (in W m-2) from the Sun, but at the distance of the Earth’s orbit. NOTE that the total power from the Sun is spread over a very large area (in space…)</a></li>
+  <li><a href="#now-how-much-power-is-intercepted-by-the-earth-as-the-suns-rays-pass-by-it." id="toc-now-how-much-power-is-intercepted-by-the-earth-as-the-suns-rays-pass-by-it." class="nav-link" data-scroll-target="#now-how-much-power-is-intercepted-by-the-earth-as-the-suns-rays-pass-by-it.">Now how much power is intercepted by the Earth as the Sun’s rays pass by it.</a></li>
+  <li><a href="#convert-this-to-terawatts-tw-1-tw-1e12-w" id="toc-convert-this-to-terawatts-tw-1-tw-1e12-w" class="nav-link" data-scroll-target="#convert-this-to-terawatts-tw-1-tw-1e12-w">Convert this to Terawatts (TW); 1 TW = 1e12 W</a></li>
+  </ul></li>
+  <li><a href="#as-dessler-explains-all-of-human-society-currently-consumes-only-16-tw.-so-we-only-need-to-capture-0.01-of-the-suns-power-to-meet-all-of-our-energy-needs." id="toc-as-dessler-explains-all-of-human-society-currently-consumes-only-16-tw.-so-we-only-need-to-capture-0.01-of-the-suns-power-to-meet-all-of-our-energy-needs." class="nav-link" data-scroll-target="#as-dessler-explains-all-of-human-society-currently-consumes-only-16-tw.-so-we-only-need-to-capture-0.01-of-the-suns-power-to-meet-all-of-our-energy-needs.">As Dessler explains, all of human society currently consumes only 16 TW. So we only need to capture 0.01% of the Sun’s power to meet all of our energy needs.</a>
+  <ul class="collapse">
+  <li><a href="#note-that-s4-is-equal-to-342-w-m-2." id="toc-note-that-s4-is-equal-to-342-w-m-2." class="nav-link" data-scroll-target="#note-that-s4-is-equal-to-342-w-m-2.">Note that S/4 is equal to 342 W m-2.</a></li>
+  </ul></li>
+  <li><a href="#sensitivity-to-earth-sun-distance" id="toc-sensitivity-to-earth-sun-distance" class="nav-link" data-scroll-target="#sensitivity-to-earth-sun-distance">Sensitivity to Earth-Sun Distance</a></li>
+  <li><a href="#sensitivity-to-suns-surface-temperature." id="toc-sensitivity-to-suns-surface-temperature." class="nav-link" data-scroll-target="#sensitivity-to-suns-surface-temperature.">Sensitivity to Sun’s surface temperature.</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Calculation of the Solar Constant</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
+    
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
-  
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      <div class="bd-sidebar-primary bd-sidebar">
-        
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-    
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-  
-
-<a class="navbar-brand logo" href="../intro.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/ce401.png" class="logo__image only-light" alt="Climate Change Science and Engineering - Home"/>
-    <script>document.write(`<img src="../_static/ce401.png" class="logo__image only-dark" alt="Climate Change Science and Engineering - Home"/>`);</script>
-  
-  
-</a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item navbar-nav active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="../intro.html">
-                    Computational Notebooks
-                </a>
-            </li>
-        </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter0.html">Using Python</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter0/softwareCarpentry_PythonFundamentals.html">Software Carpentry - Python Fundamentals</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter0/softwareCarpentry_AnalyzingPatientData.html">Software Carpentry - Analyzing Patient Data</a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter1.html">An Introduction to the Climate Problem</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter1/FairbanksTemperatures.html">Comparing temperature distributions</a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter2.html">Is the Climate Changing?</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter2/LaurentideIceSheet_and_SeaLevel.html">Approximate the Decrease in Sea-level from the Laurentide Ice Sheet</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter2/plotBerkeleyEarth.html">Plot global temperature anomalies from Berkeley Earth</a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter3.html">Radiation and Energy Balance</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter3/PlancksLaw.html">Calculate Planck curves as a function of wavelength and temperature</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter3/RadiationInSpectralBands.html">Calculate Percentage of Radiation in Spectral Bands</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter3/PowerEmittedByHuman.html">Calculate the Power Emitted by a Human</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter3/BodiesEmittingInARoom.html">Bodies Emitting in a Room</a></li>
-</ul>
-</li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../chapter4.html">A Simple Climate Model</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Calculation of the Solar Constant</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Insolation.html">Insolation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="InfraredAbsorptionByTheAtmosphere.html">Infrared Absorption by the Atmosphere</a></li>
-<li class="toctree-l2"><a class="reference internal" href="EquilibriumTemperatureOfEarth.html">Calculation of the Equilibrium Temperature of Earth</a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter10.html">Exponential Growth</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter10/ExponentialGrowth_Dessler.html">Exponential Growth</a></li>
-</ul>
-</li>
-</ul>
-
-    </div>
-</nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
-      </div>
-      
-      <main id="main-content" class="bd-main">
-        
-        
-
-<div class="sbt-scroll-pixel-helper"></div>
-
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article">
-<div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <span class="fa-solid fa-bars"></span>
-</label></div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
-
-<div class="article-header-buttons">
+</header>
 
 
-
-
-
-<div class="dropdown dropdown-launch-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
-    <i class="fas fa-rocket"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://mybinder.org/v2/gh/vonw/CE401/main?urlpath=tree/chapter4/SolarConstant.ipynb" target="_blank"
-   class="btn btn-sm dropdown-item"
-   title="Launch onBinder"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  
-    <img src="../_static/images/logo_binder.svg">
-  </span>
-<span class="btn__text-container">Binder</span>
-</a>
-</li>
-      
-  </ul>
-</div>
-
-
-
-
-
-
-<div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/vonw/CE401" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="btn__text-container">Repository</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li><a href="https://github.com/vonw/CE401/issues/new?title=Issue%20on%20page%20%2Fchapter4/SolarConstant.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="btn__text-container">Open issue</span>
-</a>
-</li>
-      
-  </ul>
-</div>
-
-
-
-
-
-
-<div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
-    <i class="fas fa-download"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="../_sources/chapter4/SolarConstant.ipynb" target="_blank"
-   class="btn btn-sm btn-download-source-button dropdown-item"
-   title="Download source file"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="btn__text-container">.ipynb</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li>
-<button onclick="window.print()"
-  class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Print to PDF"
-  data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="btn__text-container">.pdf</span>
-</button>
-</li>
-      
-  </ul>
-</div>
-
-
-
-
-<button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-
-
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script>
-
-
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
-</div></div>
-      
-    </div>
-  
-</div>
-</div>
-              
-              
-
-<div id="jb-print-docs-body" class="onlyprint">
-    <h1>Calculation of the Solar Constant</h1>
-    <!-- Table of contents -->
-    <div id="print-main-content">
-        <div id="jb-print-toc">
-            
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-links">Useful links</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#information-on-the-solar-constant">Information on the Solar “Constant”</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#information-on-earth-s-orbit">Information on Earth’s orbit</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-calculate-the-flux-emitted-by-the-sun-in-w-m-2-using-the-stefan-boltzmann-law">a) Calculate the flux emitted by the Sun in W m-2 using the Stefan-Boltzmann Law.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-calculate-the-total-power-emitted-by-the-sun-s-surface">b) Calculate the total power emitted by the Sun’s surface.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#now-determine-the-flux-in-w-m-2-from-the-sun-but-at-the-distance-of-the-earth-s-orbit-note-that-the-total-power-from-the-sun-is-spread-over-a-very-large-area-in-space">Now determine the flux (in W m-2) from the Sun, but at the distance of the Earth’s orbit. NOTE that the total power from the Sun is spread over a very large area (in space…)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#now-how-much-power-is-intercepted-by-the-earth-as-the-sun-s-rays-pass-by-it">Now how much power is intercepted by the Earth as the Sun’s rays pass by it.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-this-to-terawatts-tw-1-tw-1e12-w">Convert this to Terawatts (TW); 1 TW = 1e12 W</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#as-dessler-explains-all-of-human-society-currently-consumes-only-16-tw-so-we-only-need-to-capture-0-01-of-the-sun-s-power-to-meet-all-of-our-energy-needs">As Dessler explains, all of human society currently consumes only 16 TW. So we only need to capture 0.01% of the Sun’s power to meet all of our energy needs.</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#note-that-s-4-is-equal-to-342-w-m-2">Note that S/4 is equal to 342 W m-2.</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-to-earth-sun-distance">Sensitivity to Earth-Sun Distance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-to-sun-s-surface-temperature">Sensitivity to Sun’s surface temperature.</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#note-that-the-solar-constant-varies-by-about-0-1-1-3-w-m-2-during-the-11-year-solar-cycle-from-about-1361-to-1362-3-w-m-2-http-acrim-com-tsi-monitoring-htm">Note that the solar constant varies by about 0.1% (1.3 W m-2) during the 11-year solar cycle, from about 1361 to 1362.3 W m-2. http://acrim.com/TSI Monitoring.htm</a></li>
-</ul>
-</li>
-</ul>
-            </nav>
-        </div>
-    </div>
-</div>
-
-              
-                
-<div id="searchbox"></div>
-                <article class="bd-article" role="main">
-                  
-  <section class="tex2jax_ignore mathjax_ignore" id="calculation-of-the-solar-constant">
-<h1>Calculation of the Solar Constant<a class="headerlink" href="#calculation-of-the-solar-constant" title="Permalink to this heading">#</a></h1>
 <p><i>© Von P. Walden, Washington State University</i></p>
-<section id="useful-links">
-<h2>Useful links<a class="headerlink" href="#useful-links" title="Permalink to this heading">#</a></h2>
-<section id="information-on-the-solar-constant">
-<h3><a class="reference external" href="https://en.wikipedia.org/wiki/Solar_cycle">Information on the Solar “Constant”</a><a class="headerlink" href="#information-on-the-solar-constant" title="Permalink to this heading">#</a></h3>
+<section id="useful-links" class="level2">
+<h2 class="anchored" data-anchor-id="useful-links">Useful links</h2>
+<section id="information-on-the-solar-constant" class="level3">
+<h3 class="anchored" data-anchor-id="information-on-the-solar-constant"><a href="https://en.wikipedia.org/wiki/Solar_cycle">Information on the Solar “Constant”</a></h3>
 </section>
-<section id="information-on-earth-s-orbit">
-<h3><a class="reference external" href="https://en.wikipedia.org/wiki/Earth%27s_orbit">Information on Earth’s orbit</a><a class="headerlink" href="#information-on-earth-s-orbit" title="Permalink to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-</pre></div>
-</div>
-</div>
+<section id="information-on-earths-orbit" class="level3">
+<h3 class="anchored" data-anchor-id="information-on-earths-orbit"><a href="https://en.wikipedia.org/wiki/Earth%27s_orbit">Information on Earth’s orbit</a></h3>
+<div id="cell-4" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="a-calculate-the-flux-emitted-by-the-sun-in-w-m-2-using-the-stefan-boltzmann-law">
-<h3>a) Calculate the flux emitted by the Sun in W m-2 using the Stefan-Boltzmann Law.<a class="headerlink" href="#a-calculate-the-flux-emitted-by-the-sun-in-w-m-2-using-the-stefan-boltzmann-law" title="Permalink to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Tsun</span> <span class="o">=</span> <span class="mi">5772</span>                   <span class="c1"># K; chosen to yield S = 1361 W m-2</span>
-<span class="n">E</span>    <span class="o">=</span> <span class="mf">5.67e-8</span> <span class="o">*</span> <span class="n">Tsun</span><span class="o">**</span><span class="mi">4</span>        <span class="c1"># W m-2</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The flux from the Sun is:&#39;</span><span class="p">,</span><span class="n">E</span><span class="p">,</span> <span class="s1">&#39;W m-2&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The flux from the Sun is: 62934436.58666411 W m-2
-</pre></div>
-</div>
+<section id="a-calculate-the-flux-emitted-by-the-sun-in-w-m-2-using-the-stefan-boltzmann-law." class="level3">
+<h3 class="anchored" data-anchor-id="a-calculate-the-flux-emitted-by-the-sun-in-w-m-2-using-the-stefan-boltzmann-law.">a) Calculate the flux emitted by the Sun in W m-2 using the Stefan-Boltzmann Law.</h3>
+<div id="cell-6" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Tsun <span class="op">=</span> <span class="dv">5772</span>                   <span class="co"># K; chosen to yield S = 1361 W m-2</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>E    <span class="op">=</span> <span class="fl">5.67e-8</span> <span class="op">*</span> Tsun<span class="op">**</span><span class="dv">4</span>        <span class="co"># W m-2</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'The flux from the Sun is:'</span>,E, <span class="st">'W m-2'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The flux from the Sun is: 62934436.58666411 W m-2</code></pre>
 </div>
 </div>
 </section>
-<section id="b-calculate-the-total-power-emitted-by-the-sun-s-surface">
-<h3>b) Calculate the total power emitted by the Sun’s surface.<a class="headerlink" href="#b-calculate-the-total-power-emitted-by-the-sun-s-surface" title="Permalink to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Rs</span>   <span class="o">=</span> <span class="mf">695.7e6</span>                    <span class="c1"># meters</span>
-<span class="n">As</span>   <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">Rs</span><span class="o">**</span><span class="mi">2</span>                 <span class="c1"># m2</span>
-<span class="n">Psun</span> <span class="o">=</span> <span class="n">E</span> <span class="o">*</span> <span class="n">As</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Power emitted by the Sun is:&#39;</span><span class="p">,</span> <span class="n">Psun</span><span class="p">,</span> <span class="s1">&#39;Watts&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Power emitted by the Sun is: 3.8277381380933445e+26 Watts
-</pre></div>
-</div>
+<section id="b-calculate-the-total-power-emitted-by-the-suns-surface." class="level3">
+<h3 class="anchored" data-anchor-id="b-calculate-the-total-power-emitted-by-the-suns-surface.">b) Calculate the total power emitted by the Sun’s surface.</h3>
+<div id="cell-8" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Rs   <span class="op">=</span> <span class="fl">695.7e6</span>                    <span class="co"># meters</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>As   <span class="op">=</span> <span class="dv">4</span><span class="op">*</span>np.pi<span class="op">*</span>Rs<span class="op">**</span><span class="dv">2</span>                 <span class="co"># m2</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>Psun <span class="op">=</span> E <span class="op">*</span> As</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Power emitted by the Sun is:'</span>, Psun, <span class="st">'Watts'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Power emitted by the Sun is: 3.8277381380933445e+26 Watts</code></pre>
 </div>
 </div>
 </section>
-<section id="now-determine-the-flux-in-w-m-2-from-the-sun-but-at-the-distance-of-the-earth-s-orbit-note-that-the-total-power-from-the-sun-is-spread-over-a-very-large-area-in-space">
-<h3>Now determine the flux (in W m-2) from the Sun, but at the distance of the Earth’s orbit. NOTE that the total power from the Sun is spread over a very large area (in space…)<a class="headerlink" href="#now-determine-the-flux-in-w-m-2-from-the-sun-but-at-the-distance-of-the-earth-s-orbit-note-that-the-total-power-from-the-sun-is-spread-over-a-very-large-area-in-space" title="Permalink to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Average radius of Earth&#39;s orbit around the Sun.</span>
-<span class="n">Res</span>   <span class="o">=</span> <span class="mf">149.6e9</span>                    <span class="c1"># meters</span>
-<span class="c1"># Surface area of a sphere with radius equal to Re.</span>
-<span class="n">Aes</span>   <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">Res</span><span class="o">**</span><span class="mi">2</span>                <span class="c1"># m2</span>
-<span class="c1"># Solar Constant</span>
-<span class="n">S</span>     <span class="o">=</span> <span class="n">Psun</span> <span class="o">/</span> <span class="n">Aes</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The Solar Constant for Earth is:&#39;</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="s1">&#39;W m-2&#39;</span><span class="p">)</span>
-</pre></div>
+<section id="now-determine-the-flux-in-w-m-2-from-the-sun-but-at-the-distance-of-the-earths-orbit.-note-that-the-total-power-from-the-sun-is-spread-over-a-very-large-area-in-space" class="level3">
+<h3 class="anchored" data-anchor-id="now-determine-the-flux-in-w-m-2-from-the-sun-but-at-the-distance-of-the-earths-orbit.-note-that-the-total-power-from-the-sun-is-spread-over-a-very-large-area-in-space">Now determine the flux (in W m-2) from the Sun, but at the distance of the Earth’s orbit. NOTE that the total power from the Sun is spread over a very large area (in space…)</h3>
+<div id="cell-10" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Average radius of Earth's orbit around the Sun.</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>Res   <span class="op">=</span> <span class="fl">149.6e9</span>                    <span class="co"># meters</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Surface area of a sphere with radius equal to Re.</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>Aes   <span class="op">=</span> <span class="dv">4</span><span class="op">*</span>np.pi<span class="op">*</span>Res<span class="op">**</span><span class="dv">2</span>                <span class="co"># m2</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Solar Constant</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>S     <span class="op">=</span> Psun <span class="op">/</span> Aes</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'The Solar Constant for Earth is:'</span>, S, <span class="st">'W m-2'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The Solar Constant for Earth is: 1361.0346073015646 W m-2</code></pre>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Solar Constant for Earth is: 1361.0346073015646 W m-2
-</pre></div>
-</div>
+<hr>
+</section>
+<section id="now-how-much-power-is-intercepted-by-the-earth-as-the-suns-rays-pass-by-it." class="level3">
+<h3 class="anchored" data-anchor-id="now-how-much-power-is-intercepted-by-the-earth-as-the-suns-rays-pass-by-it.">Now how much power is intercepted by the Earth as the Sun’s rays pass by it.</h3>
+<div id="cell-13" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>Re   <span class="op">=</span> <span class="fl">6.4e6</span>                        <span class="co"># meters</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>Aint <span class="op">=</span> np.pi<span class="op">*</span>Re<span class="op">**</span><span class="dv">2</span>                     <span class="co"># Area intercepted by Earth in m2</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>Pe   <span class="op">=</span> S <span class="op">*</span> Aint</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'The amount of power (in Watts) that is constantly intercepted by Earth is:'</span>, Pe, <span class="st">'Watts'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The amount of power (in Watts) that is constantly intercepted by Earth is: 1.7513743661383942e+17 Watts</code></pre>
 </div>
 </div>
 </section>
-<hr class="docutils" />
-<section id="now-how-much-power-is-intercepted-by-the-earth-as-the-sun-s-rays-pass-by-it">
-<h3>Now how much power is intercepted by the Earth as the Sun’s rays pass by it.<a class="headerlink" href="#now-how-much-power-is-intercepted-by-the-earth-as-the-sun-s-rays-pass-by-it" title="Permalink to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Re</span>   <span class="o">=</span> <span class="mf">6.4e6</span>                        <span class="c1"># meters</span>
-<span class="n">Aint</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">Re</span><span class="o">**</span><span class="mi">2</span>                     <span class="c1"># Area intercepted by Earth in m2</span>
-<span class="n">Pe</span>   <span class="o">=</span> <span class="n">S</span> <span class="o">*</span> <span class="n">Aint</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The amount of power (in Watts) that is constantly intercepted by Earth is:&#39;</span><span class="p">,</span> <span class="n">Pe</span><span class="p">,</span> <span class="s1">&#39;Watts&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The amount of power (in Watts) that is constantly intercepted by Earth is: 1.7513743661383942e+17 Watts
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="convert-this-to-terawatts-tw-1-tw-1e12-w">
-<h3>Convert this to Terawatts (TW); 1 TW = 1e12 W<a class="headerlink" href="#convert-this-to-terawatts-tw-1-tw-1e12-w" title="Permalink to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The amount of power (in TW) that is constantly intercepted by Earth is:&#39;</span><span class="p">,</span> <span class="n">Pe</span><span class="o">/</span><span class="mf">1e12</span><span class="p">,</span> <span class="s1">&#39;TW&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The amount of power (in TW) that is constantly intercepted by Earth is: 175137.4366138394 TW
-</pre></div>
-</div>
+<section id="convert-this-to-terawatts-tw-1-tw-1e12-w" class="level3">
+<h3 class="anchored" data-anchor-id="convert-this-to-terawatts-tw-1-tw-1e12-w">Convert this to Terawatts (TW); 1 TW = 1e12 W</h3>
+<div id="cell-15" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'The amount of power (in TW) that is constantly intercepted by Earth is:'</span>, Pe<span class="op">/</span><span class="fl">1e12</span>, <span class="st">'TW'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The amount of power (in TW) that is constantly intercepted by Earth is: 175137.4366138394 TW</code></pre>
 </div>
 </div>
 </section>
 </section>
-<section id="as-dessler-explains-all-of-human-society-currently-consumes-only-16-tw-so-we-only-need-to-capture-0-01-of-the-sun-s-power-to-meet-all-of-our-energy-needs">
-<h2>As Dessler explains, all of human society currently consumes only 16 TW. So we only need to capture 0.01% of the Sun’s power to meet all of our energy needs.<a class="headerlink" href="#as-dessler-explains-all-of-human-society-currently-consumes-only-16-tw-so-we-only-need-to-capture-0-01-of-the-sun-s-power-to-meet-all-of-our-energy-needs" title="Permalink to this heading">#</a></h2>
-<hr class="docutils" />
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mf">0.3</span>                               <span class="c1"># Earth&#39;s albedo; unitless</span>
-<span class="n">S</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span>
-</pre></div>
+<section id="as-dessler-explains-all-of-human-society-currently-consumes-only-16-tw.-so-we-only-need-to-capture-0.01-of-the-suns-power-to-meet-all-of-our-energy-needs." class="level2">
+<h2 class="anchored" data-anchor-id="as-dessler-explains-all-of-human-society-currently-consumes-only-16-tw.-so-we-only-need-to-capture-0.01-of-the-suns-power-to-meet-all-of-our-energy-needs.">As Dessler explains, all of human society currently consumes only 16 TW. So we only need to capture 0.01% of the Sun’s power to meet all of our energy needs.</h2>
+<hr>
+<div id="cell-18" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="fl">0.3</span>                               <span class="co"># Earth's albedo; unitless</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>S<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>a)<span class="op">/</span><span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>238.1810562777738</code></pre>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>238.1810562777738
-</pre></div>
+<section id="note-that-s4-is-equal-to-342-w-m-2." class="level3">
+<h3 class="anchored" data-anchor-id="note-that-s4-is-equal-to-342-w-m-2.">Note that S/4 is equal to 342 W m-2.</h3>
+<div id="cell-20" class="cell" data-scrolled="true" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>S<span class="op">/</span><span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>340.25865182539115</code></pre>
 </div>
 </div>
-</div>
-<section id="note-that-s-4-is-equal-to-342-w-m-2">
-<h3>Note that S/4 is equal to 342 W m-2.<a class="headerlink" href="#note-that-s-4-is-equal-to-342-w-m-2" title="Permalink to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">S</span><span class="o">/</span><span class="mi">4</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>340.25865182539115
-</pre></div>
-</div>
-</div>
-</div>
+<hr>
 </section>
 </section>
-<hr class="docutils" />
-<section id="sensitivity-to-earth-sun-distance">
-<h2>Sensitivity to Earth-Sun Distance<a class="headerlink" href="#sensitivity-to-earth-sun-distance" title="Permalink to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SensRes</span>                   <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Earth-Sun Distance&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">147.1e9</span><span class="p">,</span><span class="mf">149.6e9</span><span class="p">,</span><span class="mf">152.1e9</span><span class="p">]})</span>
-<span class="n">SensRes</span><span class="p">[</span><span class="s1">&#39;Area&#39;</span><span class="p">]</span>           <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">SensRes</span><span class="p">[</span><span class="s1">&#39;Earth-Sun Distance&#39;</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
-<span class="n">SensRes</span><span class="p">[</span><span class="s1">&#39;Solar Constant&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Psun</span> <span class="o">/</span> <span class="n">SensRes</span><span class="p">[</span><span class="s1">&#39;Area&#39;</span><span class="p">]</span>
-<span class="n">SensRes</span><span class="p">[</span><span class="s1">&#39;</span><span class="si">% d</span><span class="s1">ifference&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="p">(</span><span class="n">SensRes</span><span class="p">[</span><span class="s1">&#39;Solar Constant&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">SensRes</span><span class="p">[</span><span class="s1">&#39;Solar Constant&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">SensRes</span><span class="p">[</span><span class="s1">&#39;Solar Constant&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>
-<span class="n">SensRes</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+<section id="sensitivity-to-earth-sun-distance" class="level2">
+<h2 class="anchored" data-anchor-id="sensitivity-to-earth-sun-distance">Sensitivity to Earth-Sun Distance</h2>
+<div id="cell-23" class="cell" data-scrolled="true" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>SensRes                   <span class="op">=</span> pd.DataFrame({<span class="st">'Earth-Sun Distance'</span>: [<span class="fl">147.1e9</span>,<span class="fl">149.6e9</span>,<span class="fl">152.1e9</span>]})</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>SensRes[<span class="st">'Area'</span>]           <span class="op">=</span> <span class="dv">4</span> <span class="op">*</span> np.pi <span class="op">*</span> SensRes[<span class="st">'Earth-Sun Distance'</span>]<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>SensRes[<span class="st">'Solar Constant'</span>] <span class="op">=</span> Psun <span class="op">/</span> SensRes[<span class="st">'Area'</span>]</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>SensRes[<span class="st">'</span><span class="sc">% d</span><span class="st">ifference'</span>]   <span class="op">=</span> (SensRes[<span class="st">'Solar Constant'</span>] <span class="op">-</span> SensRes[<span class="st">'Solar Constant'</span>].iloc[<span class="dv">1</span>]) <span class="op">/</span> SensRes[<span class="st">'Solar Constant'</span>].iloc[<span class="dv">1</span>] <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>SensRes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<div>
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Earth-Sun Distance</th>
-      <th>Area</th>
-      <th>Solar Constant</th>
-      <th>% difference</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1.471000e+11</td>
-      <td>2.719163e+23</td>
-      <td>1407.689949</td>
-      <td>3.427932</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1.496000e+11</td>
-      <td>2.812374e+23</td>
-      <td>1361.034607</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1.521000e+11</td>
-      <td>2.907156e+23</td>
-      <td>1316.660865</td>
-      <td>-3.260295</td>
-    </tr>
-  </tbody>
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Earth-Sun Distance</th>
+<th data-quarto-table-cell-role="th">Area</th>
+<th data-quarto-table-cell-role="th">Solar Constant</th>
+<th data-quarto-table-cell-role="th">% difference</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1.471000e+11</td>
+<td>2.719163e+23</td>
+<td>1407.689949</td>
+<td>3.427932</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>1.496000e+11</td>
+<td>2.812374e+23</td>
+<td>1361.034607</td>
+<td>0.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>1.521000e+11</td>
+<td>2.907156e+23</td>
+<td>1316.660865</td>
+<td>-3.260295</td>
+</tr>
+</tbody>
 </table>
-</div></div></div>
+
 </div>
+</div>
+</div>
+<hr>
 </section>
-<hr class="docutils" />
-<section id="sensitivity-to-sun-s-surface-temperature">
-<h2>Sensitivity to Sun’s surface temperature.<a class="headerlink" href="#sensitivity-to-sun-s-surface-temperature" title="Permalink to this heading">#</a></h2>
-<section id="note-that-the-solar-constant-varies-by-about-0-1-1-3-w-m-2-during-the-11-year-solar-cycle-from-about-1361-to-1362-3-w-m-2-http-acrim-com-tsi-monitoring-htm">
-<h3>Note that the solar constant varies by about 0.1% (1.3 W m-2) during the 11-year solar cycle, from about 1361 to 1362.3 W m-2. <a class="reference external" href="http://acrim.com/TSI%20Monitoring.htm">http://acrim.com/TSI Monitoring.htm</a><a class="headerlink" href="#note-that-the-solar-constant-varies-by-about-0-1-1-3-w-m-2-during-the-11-year-solar-cycle-from-about-1361-to-1362-3-w-m-2-http-acrim-com-tsi-monitoring-htm" title="Permalink to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Tsun</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5772</span><span class="p">,</span> <span class="mf">5773.5</span><span class="p">])</span>   <span class="c1"># K; chosen to yield S = 1361 W m-2</span>
-<span class="n">E</span>    <span class="o">=</span> <span class="mf">5.67e-8</span> <span class="o">*</span> <span class="n">Tsun</span><span class="o">**</span><span class="mi">4</span>        <span class="c1"># W m-2</span>
-<span class="n">Rs</span>   <span class="o">=</span> <span class="mf">695.7e6</span>                  <span class="c1"># meters</span>
-<span class="n">As</span>   <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">Rs</span><span class="o">**</span><span class="mi">2</span>               <span class="c1"># m2</span>
-<span class="n">Psun</span> <span class="o">=</span> <span class="n">E</span> <span class="o">*</span> <span class="n">As</span>
-<span class="c1"># Average radius of Earth&#39;s orbit around the Sun.</span>
-<span class="n">Res</span>   <span class="o">=</span> <span class="mf">149.6e9</span>                 <span class="c1"># meters</span>
-<span class="c1"># Surface area of a sphere with radius equal to Re.</span>
-<span class="n">Aes</span>   <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">Res</span><span class="o">**</span><span class="mi">2</span>             <span class="c1"># m2</span>
-<span class="c1"># Solar Constant</span>
-<span class="n">S</span>     <span class="o">=</span> <span class="n">Psun</span> <span class="o">/</span> <span class="n">Aes</span>
+<section id="sensitivity-to-suns-surface-temperature." class="level2">
+<h2 class="anchored" data-anchor-id="sensitivity-to-suns-surface-temperature.">Sensitivity to Sun’s surface temperature.</h2>
+<section id="note-that-the-solar-constant-varies-by-about-0.1-1.3-w-m-2-during-the-11-year-solar-cycle-from-about-1361-to-1362.3-w-m-2.-httpacrim.comtsi20monitoring.htm" class="level4">
+<h4 class="anchored" data-anchor-id="note-that-the-solar-constant-varies-by-about-0.1-1.3-w-m-2-during-the-11-year-solar-cycle-from-about-1361-to-1362.3-w-m-2.-httpacrim.comtsi20monitoring.htm">Note that the solar constant varies by about 0.1% (1.3 W m-2) during the 11-year solar cycle, from about 1361 to 1362.3 W m-2. http://acrim.com/TSI%20Monitoring.htm</h4>
+<div id="cell-27" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>Tsun <span class="op">=</span> np.array([<span class="dv">5772</span>, <span class="fl">5773.5</span>])   <span class="co"># K; chosen to yield S = 1361 W m-2</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>E    <span class="op">=</span> <span class="fl">5.67e-8</span> <span class="op">*</span> Tsun<span class="op">**</span><span class="dv">4</span>        <span class="co"># W m-2</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>Rs   <span class="op">=</span> <span class="fl">695.7e6</span>                  <span class="co"># meters</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>As   <span class="op">=</span> <span class="dv">4</span><span class="op">*</span>np.pi<span class="op">*</span>Rs<span class="op">**</span><span class="dv">2</span>               <span class="co"># m2</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>Psun <span class="op">=</span> E <span class="op">*</span> As</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Average radius of Earth's orbit around the Sun.</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>Res   <span class="op">=</span> <span class="fl">149.6e9</span>                 <span class="co"># meters</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Surface area of a sphere with radius equal to Re.</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>Aes   <span class="op">=</span> <span class="dv">4</span><span class="op">*</span>np.pi<span class="op">*</span>Res<span class="op">**</span><span class="dv">2</span>             <span class="co"># m2</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Solar Constant</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>S     <span class="op">=</span> Psun <span class="op">/</span> Aes</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>SensTsun <span class="op">=</span> pd.DataFrame({<span class="st">'Temperature of Sun'</span>:   Tsun,</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>                         <span class="st">'Power Emitted by Sun'</span>: Psun,</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>                         <span class="st">'Solar Constant'</span>:       S,</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>                         <span class="st">'</span><span class="sc">% d</span><span class="st">ifference'</span>: (S<span class="op">-</span>S[<span class="dv">0</span>])<span class="op">/</span>S[<span class="dv">1</span>]<span class="op">*</span><span class="dv">100</span>})</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>SensTsun[[<span class="st">'Temperature of Sun'</span>, <span class="st">'Power Emitted by Sun'</span>, <span class="st">'Solar Constant'</span>, <span class="st">'</span><span class="sc">% d</span><span class="st">ifference'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div>
 
-<span class="n">SensTsun</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Temperature of Sun&#39;</span><span class="p">:</span>   <span class="n">Tsun</span><span class="p">,</span>
-                         <span class="s1">&#39;Power Emitted by Sun&#39;</span><span class="p">:</span> <span class="n">Psun</span><span class="p">,</span>
-                         <span class="s1">&#39;Solar Constant&#39;</span><span class="p">:</span>       <span class="n">S</span><span class="p">,</span>
-                         <span class="s1">&#39;</span><span class="si">% d</span><span class="s1">ifference&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">S</span><span class="o">-</span><span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="p">})</span>
-<span class="n">SensTsun</span><span class="p">[[</span><span class="s1">&#39;Temperature of Sun&#39;</span><span class="p">,</span> <span class="s1">&#39;Power Emitted by Sun&#39;</span><span class="p">,</span> <span class="s1">&#39;Solar Constant&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">% d</span><span class="s1">ifference&#39;</span><span class="p">]]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Temperature of Sun</th>
-      <th>Power Emitted by Sun</th>
-      <th>Solar Constant</th>
-      <th>% difference</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>5772.0</td>
-      <td>3.827738e+26</td>
-      <td>1361.034607</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>5773.5</td>
-      <td>3.831719e+26</td>
-      <td>1362.449956</td>
-      <td>0.103883</td>
-    </tr>
-  </tbody>
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Temperature of Sun</th>
+<th data-quarto-table-cell-role="th">Power Emitted by Sun</th>
+<th data-quarto-table-cell-role="th">Solar Constant</th>
+<th data-quarto-table-cell-role="th">% difference</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>5772.0</td>
+<td>3.827738e+26</td>
+<td>1361.034607</td>
+<td>0.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>5773.5</td>
+<td>3.831719e+26</td>
+<td>1362.449956</td>
+<td>0.103883</td>
+</tr>
+</tbody>
 </table>
-</div></div></div>
+
 </div>
-</section>
+</div>
+</div>
+
+
 </section>
 </section>
 
-    <script type="text/x-thebe-config">
-    {
-        requestKernel: true,
-        binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
-        },
-        codeMirrorConfig: {
-            theme: "abcdef",
-            mode: "python"
-        },
-        kernelOptions: {
-            name: "python3",
-            path: "./chapter4"
-        },
-        predefinedOutput: true
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
     }
-    </script>
-    <script>kernelName = 'python3'</script>
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/vonw\.github\.io\/CE401\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
 
-                </article>
-              
 
-              
-              
-              
-              
-                <footer class="prev-next-footer">
-                  
-<div class="prev-next-area">
-    <a class="left-prev"
-       href="../chapter4.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">A Simple Climate Model</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="Insolation.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Insolation</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
-</div>
-                </footer>
-              
-            </div>
-            
-            
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-links">Useful links</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#information-on-the-solar-constant">Information on the Solar “Constant”</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#information-on-earth-s-orbit">Information on Earth’s orbit</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-calculate-the-flux-emitted-by-the-sun-in-w-m-2-using-the-stefan-boltzmann-law">a) Calculate the flux emitted by the Sun in W m-2 using the Stefan-Boltzmann Law.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-calculate-the-total-power-emitted-by-the-sun-s-surface">b) Calculate the total power emitted by the Sun’s surface.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#now-determine-the-flux-in-w-m-2-from-the-sun-but-at-the-distance-of-the-earth-s-orbit-note-that-the-total-power-from-the-sun-is-spread-over-a-very-large-area-in-space">Now determine the flux (in W m-2) from the Sun, but at the distance of the Earth’s orbit. NOTE that the total power from the Sun is spread over a very large area (in space…)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#now-how-much-power-is-intercepted-by-the-earth-as-the-sun-s-rays-pass-by-it">Now how much power is intercepted by the Earth as the Sun’s rays pass by it.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-this-to-terawatts-tw-1-tw-1e12-w">Convert this to Terawatts (TW); 1 TW = 1e12 W</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#as-dessler-explains-all-of-human-society-currently-consumes-only-16-tw-so-we-only-need-to-capture-0-01-of-the-sun-s-power-to-meet-all-of-our-energy-needs">As Dessler explains, all of human society currently consumes only 16 TW. So we only need to capture 0.01% of the Sun’s power to meet all of our energy needs.</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#note-that-s-4-is-equal-to-342-w-m-2">Note that S/4 is equal to 342 W m-2.</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-to-earth-sun-distance">Sensitivity to Earth-Sun Distance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-to-sun-s-surface-temperature">Sensitivity to Sun’s surface temperature.</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#note-that-the-solar-constant-varies-by-about-0-1-1-3-w-m-2-during-the-11-year-solar-cycle-from-about-1361-to-1362-3-w-m-2-http-acrim-com-tsi-monitoring-htm">Note that the solar constant varies by about 0.1% (1.3 W m-2) during the 11-year solar cycle, from about 1361 to 1362.3 W m-2. http://acrim.com/TSI Monitoring.htm</a></li>
-</ul>
-</li>
-</ul>
-  </nav></div>
 
-</div></div>
-              
-            
-          </div>
-          <footer class="bd-footer-content">
-            
-<div class="bd-footer-content__inner container">
-  
-  <div class="footer-item">
-    
-<p class="component-author">
-By Von P. Walden, Washington State University
-</p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-
-  <p class="copyright">
-    
-      © Copyright 2022.
-      <br/>
-    
-  </p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-</div>
-          </footer>
-        
-
-      </main>
-    </div>
-  </div>
-  
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
-
-  <footer class="bd-footer">
-  </footer>
-  </body>
-</html>
+</body></html>
