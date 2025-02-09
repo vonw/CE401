@@ -1,6 +1,32 @@
 project:
-  type: manuscript
+  type: website
   output-dir: docs
+
+website: 
+  sidebar: 
+    contents:
+      - text: "Home"
+        href: index.qmd
+      - section: "Chapter 0"
+        contents:
+          - chapter0/softwareCarpentry_PythonFundamentals.ipynb
+          - chapter0/softwareCarpentry_AnalyzingPatientData.ipynb
+          - chapter0/inflammation-01.csv
+      - section: "Chapter 1"
+        contents: 
+          - chapter1/HoustonTemperatures.ipynb
+      - section: "Chapter 2"
+        contents: 
+          - chapter2/plotBerkeleyEarth.ipynb
+          - chapter2/LaurentideIceSheet_and_SeaLevel.ipynb
+      - section: "Chapter 3"
+        contents: 
+          - chapter3/PlancksLaw.ipynb
+          - chapter3/RadiationInSpectralBands.ipynb
+      - section: "Chapter 4"
+        contents: 
+          - chapter4/SolarConstant.ipynb
+      
 
 execute: 
   freeze: true
@@ -10,7 +36,5 @@ collapse: true
 format:
   html:
     toc: true
-    docx: default
-    pdf: default
     theme: cosmo
     css: styles.css
