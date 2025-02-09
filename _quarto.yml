@@ -4,10 +4,11 @@ project:
 
 website: 
   sidebar: 
+    collapse-level: 1
     contents:
       - text: "Home"
         href: index.qmd
-      - section: "Chapter 0"
+      - section: "Python Fundamentals"
         contents:
           - chapter0/softwareCarpentry_PythonFundamentals.ipynb
           - chapter0/softwareCarpentry_AnalyzingPatientData.ipynb
@@ -26,12 +27,10 @@ website:
       - section: "Chapter 4"
         contents: 
           - chapter4/SolarConstant.ipynb
-      
+
 
 execute: 
   freeze: true
-
-collapse: true
 
 format:
   html:
