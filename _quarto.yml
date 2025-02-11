@@ -27,7 +27,7 @@ website:
       - section: "Chapter 4"
         contents: 
           - chapter4/SolarConstant.ipynb
-
+          - InfraredAbsorptionByTheAtmosphere.ipynb
 
 execute: 
   freeze: true

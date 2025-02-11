@@ -111,81 +111,43 @@
     ]
   },
   {
-    "objectID": "chapter3/BodiesEmittingInARoom.html",
-    "href": "chapter3/BodiesEmittingInARoom.html",
-    "title": "Bodies Emitting in a Room",
+    "objectID": "chapter4/EquilibriumTemperatureOfEarth.html",
+    "href": "chapter4/EquilibriumTemperatureOfEarth.html",
+    "title": "Equilibrium Temperature of Earth",
     "section": "",
-    "text": "Bodies Emitting in a Room\n© Von P. Walden, Washington State University\n\nStefan-Boltzmann constant\n\ns = 5.67e-8                     # W m-2 K-4\n\n\n\nRadiation from the walls of the room\n\nTroom = 20 + 273.15             # K\nFlux_room = s * Troom**4            # W m-2\n\nprint(f\"The room radiates approximately {Flux_room:5.1f} W m-2\")\n\n\n\nRadiation from the bodies in the room\n\nTbody = 28 + 273.15             # K\nFlux_body = s * Tbody**4            # W m-2\n\nprint(f\"Bodies radiate at approximately {Flux_body:5.1f} W m-2\")\n\n\nActual Body Temperature (in deg C)\n\n(37 * 9/5) + 32\n\n\n\n\nRadiation from the bodies in the room (including emissivity)\n\ne     = 0.89\nTbody = 37 + 273.15             # K\nFlux_body = e * s * Tbody**4            # W m-2\n\nprint(f\"Bodies radiate at approximately {Flux_body:5.1f} W m-2\")\n\n\nSo if the emissivity of our bodies is 0.89 (or 89%), then we emit the same radiation as a blackbody at 28 C."
+    "text": "Calculation of the Equilibrium Temperature of Earth\n\nEquation 4.3(b) in Dessler.\n\nS = 1360                  # W m-2\na = 0.3                   # unitless\nTequilibrium = (S*(1-a)/(4*5.67e-8))**(1/4)\n\n\nprint('The Equilibrium Temperature of Earth is:', Tequilibrium, 'K')"
   },
   {
-    "objectID": "chapter3/PowerEmittedByHuman.html",
-    "href": "chapter3/PowerEmittedByHuman.html",
-    "title": "Power Emitted by a Human",
+    "objectID": "chapter3/RadiationInSpectralBands.html",
+    "href": "chapter3/RadiationInSpectralBands.html",
+    "title": "Percent Radiation in a Spectral Band",
     "section": "",
-    "text": "Calculate the Power Emitted by a Human\n© Von P. Walden, Washington State University\nEstimate the power (in W) given off by an average human being if they consume 2000 calories of food each day.\n\ncalories_per_day   = 2000\njoules_per_calorie = 4184\nseconds_per_day    = 24 * 60 * 60\n\npower_per_human    = calories_per_day * joules_per_calorie / seconds_per_day\n\n\nprint(f'The power emitted by an average human is {power_per_human:{4.3}} W m-2')\n\nThe power emitted by an average human is 96.9 W m-2"
+    "text": "Calculate Percentage of Radiation in Spectral Bands\n© Von P. Walden, Washington State University\n\nimport numpy as np\nimport xarray as xr\n\n\nFor a given temperature T, calculate the proportion of radiation emitted in various spectral bands (UV, visible, near-infrared, and infrared).\n\n# Temperature of the object\nT  = 5700.                                 # K\n#T  = 3300.                                 # K\nT  = 289.                                  # K\n\n\n# Calculate the Planck radiation distribution between 0 and 50 microns\nc  = 2.998e8                              # m s-1\nh  = 6.626e-34                            # m2 kg s-1\nkB = 1.381e-23                            # m2 kg s-2 K-1\ndl = 0.01                                 # meters\nl  = np.arange(dl,50,dl) * 1e-6           # meters\nB  = 2*h*c**2 / (l**5 * (np.exp((h*c) / (l *kB * T)) - 1.)) * 1e-6      # W m-2 um-1\nspectralFlux  = np.pi * B      # W m-2 um-1\n\n# Convert spectralFlux to an Xarray data array\nspectralFlux = xr.DataArray(spectralFlux, coords={'wavelength': l*1e6}, dims=['wavelength'])\n\n# Sum the radiation in uv, vis, nir and ir spectral bands:\n#     UV            = 0   to 0.3 microns\n#     visible       = 0.3 to 0.7 microns\n#     near infrared = 0.7 to 4 microns\n#     infrared      = 4   to 50 microns\nuv  = spectralFlux.sel(wavelength=slice(0,0.3)).sum()*dl\nvis = spectralFlux.sel(wavelength=slice(0.3,0.7)).sum()*dl\nnir = spectralFlux.sel(wavelength=slice(0.7,4)).sum()*dl\nir  = spectralFlux.sel(wavelength=slice(4,50)).sum()*dl\n\n# Calculate the percent contribution in each band\nFlux  = spectralFlux.sum()*dl                           # Total flux in W m-2; Should be nearly equal to sigma * T^4 !!\np_uv  = uv / Flux * 100\np_vis = vis / Flux * 100\np_nir = nir / Flux * 100\np_ir  = ir / Flux * 100\n\n\n#%% Sum all the spectral bands; should be close to 100% !!\nprint('Percent UV:            ', p_uv.values)\nprint('Percent visible:       ', p_vis.values)\nprint('Percent near infrared: ', p_nir.values)\nprint('Percent infrared:      ', p_ir.values)\n\nprint('Total percent:         ', p_uv.values + p_vis.values + p_nir.values + p_ir.values)\n\n\nprint(Flux)\n\n\n5.67e-8*(289**4)",
+    "crumbs": [
+      "Chapter 3",
+      "Percent Radiation in a Spectral Band"
+    ]
   },
   {
-    "objectID": "chapter2/LaurentideIceSheet_and_SeaLevel.html",
-    "href": "chapter2/LaurentideIceSheet_and_SeaLevel.html",
-    "title": "Laurentide Ice Sheet and Sea Level",
+    "objectID": "chapter3/PlancksLaw.html",
+    "href": "chapter3/PlancksLaw.html",
+    "title": "Planck’s Law",
     "section": "",
-    "text": "Approximate the Decrease in Sea-level from the Laurentide Ice Sheet\n© Von P. Walden, Washington State University\nThis notebook does a quick calculation of how much ice was contained in the Laurentide Ice Sheet about 20,000 years ago, and how that may have affected sea level at that time.\n\n# Approximate the volume of water in the Laurentide Ice Sheet\nsurface_area_of_Canada     = 10e6       # km^2\naverage_height_of_icesheet = 1.750      # km\nvolume_of_ice              = surface_area_of_Canada * average_height_of_icesheet\n\n# Assume the density of ice in the Laurentide\nrho_ice                    = 917        # kg m-3\nrho_water                  = 1000       # kg m-3\n\nvolume_of_water            = volume_of_ice * (rho_water / rho_ice)\n\n\nprint(\"The estimated volume of water in the Laurentide ice sheet is:\", volume_of_water, \"km^3\")\n\nThe estimated volume of water in the Laurentide ice sheet is: 19083969.465648852 km^3\n\n\n\n# Now divide by the surface area of oceans on earth to get the depth of water required to create the ice sheet.\nsurface_area_of_oceans     = 361e6        # km^2\nsea_level_change           = volume_of_water / surface_area_of_oceans * 1000   # meters\n\n\nprint(f'Decrease in sea level due to the Laurentide Ice Sheet: {sea_level_change:{5.3}} meters')\n\nDecrease in sea level due to the Laurentide Ice Sheet:  52.9 meters\n\n\n\nThe actual value at the height of the last ice age was actually about 120 meters.\nSea Level Rise, After the Ice Melted and Today\n\nWhere might we have underestimated our calculation? The density of ice !!\nSo find the necessary density of ice to get 120 meters of sea level.\n\nnew_rho_of_ice = volume_of_ice * (rho_water) / (surface_area_of_oceans * 120/1000)\n\n\nnew_rho_of_ice\n\n\n\n\nSo the density of ice would have had to be much lower; 400 kg/m^3.",
+    "text": "Calculate Planck curves as a function of wavelength and temperature\n© Von P. Walden, Washington State University\n\n%matplotlib inline\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n\nDessler, Figure 3.2a\n\nc  = 2.998e8                              # m s-1\nh  = 6.626e-34                            # m2 kg s-1\nkB = 1.381e-23                            # m2 kg s-2 K-1\nl  = np.arange(0.25,20,0.25) * 1e-6       # meters\nT  = 300.                                 # K\nB  = 2*h*c**2 / (l**5 * (np.exp((h*c) / (l *kB * T)) - 1.)) * 1e-6      # W m-2 um-1\nspectralFlux  = np.pi * B\n\n\nplt.plot(l/1e-6,spectralFlux)\nplt.xlabel('Wavelength, microns');\nplt.ylabel('Spectral Flux, W m-2 um-1');\nplt.text(17.5,30,'300 K');\n\n\nl_max = l[np.where(spectralFlux==spectralFlux.max())]\nprint(l_max)\n\n\nprint(f\"Wiens Law gives wavelength of maximum flux at: {(2898/T):4.2f} um.\")\n\n\nprint(f\"The Stefan-Boltzmann Law gives the total flux for this object as: {(5.67e-8*T**4):4.0f} W m-2.\")\n\n\n\nDessler, Figure 3.2b\n\nl = np.arange(0.25,12,0.05) * 1e-6      # meters\nT = 1600.                               # K\nB = 2*h*c**2 / (l**5 * (np.exp((h*c) / (l *kB * T)) - 1.)) * 1e-6      # W m-2 um-1\nspectralFlux = pi * B                   # W m-2 um-1\n\n\nplt.plot(l/1e-6,spectralFlux)\nplt.xlabel('Wavelength, microns');\nplt.ylabel('Spectral Flux, W m-2 um-1');\nplt.text(10,120000,'1600 K');\n\n\nprint(f\"Wiens law gives wavelength of maximum flux at: {(2898/T):3.1f} um.\")\n\n\nprint(f\"The Stefan-Boltzmann Law gives the total flux for this object as: {(5.67e-8*T**4):4.0f} W m-2.\")\n\n\n\nDessler, Figure 3.2c\n\nl  = np.arange(0.01,3.5,0.01) * 1e-6      # meters\nT  = 6000.                                # K\nB  = pi * 2*h*c**2 / (l**5 * (np.exp((h*c) / (l *kB * T)) - 1.)) * 1e-6      # W m-2 um-1\n\n\nplt.plot(l/1e-6,B)\nplt.xlabel('Wavelength, microns');\nplt.ylabel('Flux, W m-2 um-1');\nplt.text(2.8,90e6,'6000 K');\n\n\nprint(f\"Wiens law gives wavelength of maximum flux at: {(2898/T):3.1f} um.\")\n\n\nprint(f\"The Stefan-Boltzmann Law gives the total flux for this object as: {(5.67e-8*T**4):4.0f} W m-2.\")",
+    "crumbs": [
+      "Chapter 3",
+      "Planck's Law"
+    ]
+  },
+  {
+    "objectID": "chapter2/plotBerkeleyEarth.html",
+    "href": "chapter2/plotBerkeleyEarth.html",
+    "title": "Plot Berkeley Earth",
+    "section": "",
+    "text": "Plot global temperature anomalies from Berkeley Earth\n© Von P. Walden, Washington State University\nThe data used in this notebook are from Berkeley Earth: Land_and_Ocean_LatLong1.nc\n\nimport matplotlib.pyplot as plt\nimport cartopy.crs as ccrs\nimport pandas as pd\nimport xarray as xr\n\n\nWorking from your local computer\nIf you are running this notebook from your local computer, you will need to:\n\nDownload a large (400 MB) data file (Land_and_Ocean_LatLong1.nc) from Canvas.\nEdit the code cell below by replacing ‘../Land_and_Ocean_LatLong1.nc’ with the pathname to the data file on your local hard drive.\nNOTE that if you have a PC laptop that runs Windows (as opposed to a Mac or a Linux computer), the syntax of your filename is different. In particular, PCs use a backward slash instead of a forward slash. For Python to recognize the backward slash, one must actually use two backslashes together. So copy the location of the Land_and_Ocean_LatLong1.nc file, then make sure to use double backslashes. An example is given in the code cell below.\n\n\n# ....For Windows PC\n#be = xr.open_dataset('C:\\\\Users\\\\vonw\\\\Land_and_Ocean_LatLong1.nc')\n# ....For Mac or Linux\n#be = xr.open_dataset('../../Land_and_Ocean_LatLong1.nc')\nbe = xr.open_dataset('/Users/vonw/Downloads/Land_and_Ocean_LatLong1.nc')\nbe\n\n\n\nPlot geographic distribution of 1951-1980 climatology\n\n# Select a particular month to view\nmonth = 'Jan'\n\nmonths = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']\n\nfig = plt.figure(figsize=(20,10))\nax = plt.axes(projection=ccrs.PlateCarree())\nax.coastlines()\nbe.climatology[months.index(month)].plot(ax=ax)\nplt.title('Climatology (1951-1980) for ' + month);\n\n\n\nPlot geographic distribution of temperature anomalies for given year and month\n\n# Select a particular year and month to view\nyear = 1900\nmonth = 'Jan'\n\nmonths = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']\n\nfig = plt.figure(figsize=(20,10))\nax = plt.axes(projection=ccrs.PlateCarree())\nax.coastlines()\n(be.temperature[months.index(month)+((year-1850)*12)]).plot(ax=ax, clim=[-10, 10])\nplt.title('Temperature Anomalies for ' + month + ' ' + str(year));\n\n\n\nPlot geographic distribution of actual temperatures for given year and month\n\n# Select a particular year and month to view\nyear = 2023\nmonth = 'Jan'\n\nmonths = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']\n\nfig = plt.figure(figsize=(20,10))\nax = plt.axes(projection=ccrs.PlateCarree())\nax.coastlines()\n(be.temperature[months.index(month)+((year-1850)*12)] + be.climatology[months.index(month)]).plot(ax=ax, clim=[-10, 10])\nplt.title('Temperatures for ' + month + ' ' + str(year));\n\n\n\nCalculate global annual temperature anomalies\n\n# Select a particular year and month to view\n# !! Depending on how many years you choose to analyze, this COULD TAKE TENS OF SECONDS to complete.\nbeginning_year = 1850\nending_year = 2023\n\nmonths = pd.date_range(start=str(beginning_year), end=str(ending_year+1), freq='ME')\n\ndata = []\nfor month in months:\n    #print(month.month)\n    data.append(be.temperature[month.month+((month.year-1850)*12)].mean())\n\nTanomalies = xr.DataArray(data, coords={'month': months})\n\nfig = plt.figure(figsize=(20,10))\nTanomalies.plot()\nplt.grid()\nplt.xlabel('Month');\nplt.ylabel('Temperature anomaly (C)');\nplt.title('Global monthly temperature anomaly between ' + str(beginning_year) + ' and ' + str(ending_year));\n\n\n\nCalculate longitudinally-averaged temperature anomalies\n\n# Select the latitude range to average over\nbeginning_latitude = -5\nending_latitude = 5\n\n# Select a particular year and month to view\n# !! Depending on how many years you choose to analyze, this COULD TAKE TENS OF SECONDS to complete.\nbeginning_year = 1950\nending_year = 2023\n\nmonths = pd.date_range(start=str(beginning_year), end=str(ending_year+1), freq='ME')\n\ndata = []\nfor month in months:\n    #print(month.month)\n    data.append(be.temperature[month.month+((month.year-1850)*12)].sel(latitude=slice(beginning_latitude, ending_latitude)).mean())\n\nTanomalies = xr.DataArray(data, coords={'month': months})\n\nfig = plt.figure(figsize=(20,10))\nTanomalies.plot()\nplt.grid()\nplt.xlabel('Month');\nplt.ylabel('Temperature anomaly (C)');\nplt.title('Equatorial temperature anomaly between ' + str(beginning_year) + ' and ' + str(ending_year));",
     "crumbs": [
       "Chapter 2",
-      "Laurentide Ice Sheet and Sea Level"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Computational Notebooks",
-    "section": "",
-    "text": "© Von P. Walden, Washington State University\nThese computational notebooks were developed by Von P. Walden at Washington State University as part of the course CE401 - Climate Change Science and Engineering. Some of the notebooks are closely associated with Andrew Dessler’s book, Introduction to Modern Climate Change, and are designed to provide engineering students with more background in how to calculate parameters that are related to Earth’s climate and climate change.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#introduction",
-    "href": "index.html#introduction",
-    "title": "Computational Notebooks",
-    "section": "",
-    "text": "© Von P. Walden, Washington State University\nThese computational notebooks were developed by Von P. Walden at Washington State University as part of the course CE401 - Climate Change Science and Engineering. Some of the notebooks are closely associated with Andrew Dessler’s book, Introduction to Modern Climate Change, and are designed to provide engineering students with more background in how to calculate parameters that are related to Earth’s climate and climate change.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "chapter0/softwareCarpentry_PythonFundamentals.html",
-    "href": "chapter0/softwareCarpentry_PythonFundamentals.html",
-    "title": "Software Carpentry - Python Fundamentals",
-    "section": "",
-    "text": "Software Carpentry - Python Fundamentals\nRead Software Carpentry’s Python Fundamentals. Start by scrolling down to the section on Variables.\nUsing notebook cells below, type in the commands in the instructions to check your knowledge of Python variables. (The cell below is the first example.)\n\n3 + 5 * 4",
-    "crumbs": [
-      "Python Fundamentals",
-      "Software Carpentry - Python Fundamentals"
-    ]
-  },
-  {
-    "objectID": "chapter1/HoustonTemperatures.html",
-    "href": "chapter1/HoustonTemperatures.html",
-    "title": "Comparing temperature distributions",
-    "section": "",
-    "text": "Comparing temperature distributions\n© Von P. Walden, Washington State University\nThis notebook compares two distributions that differ slightly in their mean values. The idea is to simulate the two distributions in Figure 1.1 in Dessler’s book, and to then subtract the distributions to show where they differ the most.\n\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom scipy.stats import norm\nimport statistics\n\n\nGenerate two distributions of temperatures that approximate those measured in Houston, TX in the 1970s and 2010s.\n\n# ....These distributions roughly approximate those in Figure 1.1 in Dessler's Introduction to Modern Climate Change\nx = np.arange(21, 43, 0.1)\nH1970s = norm.pdf(x, 31, 2.75)\nH2010s = norm.pdf(x, 33, 2.75)\n\n\nplt.figure(figsize=(12,12))\nplt.subplot(211)\nplt.plot(x, H1970s)\nplt.plot(x, H2010s)\nplt.grid(True)\nplt.xlabel('Temperature (C)')\nplt.ylabel('Frequency')\nplt.title('Approximate Temperature Distributions for September near Houston, TX')\nplt.legend(['1970s', '2010s'])\nplt.subplot(212)\nplt.plot(x, H2010s-H1970s)\nplt.xlabel('Temperature (C)')\nplt.ylabel('Frequency')\nplt.title('Difference of the two temperature distributions')\nplt.grid(True)",
-    "crumbs": [
-      "Chapter 1",
-      "Comparing temperature distributions"
-    ]
-  },
-  {
-    "objectID": "chapter0/softwareCarpentry_AnalyzingPatientData.html",
-    "href": "chapter0/softwareCarpentry_AnalyzingPatientData.html",
-    "title": "Software Carpentry - Analyzing Patient Data",
-    "section": "",
-    "text": "Software Carpentry - Analyzing Patient Data\nRead Software Carpentry’s Analyzing Patient Data.\nUsing notebook cells below, type in the commands in the instructions to check your knowledge of Python variables. (The two cells below will get you started.)\n\nimport numpy\n\n\nnumpy.loadtxt(fname='inflammation-01.csv', delimiter=',')",
-    "crumbs": [
-      "Python Fundamentals",
-      "Software Carpentry - Analyzing Patient Data"
+      "Plot Berkeley Earth"
     ]
   },
   {
@@ -217,44 +179,89 @@
     "text": "So how do we determine the correct discount rate to use?\nThe discount rate is a combination of two different judgements:\n\nTime discounting, which is the preference to consume now rather than later. Positive time discounting means that goods and services now are worth more than they are later.\nGrowth discounting is the fact that a dollar means more to poor people than it does to rich people. Would you pick up a $1 bill if you saw it on the street? What about a $20 bill?\n\nThe discount rate used in present-value calculations is determined by combining the time and growth discount rates.\nBUT economists argue about which rate to use: 1% to 4%.\n\nThe choice of discount rate makes a huge difference in climate problems."
   },
   {
-    "objectID": "chapter2/plotBerkeleyEarth.html",
-    "href": "chapter2/plotBerkeleyEarth.html",
-    "title": "Plot Berkeley Earth",
+    "objectID": "chapter0/softwareCarpentry_AnalyzingPatientData.html",
+    "href": "chapter0/softwareCarpentry_AnalyzingPatientData.html",
+    "title": "Software Carpentry - Analyzing Patient Data",
     "section": "",
-    "text": "Plot global temperature anomalies from Berkeley Earth\n© Von P. Walden, Washington State University\nThe data used in this notebook are from Berkeley Earth: Land_and_Ocean_LatLong1.nc\n\nimport matplotlib.pyplot as plt\nimport cartopy.crs as ccrs\nimport pandas as pd\nimport xarray as xr\n\n\nWorking from your local computer\nIf you are running this notebook from your local computer, you will need to:\n\nDownload a large (400 MB) data file (Land_and_Ocean_LatLong1.nc) from Canvas.\nEdit the code cell below by replacing ‘../Land_and_Ocean_LatLong1.nc’ with the pathname to the data file on your local hard drive.\nNOTE that if you have a PC laptop that runs Windows (as opposed to a Mac or a Linux computer), the syntax of your filename is different. In particular, PCs use a backward slash instead of a forward slash. For Python to recognize the backward slash, one must actually use two backslashes together. So copy the location of the Land_and_Ocean_LatLong1.nc file, then make sure to use double backslashes. An example is given in the code cell below.\n\n\n# ....For Windows PC\n#be = xr.open_dataset('C:\\\\Users\\\\vonw\\\\Land_and_Ocean_LatLong1.nc')\n# ....For Mac or Linux\n#be = xr.open_dataset('../../Land_and_Ocean_LatLong1.nc')\nbe = xr.open_dataset('/Users/vonw/Downloads/Land_and_Ocean_LatLong1.nc')\nbe\n\n\n\nPlot geographic distribution of 1951-1980 climatology\n\n# Select a particular month to view\nmonth = 'Jan'\n\nmonths = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']\n\nfig = plt.figure(figsize=(20,10))\nax = plt.axes(projection=ccrs.PlateCarree())\nax.coastlines()\nbe.climatology[months.index(month)].plot(ax=ax)\nplt.title('Climatology (1951-1980) for ' + month);\n\n\n\nPlot geographic distribution of temperature anomalies for given year and month\n\n# Select a particular year and month to view\nyear = 1900\nmonth = 'Jan'\n\nmonths = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']\n\nfig = plt.figure(figsize=(20,10))\nax = plt.axes(projection=ccrs.PlateCarree())\nax.coastlines()\n(be.temperature[months.index(month)+((year-1850)*12)]).plot(ax=ax, clim=[-10, 10])\nplt.title('Temperature Anomalies for ' + month + ' ' + str(year));\n\n\n\nPlot geographic distribution of actual temperatures for given year and month\n\n# Select a particular year and month to view\nyear = 2023\nmonth = 'Jan'\n\nmonths = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']\n\nfig = plt.figure(figsize=(20,10))\nax = plt.axes(projection=ccrs.PlateCarree())\nax.coastlines()\n(be.temperature[months.index(month)+((year-1850)*12)] + be.climatology[months.index(month)]).plot(ax=ax, clim=[-10, 10])\nplt.title('Temperatures for ' + month + ' ' + str(year));\n\n\n\nCalculate global annual temperature anomalies\n\n# Select a particular year and month to view\n# !! Depending on how many years you choose to analyze, this COULD TAKE TENS OF SECONDS to complete.\nbeginning_year = 1850\nending_year = 2023\n\nmonths = pd.date_range(start=str(beginning_year), end=str(ending_year+1), freq='ME')\n\ndata = []\nfor month in months:\n    #print(month.month)\n    data.append(be.temperature[month.month+((month.year-1850)*12)].mean())\n\nTanomalies = xr.DataArray(data, coords={'month': months})\n\nfig = plt.figure(figsize=(20,10))\nTanomalies.plot()\nplt.grid()\nplt.xlabel('Month');\nplt.ylabel('Temperature anomaly (C)');\nplt.title('Global monthly temperature anomaly between ' + str(beginning_year) + ' and ' + str(ending_year));\n\n\n\nCalculate longitudinally-averaged temperature anomalies\n\n# Select the latitude range to average over\nbeginning_latitude = -5\nending_latitude = 5\n\n# Select a particular year and month to view\n# !! Depending on how many years you choose to analyze, this COULD TAKE TENS OF SECONDS to complete.\nbeginning_year = 1950\nending_year = 2023\n\nmonths = pd.date_range(start=str(beginning_year), end=str(ending_year+1), freq='ME')\n\ndata = []\nfor month in months:\n    #print(month.month)\n    data.append(be.temperature[month.month+((month.year-1850)*12)].sel(latitude=slice(beginning_latitude, ending_latitude)).mean())\n\nTanomalies = xr.DataArray(data, coords={'month': months})\n\nfig = plt.figure(figsize=(20,10))\nTanomalies.plot()\nplt.grid()\nplt.xlabel('Month');\nplt.ylabel('Temperature anomaly (C)');\nplt.title('Equatorial temperature anomaly between ' + str(beginning_year) + ' and ' + str(ending_year));",
+    "text": "Software Carpentry - Analyzing Patient Data\nRead Software Carpentry’s Analyzing Patient Data.\nUsing notebook cells below, type in the commands in the instructions to check your knowledge of Python variables. (The two cells below will get you started.)\n\nimport numpy\n\n\nnumpy.loadtxt(fname='inflammation-01.csv', delimiter=',')",
+    "crumbs": [
+      "Python Fundamentals",
+      "Software Carpentry - Analyzing Patient Data"
+    ]
+  },
+  {
+    "objectID": "chapter1/HoustonTemperatures.html",
+    "href": "chapter1/HoustonTemperatures.html",
+    "title": "Comparing temperature distributions",
+    "section": "",
+    "text": "Comparing temperature distributions\n© Von P. Walden, Washington State University\nThis notebook compares two distributions that differ slightly in their mean values. The idea is to simulate the two distributions in Figure 1.1 in Dessler’s book, and to then subtract the distributions to show where they differ the most.\n\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom scipy.stats import norm\nimport statistics\n\n\nGenerate two distributions of temperatures that approximate those measured in Houston, TX in the 1970s and 2010s.\n\n# ....These distributions roughly approximate those in Figure 1.1 in Dessler's Introduction to Modern Climate Change\nx = np.arange(21, 43, 0.1)\nH1970s = norm.pdf(x, 31, 2.75)\nH2010s = norm.pdf(x, 33, 2.75)\n\n\nplt.figure(figsize=(12,12))\nplt.subplot(211)\nplt.plot(x, H1970s)\nplt.plot(x, H2010s)\nplt.grid(True)\nplt.xlabel('Temperature (C)')\nplt.ylabel('Frequency')\nplt.title('Approximate Temperature Distributions for September near Houston, TX')\nplt.legend(['1970s', '2010s'])\nplt.subplot(212)\nplt.plot(x, H2010s-H1970s)\nplt.xlabel('Temperature (C)')\nplt.ylabel('Frequency')\nplt.title('Difference of the two temperature distributions')\nplt.grid(True)",
+    "crumbs": [
+      "Chapter 1",
+      "Comparing temperature distributions"
+    ]
+  },
+  {
+    "objectID": "chapter0/softwareCarpentry_PythonFundamentals.html",
+    "href": "chapter0/softwareCarpentry_PythonFundamentals.html",
+    "title": "Software Carpentry - Python Fundamentals",
+    "section": "",
+    "text": "Software Carpentry - Python Fundamentals\nRead Software Carpentry’s Python Fundamentals. Start by scrolling down to the section on Variables.\nUsing notebook cells below, type in the commands in the instructions to check your knowledge of Python variables. (The cell below is the first example.)\n\n3 + 5 * 4",
+    "crumbs": [
+      "Python Fundamentals",
+      "Software Carpentry - Python Fundamentals"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Computational Notebooks",
+    "section": "",
+    "text": "© Von P. Walden, Washington State University\nThese computational notebooks were developed by Von P. Walden at Washington State University as part of the course CE401 - Climate Change Science and Engineering. Some of the notebooks are closely associated with Andrew Dessler’s book, Introduction to Modern Climate Change, and are designed to provide engineering students with more background in how to calculate parameters that are related to Earth’s climate and climate change.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#introduction",
+    "href": "index.html#introduction",
+    "title": "Computational Notebooks",
+    "section": "",
+    "text": "© Von P. Walden, Washington State University\nThese computational notebooks were developed by Von P. Walden at Washington State University as part of the course CE401 - Climate Change Science and Engineering. Some of the notebooks are closely associated with Andrew Dessler’s book, Introduction to Modern Climate Change, and are designed to provide engineering students with more background in how to calculate parameters that are related to Earth’s climate and climate change.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "chapter2/LaurentideIceSheet_and_SeaLevel.html",
+    "href": "chapter2/LaurentideIceSheet_and_SeaLevel.html",
+    "title": "Laurentide Ice Sheet and Sea Level",
+    "section": "",
+    "text": "Approximate the Decrease in Sea-level from the Laurentide Ice Sheet\n© Von P. Walden, Washington State University\nThis notebook does a quick calculation of how much ice was contained in the Laurentide Ice Sheet about 20,000 years ago, and how that may have affected sea level at that time.\n\n# Approximate the volume of water in the Laurentide Ice Sheet\nsurface_area_of_Canada     = 10e6       # km^2\naverage_height_of_icesheet = 1.750      # km\nvolume_of_ice              = surface_area_of_Canada * average_height_of_icesheet\n\n# Assume the density of ice in the Laurentide\nrho_ice                    = 917        # kg m-3\nrho_water                  = 1000       # kg m-3\n\nvolume_of_water            = volume_of_ice * (rho_water / rho_ice)\n\n\nprint(\"The estimated volume of water in the Laurentide ice sheet is:\", volume_of_water, \"km^3\")\n\nThe estimated volume of water in the Laurentide ice sheet is: 19083969.465648852 km^3\n\n\n\n# Now divide by the surface area of oceans on earth to get the depth of water required to create the ice sheet.\nsurface_area_of_oceans     = 361e6        # km^2\nsea_level_change           = volume_of_water / surface_area_of_oceans * 1000   # meters\n\n\nprint(f'Decrease in sea level due to the Laurentide Ice Sheet: {sea_level_change:{5.3}} meters')\n\nDecrease in sea level due to the Laurentide Ice Sheet:  52.9 meters\n\n\n\nThe actual value at the height of the last ice age was actually about 120 meters.\nSea Level Rise, After the Ice Melted and Today\n\nWhere might we have underestimated our calculation? The density of ice !!\nSo find the necessary density of ice to get 120 meters of sea level.\n\nnew_rho_of_ice = volume_of_ice * (rho_water) / (surface_area_of_oceans * 120/1000)\n\n\nnew_rho_of_ice\n\n\n\n\nSo the density of ice would have had to be much lower; 400 kg/m^3.",
     "crumbs": [
       "Chapter 2",
-      "Plot Berkeley Earth"
+      "Laurentide Ice Sheet and Sea Level"
     ]
   },
   {
-    "objectID": "chapter3/PlancksLaw.html",
-    "href": "chapter3/PlancksLaw.html",
-    "title": "Planck’s Law",
+    "objectID": "chapter3/PowerEmittedByHuman.html",
+    "href": "chapter3/PowerEmittedByHuman.html",
+    "title": "Power Emitted by a Human",
     "section": "",
-    "text": "Calculate Planck curves as a function of wavelength and temperature\n© Von P. Walden, Washington State University\n\n%matplotlib inline\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n\nDessler, Figure 3.2a\n\nc  = 2.998e8                              # m s-1\nh  = 6.626e-34                            # m2 kg s-1\nkB = 1.381e-23                            # m2 kg s-2 K-1\nl  = np.arange(0.25,20,0.25) * 1e-6       # meters\nT  = 300.                                 # K\nB  = 2*h*c**2 / (l**5 * (np.exp((h*c) / (l *kB * T)) - 1.)) * 1e-6      # W m-2 um-1\nspectralFlux  = np.pi * B\n\n\nplt.plot(l/1e-6,spectralFlux)\nplt.xlabel('Wavelength, microns');\nplt.ylabel('Spectral Flux, W m-2 um-1');\nplt.text(17.5,30,'300 K');\n\n\nl_max = l[np.where(spectralFlux==spectralFlux.max())]\nprint(l_max)\n\n\nprint(f\"Wiens Law gives wavelength of maximum flux at: {(2898/T):4.2f} um.\")\n\n\nprint(f\"The Stefan-Boltzmann Law gives the total flux for this object as: {(5.67e-8*T**4):4.0f} W m-2.\")\n\n\n\nDessler, Figure 3.2b\n\nl = np.arange(0.25,12,0.05) * 1e-6      # meters\nT = 1600.                               # K\nB = 2*h*c**2 / (l**5 * (np.exp((h*c) / (l *kB * T)) - 1.)) * 1e-6      # W m-2 um-1\nspectralFlux = pi * B                   # W m-2 um-1\n\n\nplt.plot(l/1e-6,spectralFlux)\nplt.xlabel('Wavelength, microns');\nplt.ylabel('Spectral Flux, W m-2 um-1');\nplt.text(10,120000,'1600 K');\n\n\nprint(f\"Wiens law gives wavelength of maximum flux at: {(2898/T):3.1f} um.\")\n\n\nprint(f\"The Stefan-Boltzmann Law gives the total flux for this object as: {(5.67e-8*T**4):4.0f} W m-2.\")\n\n\n\nDessler, Figure 3.2c\n\nl  = np.arange(0.01,3.5,0.01) * 1e-6      # meters\nT  = 6000.                                # K\nB  = pi * 2*h*c**2 / (l**5 * (np.exp((h*c) / (l *kB * T)) - 1.)) * 1e-6      # W m-2 um-1\n\n\nplt.plot(l/1e-6,B)\nplt.xlabel('Wavelength, microns');\nplt.ylabel('Flux, W m-2 um-1');\nplt.text(2.8,90e6,'6000 K');\n\n\nprint(f\"Wiens law gives wavelength of maximum flux at: {(2898/T):3.1f} um.\")\n\n\nprint(f\"The Stefan-Boltzmann Law gives the total flux for this object as: {(5.67e-8*T**4):4.0f} W m-2.\")",
-    "crumbs": [
-      "Chapter 3",
-      "Planck's Law"
-    ]
+    "text": "Calculate the Power Emitted by a Human\n© Von P. Walden, Washington State University\nEstimate the power (in W) given off by an average human being if they consume 2000 calories of food each day.\n\ncalories_per_day   = 2000\njoules_per_calorie = 4184\nseconds_per_day    = 24 * 60 * 60\n\npower_per_human    = calories_per_day * joules_per_calorie / seconds_per_day\n\n\nprint(f'The power emitted by an average human is {power_per_human:{4.3}} W m-2')\n\nThe power emitted by an average human is 96.9 W m-2"
   },
   {
-    "objectID": "chapter3/RadiationInSpectralBands.html",
-    "href": "chapter3/RadiationInSpectralBands.html",
-    "title": "Percent Radiation in a Spectral Band",
+    "objectID": "chapter3/BodiesEmittingInARoom.html",
+    "href": "chapter3/BodiesEmittingInARoom.html",
+    "title": "Bodies Emitting in a Room",
     "section": "",
-    "text": "Calculate Percentage of Radiation in Spectral Bands\n© Von P. Walden, Washington State University\n\nimport numpy as np\nimport xarray as xr\n\n\nFor a given temperature T, calculate the proportion of radiation emitted in various spectral bands (UV, visible, near-infrared, and infrared).\n\n# Temperature of the object\nT  = 5700.                                 # K\n#T  = 3300.                                 # K\nT  = 289.                                  # K\n\n\n# Calculate the Planck radiation distribution between 0 and 50 microns\nc  = 2.998e8                              # m s-1\nh  = 6.626e-34                            # m2 kg s-1\nkB = 1.381e-23                            # m2 kg s-2 K-1\ndl = 0.01                                 # meters\nl  = np.arange(dl,50,dl) * 1e-6           # meters\nB  = 2*h*c**2 / (l**5 * (np.exp((h*c) / (l *kB * T)) - 1.)) * 1e-6      # W m-2 um-1\nspectralFlux  = np.pi * B      # W m-2 um-1\n\n# Convert spectralFlux to an Xarray data array\nspectralFlux = xr.DataArray(spectralFlux, coords={'wavelength': l*1e6}, dims=['wavelength'])\n\n# Sum the radiation in uv, vis, nir and ir spectral bands:\n#     UV            = 0   to 0.3 microns\n#     visible       = 0.3 to 0.7 microns\n#     near infrared = 0.7 to 4 microns\n#     infrared      = 4   to 50 microns\nuv  = spectralFlux.sel(wavelength=slice(0,0.3)).sum()*dl\nvis = spectralFlux.sel(wavelength=slice(0.3,0.7)).sum()*dl\nnir = spectralFlux.sel(wavelength=slice(0.7,4)).sum()*dl\nir  = spectralFlux.sel(wavelength=slice(4,50)).sum()*dl\n\n# Calculate the percent contribution in each band\nFlux  = spectralFlux.sum()*dl                           # Total flux in W m-2; Should be nearly equal to sigma * T^4 !!\np_uv  = uv / Flux * 100\np_vis = vis / Flux * 100\np_nir = nir / Flux * 100\np_ir  = ir / Flux * 100\n\n\n#%% Sum all the spectral bands; should be close to 100% !!\nprint('Percent UV:            ', p_uv.values)\nprint('Percent visible:       ', p_vis.values)\nprint('Percent near infrared: ', p_nir.values)\nprint('Percent infrared:      ', p_ir.values)\n\nprint('Total percent:         ', p_uv.values + p_vis.values + p_nir.values + p_ir.values)\n\n\nprint(Flux)\n\n\n5.67e-8*(289**4)",
-    "crumbs": [
-      "Chapter 3",
-      "Percent Radiation in a Spectral Band"
-    ]
+    "text": "Bodies Emitting in a Room\n© Von P. Walden, Washington State University\n\nStefan-Boltzmann constant\n\ns = 5.67e-8                     # W m-2 K-4\n\n\n\nRadiation from the walls of the room\n\nTroom = 20 + 273.15             # K\nFlux_room = s * Troom**4            # W m-2\n\nprint(f\"The room radiates approximately {Flux_room:5.1f} W m-2\")\n\n\n\nRadiation from the bodies in the room\n\nTbody = 28 + 273.15             # K\nFlux_body = s * Tbody**4            # W m-2\n\nprint(f\"Bodies radiate at approximately {Flux_body:5.1f} W m-2\")\n\n\nActual Body Temperature (in deg C)\n\n(37 * 9/5) + 32\n\n\n\n\nRadiation from the bodies in the room (including emissivity)\n\ne     = 0.89\nTbody = 37 + 273.15             # K\nFlux_body = e * s * Tbody**4            # W m-2\n\nprint(f\"Bodies radiate at approximately {Flux_body:5.1f} W m-2\")\n\n\nSo if the emissivity of our bodies is 0.89 (or 89%), then we emit the same radiation as a blackbody at 28 C."
   },
   {
-    "objectID": "chapter4/EquilibriumTemperatureOfEarth.html",
-    "href": "chapter4/EquilibriumTemperatureOfEarth.html",
-    "title": "Equilibrium Temperature of Earth",
+    "objectID": "chapter4/Insolation.html",
+    "href": "chapter4/Insolation.html",
+    "title": "Insolation",
     "section": "",
-    "text": "Calculation of the Equilibrium Temperature of Earth\n\nEquation 4.3(b) in Dessler.\n\nS = 1360                  # W m-2\na = 0.3                   # unitless\nTequilibrium = (S*(1-a)/(4*5.67e-8))**(1/4)\n\n\nprint('The Equilibrium Temperature of Earth is:', Tequilibrium, 'K')"
+    "text": "Insolation\n© Von P. Walden, Washington State University\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n\nCalculates the insolation at the top of the atmosphere (TOA) as a function of time and location.\n\nSolar flux per unit area at TOA (Equations from Hartmann, Global Physical Climatology)\n\\[Q = S_o (d_m/d)^2 \\cos(\\theta_s)\\] where So is the solar “constant”, \\(d_m\\) is the mean distance between the Earth and Sun, d is the actual distance between the Earth and Sun, and theta(s) is the solar zenith angle.\n\\(\\delta = -23.44^{\\circ}\\cos{[(t_j+10 days)*(360^{\\circ}/365.25 days)]}\\) is the declination angle.\n\\(\\cos{\\theta_s} = \\sin{\\phi}sin{\\delta} + \\cos{\\phi}\\cos{\\delta}\\cos{h}\\), where phi is the latitude and h is the hour angle.\n\\(h=(12-t)*(15^{\\circ} / 1 hour)\\), where t is the local time and 15 is the number of degrees that the Earth rotates in one hour. The conversion factor converts hours to degrees.\n\\(d_m\\) is the mean distance from the Sun to the Earth, and is equal to the length of semi-major axis (a) of the elliptical orbit (which is 149.6 million km).\nd is the distance between the Earth and Sun on any given day, where the closest approach (perihelion) occurs on 3 January.\n\\[ d = \\frac{a(1-\\epsilon^2)}{1 + \\epsilon cos(\\theta)} \\]\nwhere \\(\\epsilon\\) is the eccentricity of Earth’s orbit (0.017), a is the semi major axis of Earth’s orbit, and \\(\\theta\\) is an angle that relates the day number to the correct location of Earth in the elliptical orbit for that day.\n\\(Q_{dayavg} = (S_o/\\pi)(d_m/d)^2[h_o\\sin{\\phi}\\sin{\\delta}+\\cos{\\phi}\\cos{\\delta}\\sin{h_o}]\\), where cos(\\(h_o) = -\\tan{\\phi}\\tan{\\delta}\\).\n\ndef earth_sun_distance(day):\n    a     = 149.6e6                   # km\n    e     = 0.017\n    theta = (day - 3) * ((2*np.pi) / 365.25)     # This is only an approximation.\n    d = a*(1-e*e)/(1+e * np.cos(theta))\n    return d\n\n\ndef declination(day):\n    dec = -23.44 * np.cos( (2.*np.pi) / 365.25 * (day + 10) )   # Approximate\n    return dec\n\n\ndef solar_zenith_angle(latitude,declinationAngle,hour):\n    # All angles must be in radians !!\n    latitude = latitude * (np.pi/180.)\n    declinationAngle = declinationAngle * (np.pi/180.)\n    h = 15. * (12. - hour) * (np.pi/180.)\n    sza = np.arccos(np.sin(latitude)*np.sin(declinationAngle) + np.cos(latitude)*np.cos(declinationAngle)*np.cos(h))\n    return sza\n\n\ndef Qday_avg(latitude,day):\n    lat = latitude*(np.pi/180.)\n    So  = 1370.\n    d   = earth_sun_distance(day)\n    dm  = 149.6e6\n    da  = declination(day) * (np.pi/180.)\n    tmp = np.tan(lat)*np.tan(da)\n    # Obtain this condition from http://en.wikipedia.org/wiki/Insolation\n    if tmp&gt;1:\n        ho = np.pi\n    elif tmp&lt;-1:\n        ho = 0.\n    else:\n        ho  = np.arccos(-1.*np.tan(lat)*np.tan(da))\n    Q   = (So/np.pi) * (dm/d)**2 * (ho*np.sin(lat)*np.sin(da) + np.cos(lat)*np.cos(da)*np.sin(ho))\n    return Q\n\n\nlat = 46.7\nday = 31+28+22\nprint('Declination = ', declination(day))\nprint('Earth distance = ', earth_sun_distance(day))\nprint('Q =', Qday_avg(lat, day))\n\nDeclination =  -0.12600714770976626\nEarth distance =  148981817.36070523\nQ = 300.456485702979\n\n\n\n\n\nGeographic distribution of insolation (solar radition) at TOA\n\nlats = np.arange(-90.,91.)\ndays = np.arange(1.,366.)\n\nQ = np.array([])\nfor lat in lats:\n    for day in days:\n        Q = np.append(Q, Qday_avg(lat,day))\n\nQn = np.reshape(Q,(181,365))\nplt.figure(figsize=(20,10))\n#CS=contourf(days, lats, Qn, range(0,550,50), cmap=plt.cm.RdBu_r)\nCS=plt.contour(days, lats, Qn, range(0,550,25), colors='k')\nplt.clabel(CS, range(0,550,100) ,inline=1,fmt='%4.0f',fontsize=12)\nplt.grid()\nplt.xlabel('Day of Year');\nplt.ylabel('Latitude (deg)');\nplt.title('TOA Insolation as a function of Day of Year and Latitude');\n\n\n\n\n\n\n\n\n\nmar20 = 31+28+20\njun21 = 31+28+31+30+31+21\nsep20 = 31+28+31+30+31+30+31+31+20\ndec21 = 355\nplt.figure(figsize=(20,10))\nplt.plot(lats,Qn[:,jun21],'r',lats,Qn[:,dec21],'b')\nplt.plot(lats,Qn[:,mar20],'r--',lats,Qn[:,sep20],'b--')\n#plt.plot(lats,Qn.mean(axis=1),'k')                      # Annual mean\nplt.axis([-90., 90., 0., 600])\nplt.grid()\nplt.xticks(np.arange(-90., 90.+1, 30.))\nplt.xlabel('Latitude (degrees)');\nplt.ylabel('Insolation (W m-2)');\nplt.title('Insolation for the Solstices and Equinoxes');\nplt.legend(['June Solstice', 'December Solstice', 'March Equinox', 'September Equinox'])\n\n\n\n\n\n\n\n\n\n\nDaily Average Insolation over Pullman, WA\n\ndays = np.arange(1.,366.)\nlat  = 46.7298\nlon  = -117.1817\n\nQ = np.array([])\nfor day in days:\n    Q = np.append(Q, Qday_avg(lat,day))\n\nplt.figure(figsize=(12,6))\nplt.plot(days, Q)\nplt.grid();\nplt.xlabel('Day of Year');\nplt.ylabel('Daily-Average Insolation (W m-2)');\nplt.title('TOA Insolation over Pullman, WA');\n\n\n\n\n\n\n\n\n\n\nHourly Insolation over Pullman, WA\n\nlatitude = 46.7\n#day      = 31+28+21                                 # 21 Mar\nday      = 31+28+31+30+31+21                        # 21 Jun\n#day      = 31+28+31+30+31+30+31+31+21               # 21 Sep\n#day      = 31+28+31+30+31+30+31+31+30+31+30+21      # 21 Dec\nhours    = np.arange(0,24.1,0.1)\ndm       = 149.6e6\nd        = earth_sun_distance(day)\ndec      = declination(day)\n\nQ = np.array([])\nfor hour in hours:\n    if np.cos(solar_zenith_angle(latitude, dec, hour)) &gt; 0:\n        Q = np.append(Q, 1361. * (dm/d)**2 * np.cos(solar_zenith_angle(latitude, dec, hour)))\n    else:\n        Q = np.append(Q, np.nan)\n        \n\nplt.figure(figsize=(12,6))\nplt.plot(hours, Q)\nplt.grid();\nplt.xlabel('Hour of Day');\nplt.ylabel('Insolation (W m-2)');\nplt.title('TOA Insolation over Pullman, WA');"
   },
   {
     "objectID": "chapter4/ASHRAE_Irradiance.html",
