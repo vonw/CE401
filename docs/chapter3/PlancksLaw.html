@@ -295,7 +295,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="calculate-planck-curves-as-a-function-of-wavelength-and-temperature" class="level3">
 <h3 class="anchored" data-anchor-id="calculate-planck-curves-as-a-function-of-wavelength-and-temperature">Calculate Planck curves as a function of wavelength and temperature</h3>
 <p><i>© Von P. Walden, Washington State University</i></p>
-<div id="cell-3" class="cell">
+<div id="cell-3" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -303,7 +303,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="dessler-figure-3.2a" class="level4">
 <h4 class="anchored" data-anchor-id="dessler-figure-3.2a">Dessler, Figure 3.2a</h4>
-<div id="cell-5" class="cell">
+<div id="cell-5" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>c  <span class="op">=</span> <span class="fl">2.998e8</span>                              <span class="co"># m s-1</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>h  <span class="op">=</span> <span class="fl">6.626e-34</span>                            <span class="co"># m2 kg s-1</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>kB <span class="op">=</span> <span class="fl">1.381e-23</span>                            <span class="co"># m2 kg s-2 K-1</span></span>
@@ -312,62 +312,106 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>B  <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>h<span class="op">*</span>c<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> (l<span class="op">**</span><span class="dv">5</span> <span class="op">*</span> (np.exp((h<span class="op">*</span>c) <span class="op">/</span> (l <span class="op">*</span>kB <span class="op">*</span> T)) <span class="op">-</span> <span class="fl">1.</span>)) <span class="op">*</span> <span class="fl">1e-6</span>      <span class="co"># W m-2 um-1</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>spectralFlux  <span class="op">=</span> np.pi <span class="op">*</span> B</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-6" class="cell">
+<div id="cell-6" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>plt.plot(l<span class="op">/</span><span class="fl">1e-6</span>,spectralFlux)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Wavelength, microns'</span>)<span class="op">;</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Spectral Flux, W m-2 um-1'</span>)<span class="op">;</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>plt.text(<span class="fl">17.5</span>,<span class="dv">30</span>,<span class="st">'300 K'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PlancksLaw_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
-<div id="cell-7" class="cell">
+</div>
+</div>
+<div id="cell-7" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>l_max <span class="op">=</span> l[np.where(spectralFlux<span class="op">==</span>spectralFlux.<span class="bu">max</span>())]</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(l_max)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[9.75e-06]</code></pre>
+</div>
 </div>
 <div id="cell-8" class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Wiens Law gives wavelength of maximum flux at: </span><span class="sc">{</span>(<span class="dv">2898</span><span class="op">/</span>T)<span class="sc">:4.2f}</span><span class="ss"> um."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Wiens Law gives wavelength of maximum flux at: </span><span class="sc">{</span>(<span class="dv">2898</span><span class="op">/</span>T)<span class="sc">:4.2f}</span><span class="ss"> um."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Wiens Law gives wavelength of maximum flux at: 0.97 um.</code></pre>
 </div>
-<div id="cell-9" class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The Stefan-Boltzmann Law gives the total flux for this object as: </span><span class="sc">{</span>(<span class="fl">5.67e-8</span><span class="op">*</span>T<span class="op">**</span><span class="dv">4</span>)<span class="sc">:4.0f}</span><span class="ss"> W m-2."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-9" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The Stefan-Boltzmann Law gives the total flux for this object as: </span><span class="sc">{</span>(<span class="fl">5.67e-8</span><span class="op">*</span>T<span class="op">**</span><span class="dv">4</span>)<span class="sc">:4.0f}</span><span class="ss"> W m-2."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The Stefan-Boltzmann Law gives the total flux for this object as:  459 W m-2.</code></pre>
+</div>
 </div>
 </section>
 <section id="dessler-figure-3.2b" class="level4">
 <h4 class="anchored" data-anchor-id="dessler-figure-3.2b">Dessler, Figure 3.2b</h4>
 <div id="cell-11" class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>l <span class="op">=</span> np.arange(<span class="fl">0.25</span>,<span class="dv">12</span>,<span class="fl">0.05</span>) <span class="op">*</span> <span class="fl">1e-6</span>      <span class="co"># meters</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> <span class="fl">1600.</span>                               <span class="co"># K</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>h<span class="op">*</span>c<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> (l<span class="op">**</span><span class="dv">5</span> <span class="op">*</span> (np.exp((h<span class="op">*</span>c) <span class="op">/</span> (l <span class="op">*</span>kB <span class="op">*</span> T)) <span class="op">-</span> <span class="fl">1.</span>)) <span class="op">*</span> <span class="fl">1e-6</span>      <span class="co"># W m-2 um-1</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>spectralFlux <span class="op">=</span> pi <span class="op">*</span> B                   <span class="co"># W m-2 um-1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>l <span class="op">=</span> np.arange(<span class="fl">0.25</span>,<span class="dv">12</span>,<span class="fl">0.05</span>) <span class="op">*</span> <span class="fl">1e-6</span>      <span class="co"># meters</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> <span class="fl">1600.</span>                               <span class="co"># K</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>h<span class="op">*</span>c<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> (l<span class="op">**</span><span class="dv">5</span> <span class="op">*</span> (np.exp((h<span class="op">*</span>c) <span class="op">/</span> (l <span class="op">*</span>kB <span class="op">*</span> T)) <span class="op">-</span> <span class="fl">1.</span>)) <span class="op">*</span> <span class="fl">1e-6</span>      <span class="co"># W m-2 um-1</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>spectralFlux <span class="op">=</span> pi <span class="op">*</span> B                   <span class="co"># W m-2 um-1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="cell-12" class="cell" data-scrolled="true">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.plot(l<span class="op">/</span><span class="fl">1e-6</span>,spectralFlux)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Wavelength, microns'</span>)<span class="op">;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Spectral Flux, W m-2 um-1'</span>)<span class="op">;</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>plt.text(<span class="dv">10</span>,<span class="dv">120000</span>,<span class="st">'1600 K'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>plt.plot(l<span class="op">/</span><span class="fl">1e-6</span>,spectralFlux)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Wavelength, microns'</span>)<span class="op">;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Spectral Flux, W m-2 um-1'</span>)<span class="op">;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>plt.text(<span class="dv">10</span>,<span class="dv">120000</span>,<span class="st">'1600 K'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="cell-13" class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Wiens law gives wavelength of maximum flux at: </span><span class="sc">{</span>(<span class="dv">2898</span><span class="op">/</span>T)<span class="sc">:3.1f}</span><span class="ss"> um."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Wiens law gives wavelength of maximum flux at: </span><span class="sc">{</span>(<span class="dv">2898</span><span class="op">/</span>T)<span class="sc">:3.1f}</span><span class="ss"> um."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="cell-14" class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The Stefan-Boltzmann Law gives the total flux for this object as: </span><span class="sc">{</span>(<span class="fl">5.67e-8</span><span class="op">*</span>T<span class="op">**</span><span class="dv">4</span>)<span class="sc">:4.0f}</span><span class="ss"> W m-2."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The Stefan-Boltzmann Law gives the total flux for this object as: </span><span class="sc">{</span>(<span class="fl">5.67e-8</span><span class="op">*</span>T<span class="op">**</span><span class="dv">4</span>)<span class="sc">:4.0f}</span><span class="ss"> W m-2."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="dessler-figure-3.2c" class="level4">
 <h4 class="anchored" data-anchor-id="dessler-figure-3.2c">Dessler, Figure 3.2c</h4>
 <div id="cell-16" class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>l  <span class="op">=</span> np.arange(<span class="fl">0.01</span>,<span class="fl">3.5</span>,<span class="fl">0.01</span>) <span class="op">*</span> <span class="fl">1e-6</span>      <span class="co"># meters</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>T  <span class="op">=</span> <span class="fl">6000.</span>                                <span class="co"># K</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>B  <span class="op">=</span> pi <span class="op">*</span> <span class="dv">2</span><span class="op">*</span>h<span class="op">*</span>c<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> (l<span class="op">**</span><span class="dv">5</span> <span class="op">*</span> (np.exp((h<span class="op">*</span>c) <span class="op">/</span> (l <span class="op">*</span>kB <span class="op">*</span> T)) <span class="op">-</span> <span class="fl">1.</span>)) <span class="op">*</span> <span class="fl">1e-6</span>      <span class="co"># W m-2 um-1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>l  <span class="op">=</span> np.arange(<span class="fl">0.01</span>,<span class="fl">3.5</span>,<span class="fl">0.01</span>) <span class="op">*</span> <span class="fl">1e-6</span>      <span class="co"># meters</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>T  <span class="op">=</span> <span class="fl">6000.</span>                                <span class="co"># K</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>B  <span class="op">=</span> pi <span class="op">*</span> <span class="dv">2</span><span class="op">*</span>h<span class="op">*</span>c<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> (l<span class="op">**</span><span class="dv">5</span> <span class="op">*</span> (np.exp((h<span class="op">*</span>c) <span class="op">/</span> (l <span class="op">*</span>kB <span class="op">*</span> T)) <span class="op">-</span> <span class="fl">1.</span>)) <span class="op">*</span> <span class="fl">1e-6</span>      <span class="co"># W m-2 um-1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="cell-17" class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>plt.plot(l<span class="op">/</span><span class="fl">1e-6</span>,B)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Wavelength, microns'</span>)<span class="op">;</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Flux, W m-2 um-1'</span>)<span class="op">;</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>plt.text(<span class="fl">2.8</span>,<span class="fl">90e6</span>,<span class="st">'6000 K'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>plt.plot(l<span class="op">/</span><span class="fl">1e-6</span>,B)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Wavelength, microns'</span>)<span class="op">;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Flux, W m-2 um-1'</span>)<span class="op">;</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>plt.text(<span class="fl">2.8</span>,<span class="fl">90e6</span>,<span class="st">'6000 K'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="cell-18" class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Wiens law gives wavelength of maximum flux at: </span><span class="sc">{</span>(<span class="dv">2898</span><span class="op">/</span>T)<span class="sc">:3.1f}</span><span class="ss"> um."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Wiens law gives wavelength of maximum flux at: </span><span class="sc">{</span>(<span class="dv">2898</span><span class="op">/</span>T)<span class="sc">:3.1f}</span><span class="ss"> um."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="cell-19" class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The Stefan-Boltzmann Law gives the total flux for this object as: </span><span class="sc">{</span>(<span class="fl">5.67e-8</span><span class="op">*</span>T<span class="op">**</span><span class="dv">4</span>)<span class="sc">:4.0f}</span><span class="ss"> W m-2."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The Stefan-Boltzmann Law gives the total flux for this object as: </span><span class="sc">{</span>(<span class="fl">5.67e-8</span><span class="op">*</span>T<span class="op">**</span><span class="dv">4</span>)<span class="sc">:4.0f}</span><span class="ss"> W m-2."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-20" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> np.array([<span class="dv">300</span>, <span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">2000</span>, <span class="dv">3000</span>])</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>lmax <span class="op">=</span> np.array([<span class="fl">9.66</span>, <span class="fl">5.8</span>, <span class="fl">2.9</span>, <span class="fl">1.45</span>, <span class="fl">0.97</span>])</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>plt.scatter(<span class="dv">1</span><span class="op">/</span>T, lmax)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'1 / T (K-1)'</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Maximum wavelength (um)'</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Wien''s Law'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<pre><code>Text(0.5, 1.0, 'Wiens Law')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PlancksLaw_files/figure-html/cell-16-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-21" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>slope <span class="op">=</span> (<span class="fl">9.66</span><span class="op">-</span><span class="fl">0.97</span>)<span class="op">/</span>((<span class="dv">1</span><span class="op">/</span><span class="dv">300</span>) <span class="op">-</span> (<span class="dv">1</span><span class="op">/</span><span class="dv">3000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-22" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(slope)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>2896.6666666666665</code></pre>
+</div>
 </div>
 
 

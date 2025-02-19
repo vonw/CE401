@@ -348,7 +348,7 @@ window.Quarto = {
 <section id="infrared-absorption-by-the-atmosphere" class="level1">
 <h1>Infrared Absorption by the Atmosphere</h1>
 <p><i>© Von P. Walden, Washington State University</i></p>
-<div id="dd37987e-0f23-46a4-a58f-ffe80536193c" class="cell" data-execution_count="1">
+<div id="dd37987e-0f23-46a4-a58f-ffe80536193c" class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -357,22 +357,24 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="definition-of-the-optical-depth">Definition of the Optical Depth</h2>
 <p>To calculate the infrared absorption by the atmosphere, we must calculate the optical depth. The optical depth is related to the transmission of radiation through “optical media”, such as an absorbing gas or an absorbing liquid. <a href="https://en.wikipedia.org/wiki/Beer–Lambert_law">Beer’s Law</a> gives us</p>
 <p><span class="math display">\[ I(\lambda) = I_o(\lambda) e^{-\tau} \]</span></p>
+<p>or</p>
+<p><span class="math display">\[ I_{\lambda} = I_{o, \lambda} e^{-\tau_{\lambda}} \]</span></p>
 <p>This can be rewritten as</p>
-<p><span class="math display">\[ Transmission = \frac{I(\lambda)}{I_o(\lambda)} = e^{-\tau} \]</span></p>
+<p><span class="math display">\[ Transmission = \frac{I_{\lambda}}{I_{o, \lambda}} = e^{-\tau_{\lambda}} \]</span></p>
 <p>Then one can solve for the optical depth <span class="math inline">\(\tau\)</span> as</p>
-<p><span class="math display">\[ \tau = -ln \Big[ \frac{I(\lambda)}{I_o(\lambda)} \Big] \]</span></p>
+<p><span class="math display">\[ \tau_{\lambda} = -ln \Big[ \frac{I_{\lambda}}{I_{o, \lambda}} \Big] \]</span></p>
 <p>In general, the optical depth is:</p>
-<p><span class="math display">\[ \tau = \int_{z_1}^{z_2} \beta_{\lambda} dz = \int_{z_1}^{z_2} \kappa_{\lambda} \rho (z) dz = \int_{z_1}^{z_2} \sigma_{\lambda} n(z) dz \]</span></p>
+<p><span class="math display">\[ \tau_{\lambda} = \int_{z_1}^{z_2} \beta_{\lambda} (z) dz = \int_{z_1}^{z_2} \kappa_{\lambda} \rho (z) dz = \int_{z_1}^{z_2} \sigma_{\lambda} N(z) dz \]</span></p>
 <p>where - <span class="math inline">\(\beta\)</span> is the volume absorption coefficient, - <span class="math inline">\(\kappa\)</span> is the mass absorption coefficient, - <span class="math inline">\(\sigma\)</span> is the absorption cross section,</p>
 <p>which all depend on wavelength, <span class="math inline">\(\lambda\)</span>.</p>
-<p><span class="math inline">\(\rho(z)\)</span> and n(z) are the air density and the number density of the absorbing gas. z is distance along the absorbing path from <span class="math inline">\(z_1\)</span> to <span class="math inline">\(z_2\)</span>.</p>
+<p><span class="math inline">\(\rho(z)\)</span> and <span class="math inline">\(N(z)\)</span> are the air density and the number density of the absorbing gas. z is distance along the absorbing path from <span class="math inline">\(z_1\)</span> to <span class="math inline">\(z_2\)</span>.</p>
 <p>If one conducts an experiment of Beer’s Law in the lab using a tube filled with an absorbing gas (like H2O or CO2), this equation reduces to:</p>
-<p><span class="math display">\[ \tau = \beta (z_2 - z_1) = \kappa_{\lambda} \rho (z_2 - z_1) = \sigma_{\lambda} N (z_2 - z_1) \]</span></p>
+<p><span class="math display">\[ \tau_{\lambda} = \beta_{\lambda} (z_2 - z_1) = \kappa_{\lambda} \rho (z_2 - z_1) = \sigma_{\lambda} N (z_2 - z_1) \]</span></p>
 <p>Note that this is how scientists (100 or so years ago) determined how different gases absorbed infrared radiation at different wavelengths, by measuring the transmission of radiation through the gas, calculating the optical depth, then solving for either <span class="math inline">\(\beta_{\lambda}\)</span>, <span class="math inline">\(\kappa_{\lambda}\)</span>, or <span class="math inline">\(\sigma_{\lambda}\)</span>.</p>
 <section id="optical-depth-in-the-atmosphere" class="level3">
 <h3 class="anchored" data-anchor-id="optical-depth-in-the-atmosphere">Optical Depth in the Atmosphere</h3>
 <p>To determine the optical depth in the atmosphere, one must use the general equation above, because the number of molecules of absorbing gas changes with height in the atmosphere. Carbon dioxide is “uniformly mixed” in the atmosphere, meaning that its concentration relative to other gases does not change with height. However, the actual number of CO2 molecules decreases exponentially with height in the atmosphere because the density (and pressure) of the air decreases in this manner. Most of the water vapor in the atmosphere is contained only in the troposphere in the lowest 7 or 8 km. Therefore, one must integrate through the atmosphere to determine the optical depth using:</p>
-<p><span class="math display">\[ \tau = \int_{z_1}^{z_2} \kappa_{\lambda} \rho (z) dz \]</span></p>
+<p><span class="math display">\[ \tau_{\lambda} = \int_{z_1}^{z_2} \kappa_{\lambda} \rho (z) dz \]</span></p>
 <p>Here we have chosen to use the specific formula of the optical depth that contains the mass absorption coefficient, because Figure 2 of Pierrehumbert (2010) gives values of <span class="math inline">\(\kappa\)</span> for both H2O and CO2.</p>
 </section>
 </section>
@@ -386,7 +388,7 @@ window.Quarto = {
 <li>Sub-Arctic Summer (SAS)</li>
 <li>Sub-Arctic Winter (SAW)</li>
 </ul>
-<div id="bb523c6a-db8f-48cf-87e4-9d705f06c4fe" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="2">
+<div id="bb523c6a-db8f-48cf-87e4-9d705f06c4fe" class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in raw data files</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> [<span class="st">'layer'</span>, <span class="st">'altitude'</span>, <span class="st">'pressure'</span>, <span class="st">'temperature'</span>, <span class="st">'dew_point'</span>, <span class="st">'density'</span>, <span class="st">'h2o'</span>, <span class="st">'co2'</span>, <span class="st">'o3'</span>, <span class="st">'n2o'</span>, <span class="st">'co'</span>, <span class="st">'ch4'</span>, <span class="st">'o2'</span>]</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>trp <span class="op">=</span> pd.read_table(<span class="st">'trp.dat'</span>, sep<span class="op">=</span><span class="st">'\s+'</span>, names<span class="op">=</span>columns)</span>
@@ -395,7 +397,7 @@ window.Quarto = {
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>sas <span class="op">=</span> pd.read_table(<span class="st">'sas.dat'</span>, sep<span class="op">=</span><span class="st">'\s+'</span>, names<span class="op">=</span>columns)</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>saw <span class="op">=</span> pd.read_table(<span class="st">'saw.dat'</span>, sep<span class="op">=</span><span class="st">'\s+'</span>, names<span class="op">=</span>columns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="659a37f4" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="3">
+<div id="659a37f4" class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Rair <span class="op">=</span> <span class="fl">287.058</span>        <span class="co"># J kg-1 K-1</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate air density</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>trp.rename({<span class="st">'density'</span>: <span class="st">'numberDensity'</span>})</span>
@@ -413,7 +415,7 @@ window.Quarto = {
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>saw.rename({<span class="st">'density'</span>: <span class="st">'numberDensity'</span>})</span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>saw[<span class="st">'airDensity'</span>] <span class="op">=</span> (saw.pressure <span class="op">*</span> <span class="dv">100</span>) <span class="op">/</span> (Rair <span class="op">*</span> saw.temperature)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="05df41d4-dda4-4e35-bf5f-9d53b4ec7481" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="4">
+<div id="05df41d4-dda4-4e35-bf5f-9d53b4ec7481" class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interpolate the standard atmospheres to a common grid in meters with heights every 100 meters</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>trp.index <span class="op">=</span> trp.altitude<span class="op">*</span><span class="dv">1000</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>trp <span class="op">=</span> trp.reindex(np.arange(<span class="dv">0</span>,<span class="dv">60001</span>,<span class="dv">100</span>)).interpolate(method<span class="op">=</span><span class="st">'linear'</span>)</span>
@@ -464,7 +466,7 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<div id="c4145b87" class="cell" data-execution_count="5">
+<div id="c4145b87" class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Change this variable to choose the model atmosphere</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># !! </span><span class="al">NOTE</span><span class="co"> that the single quotation marks are important !!</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -486,19 +488,19 @@ window.Quarto = {
 </section>
 <section id="set-the-atmospheric-co2-concentration-in-ppmv" class="level2">
 <h2 class="anchored" data-anchor-id="set-the-atmospheric-co2-concentration-in-ppmv">2) Set the atmospheric CO2 concentration (in ppmv)</h2>
-<div id="9008fcc5-f939-4bf3-b2f6-687866f24cb1" class="cell" data-execution_count="22">
+<div id="9008fcc5-f939-4bf3-b2f6-687866f24cb1" class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set CO2 in all Standard Atmospheres.</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#co2 = 330.   # ppmv; approximate concentration in 1971</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#co2 = 420.   # ppmv; current concentration in 2024</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#co2 = 280.   # ppmv; pre-industrial concentration</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>co2 <span class="op">=</span> <span class="fl">560.</span>   <span class="co"># ppmv; doubled CO2 concentration (from pre-industrial)</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>co2 <span class="op">=</span> <span class="fl">280.</span>   <span class="co"># ppmv; pre-industrial concentration</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#co2 = 560.   # ppmv; doubled CO2 concentration (from pre-industrial)</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>trp[<span class="st">'co2'</span>] <span class="op">=</span> mls[<span class="st">'co2'</span>] <span class="op">=</span> mlw[<span class="st">'co2'</span>] <span class="op">=</span> sas[<span class="st">'co2'</span>] <span class="op">=</span> saw[<span class="st">'co2'</span>] <span class="op">=</span> co2<span class="co">#</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 <section id="pressure-temperature-and-air-density-in-the-standard-atmospheres" class="level3">
 <h3 class="anchored" data-anchor-id="pressure-temperature-and-air-density-in-the-standard-atmospheres">Pressure, Temperature, and Air Density in the Standard Atmospheres</h3>
-<div id="25b89e96-4fbe-480a-a86c-1b411ca3b58a" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="23">
+<div id="25b89e96-4fbe-480a-a86c-1b411ca3b58a" class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fig, (ax1, ax2, ax3) <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">20</span>,<span class="dv">10</span>), nrows<span class="op">=</span><span class="dv">1</span>, ncols<span class="op">=</span><span class="dv">3</span>, sharey<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Pressure</span></span>
@@ -536,18 +538,11 @@ window.Quarto = {
 <span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>ax3.set_ylabel(<span class="st">'Altitude (km)'</span>)<span class="op">;</span></span>
 <span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>ax3.set_title(<span class="st">'Density of Air for Standard Atmospheres'</span>)<span class="op">;</span></span>
 <span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>ax3.legend([<span class="st">'TRP'</span>,<span class="st">'MLS'</span>,<span class="st">'MLW'</span>,<span class="st">'SAS'</span>,<span class="st">'SAW'</span>])<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="InfraredAbsorptionByTheAtmosphere_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
 </div>
 </section>
 <section id="primary-greenhouse-gas-concentrations-in-standard-atmospheres" class="level3">
 <h3 class="anchored" data-anchor-id="primary-greenhouse-gas-concentrations-in-standard-atmospheres">Primary Greenhouse Gas Concentrations in Standard Atmospheres</h3>
-<div id="5fb0c120-53d0-4dc2-b8bb-f8a0529a2928" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="24">
+<div id="5fb0c120-53d0-4dc2-b8bb-f8a0529a2928" class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fig, (ax1, ax2, ax3) <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">20</span>,<span class="dv">10</span>), nrows<span class="op">=</span><span class="dv">1</span>, ncols<span class="op">=</span><span class="dv">3</span>, sharey<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># H2O</span></span>
@@ -585,13 +580,6 @@ window.Quarto = {
 <span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>ax3.set_ylabel(<span class="st">'Altitude (km)'</span>)<span class="op">;</span></span>
 <span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>ax3.set_title(<span class="st">'Ozone concentration for Standard Atmospheres'</span>)<span class="op">;</span></span>
 <span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>ax3.legend([<span class="st">'TRP'</span>,<span class="st">'MLS'</span>,<span class="st">'MLW'</span>,<span class="st">'SAS'</span>,<span class="st">'SAW'</span>])<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="InfraredAbsorptionByTheAtmosphere_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
 </div>
 </section>
 </section>
@@ -611,7 +599,7 @@ window.Quarto = {
 <th>Type of Absorption</th>
 <th>Wavenumber (<span class="math inline">\(cm^{-1}\)</span>)</th>
 <th>Wavelength (<span class="math inline">\(\mu\)</span>m)</th>
-<th><span class="math inline">\(\kappa_a\)</span> (<span class="math inline">\(m^2 kg^{-1}\)</span>)</th>
+<th><span class="math inline">\(\kappa_{a, \lambda}\)</span> (<span class="math inline">\(m^2 kg^{-1}\)</span>)</th>
 </tr>
 </thead>
 <tbody>
@@ -642,7 +630,7 @@ window.Quarto = {
 </tbody>
 </table>
 <p>These mass absorption coefficients values were <em>approximated</em> from Figure 2 in Pierrehumbert, Physics Today, January 2011.</p>
-<p>So, the optical depth can now be calculated for each layer of the atmosphere by multiplying the absorption cross sections (<span class="math inline">\(\kappa_a\)</span>) by the air density, and then by the thickness of the atmospheric layer, as shown in the code below (for the Mid-latitude Winter Standard Atmosphere - MLW).</p>
+<p>So, the optical depth can now be calculated for each layer of the atmosphere by multiplying the absorption cross sections (<span class="math inline">\(\kappa_{a, \lambda}\)</span>) by the air density, and then by the thickness of the atmospheric layer, as shown in the code below (for the Mid-latitude Winter Standard Atmosphere - MLW).</p>
 <p><strong>Disclaimer:</strong> Please note that this calculation of optical depth is for illustrative purposes only, and is over-simplified in the following ways:</p>
 <ul>
 <li><p>In most cases H2O overlaps the absorption bands of all the other GH gases. (See Figure 2 of Pierrehumbert (2010); blowup of 600-670 cm-1).</p></li>
@@ -650,7 +638,7 @@ window.Quarto = {
 <li><p>We are neglecting how the widths of absorption lines depend on both temperature and pressure (https://hitran.org/docs/definitions-and-units/)</p></li>
 </ul>
 <p>Accurate radiative transfer models of the atmosphere account for all of this issues.</p>
-<div id="f15d6443-f485-4716-9ea7-13de08bfa4fe" class="cell" data-execution_count="25">
+<div id="f15d6443-f485-4716-9ea7-13de08bfa4fe" class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Ka_15 <span class="op">=</span> <span class="dv">2000</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>Ka_14 <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>Ka_13 <span class="op">=</span> <span class="fl">0.1</span></span>
@@ -665,7 +653,7 @@ window.Quarto = {
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>stdatm[<span class="st">'od_13'</span>] <span class="op">=</span> Ka_13 <span class="op">*</span> rhoCO2 <span class="op">*</span> dz</span>
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>stdatm[<span class="st">'od_12'</span>] <span class="op">=</span> Ka_12 <span class="op">*</span> rhoCO2 <span class="op">*</span> dz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="e3beb853-3cc3-4117-bb4e-7a0155f2bb38" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="26">
+<div id="e3beb853-3cc3-4117-bb4e-7a0155f2bb38" class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">10</span>))</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>stdatm.plot(ax<span class="op">=</span>ax, x<span class="op">=</span><span class="st">'od_15'</span>, y<span class="op">=</span><span class="st">'altitude'</span>, logx<span class="op">=</span><span class="va">True</span>, logy<span class="op">=</span><span class="va">True</span>)</span>
@@ -677,26 +665,19 @@ window.Quarto = {
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Altitude (km)'</span>)<span class="op">;</span></span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Infrared Optical Depths for CO2 in '</span> <span class="op">+</span> stdatm_name <span class="op">+</span> <span class="st">'Standard Atmospheres'</span>)<span class="op">;</span></span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>ax.legend([<span class="st">'15 um'</span>,<span class="st">'14 um'</span>,<span class="st">'13 um'</span>,<span class="st">'12 um'</span>])<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="InfraredAbsorptionByTheAtmosphere_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
 </div>
 </section>
 <section id="calculating-atmospheric-transmission" class="level2">
 <h2 class="anchored" data-anchor-id="calculating-atmospheric-transmission">Calculating Atmospheric Transmission</h2>
 <section id="as-a-function-of-altitude" class="level3">
 <h3 class="anchored" data-anchor-id="as-a-function-of-altitude">As a function of altitude</h3>
-<div id="9fa8c6e8-2cca-4b29-8a33-c5f7a9fc63f2" class="cell" data-execution_count="27">
+<div id="9fa8c6e8-2cca-4b29-8a33-c5f7a9fc63f2" class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>stdatm[<span class="st">'T_15'</span>] <span class="op">=</span> np.exp(<span class="op">-</span>stdatm.od_15) <span class="op">*</span> <span class="dv">100</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>stdatm[<span class="st">'T_14'</span>] <span class="op">=</span> np.exp(<span class="op">-</span>stdatm.od_14) <span class="op">*</span> <span class="dv">100</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>stdatm[<span class="st">'T_13'</span>] <span class="op">=</span> np.exp(<span class="op">-</span>stdatm.od_13) <span class="op">*</span> <span class="dv">100</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>stdatm[<span class="st">'T_12'</span>] <span class="op">=</span> np.exp(<span class="op">-</span>stdatm.od_12) <span class="op">*</span> <span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="5d76b3fb-07c2-4d8e-8976-7f9a1556a65d" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="28">
+<div id="5d76b3fb-07c2-4d8e-8976-7f9a1556a65d" class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">10</span>))</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>stdatm.plot(ax<span class="op">=</span>ax, x<span class="op">=</span><span class="st">'T_15'</span>, y<span class="op">=</span><span class="st">'altitude'</span>, logx<span class="op">=</span><span class="va">True</span>)</span>
@@ -709,13 +690,6 @@ window.Quarto = {
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Altitude (km)'</span>)<span class="op">;</span></span>
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Infrared Transmission for CO2 in '</span> <span class="op">+</span> stdatm_name <span class="op">+</span> <span class="st">'Standard Atmospheres'</span>)<span class="op">;</span></span>
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>ax.legend([<span class="st">'15 um'</span>,<span class="st">'14 um'</span>,<span class="st">'13 um'</span>,<span class="st">'12 um'</span>])<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="InfraredAbsorptionByTheAtmosphere_files/figure-html/cell-13-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
 </div>
 </section>
 <section id="transmission-through-the-entire-atmosphere" class="level3">
@@ -731,7 +705,7 @@ window.Quarto = {
 </ol>
 <p><span class="math display">\[ T_{total} = e^{- \tau_1} e^{- \tau_2} e^{- \tau_3} ... = e^{- (\tau_1 +  \tau_2 + \tau_3 ...)} \]</span></p>
 <p>Option 2 is much easier for us here; see the code below.</p>
-<div id="1de8155f-105e-4733-933b-ec1f3cd782e8" class="cell" data-execution_count="29">
+<div id="1de8155f-105e-4733-933b-ec1f3cd782e8" class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate total transmission in the atmosphere by summing all optical depths</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>Ttotal_15 <span class="op">=</span> np.exp(<span class="op">-</span>stdatm.od_15.<span class="bu">sum</span>())</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>Ttotal_14 <span class="op">=</span> np.exp(<span class="op">-</span>stdatm.od_14.<span class="bu">sum</span>())</span>
@@ -743,12 +717,6 @@ window.Quarto = {
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Total transmission in atmosphere (%) at 14 um = </span><span class="sc">{</span>Ttotal_14<span class="op">*</span><span class="dv">100</span><span class="sc">:.2f}</span><span class="ss"> %'</span>)</span>
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Total transmission in atmosphere (%) at 13 um = </span><span class="sc">{</span>Ttotal_13<span class="op">*</span><span class="dv">100</span><span class="sc">:.2f}</span><span class="ss"> %'</span>)</span>
 <span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Total transmission in atmosphere (%) at 12 um = </span><span class="sc">{</span>Ttotal_12<span class="op">*</span><span class="dv">100</span><span class="sc">:.2f}</span><span class="ss"> %'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Total transmission in atmosphere (%) at 15 um = 0.00 %
-Total transmission in atmosphere (%) at 14 um = 0.00 %
-Total transmission in atmosphere (%) at 13 um = 55.59 %
-Total transmission in atmosphere (%) at 12 um = 99.41 %</code></pre>
-</div>
 </div>
 </section>
 </section>
@@ -763,47 +731,34 @@ Total transmission in atmosphere (%) at 12 um = 99.41 %</code></pre>
 <p><span class="math display">\[ Emissivity = 1 - Transmission \]</span></p>
 <section id="as-a-function-of-altitude-1" class="level3">
 <h3 class="anchored" data-anchor-id="as-a-function-of-altitude-1">As a function of altitude</h3>
-<div id="6b8b9d3e-7ade-4caf-b88d-2f04281bc111" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>stdatm[<span class="st">'A_15'</span>] <span class="op">=</span> (<span class="fl">1.</span> <span class="op">-</span> np.exp(<span class="op">-</span>stdatm.od_15)) <span class="op">*</span> <span class="dv">100</span>        <span class="co"># Convert from fraction to percent</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>stdatm[<span class="st">'A_14'</span>] <span class="op">=</span> (<span class="fl">1.</span> <span class="op">-</span> np.exp(<span class="op">-</span>stdatm.od_14)) <span class="op">*</span> <span class="dv">100</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>stdatm[<span class="st">'A_13'</span>] <span class="op">=</span> (<span class="fl">1.</span> <span class="op">-</span> np.exp(<span class="op">-</span>stdatm.od_13)) <span class="op">*</span> <span class="dv">100</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>stdatm[<span class="st">'A_12'</span>] <span class="op">=</span> (<span class="fl">1.</span> <span class="op">-</span> np.exp(<span class="op">-</span>stdatm.od_12)) <span class="op">*</span> <span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="6b8b9d3e-7ade-4caf-b88d-2f04281bc111" class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>stdatm[<span class="st">'A_15'</span>] <span class="op">=</span> (<span class="fl">1.</span> <span class="op">-</span> np.exp(<span class="op">-</span>stdatm.od_15)) <span class="op">*</span> <span class="dv">100</span>        <span class="co"># Convert from fraction to percent</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>stdatm[<span class="st">'A_14'</span>] <span class="op">=</span> (<span class="fl">1.</span> <span class="op">-</span> np.exp(<span class="op">-</span>stdatm.od_14)) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>stdatm[<span class="st">'A_13'</span>] <span class="op">=</span> (<span class="fl">1.</span> <span class="op">-</span> np.exp(<span class="op">-</span>stdatm.od_13)) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>stdatm[<span class="st">'A_12'</span>] <span class="op">=</span> (<span class="fl">1.</span> <span class="op">-</span> np.exp(<span class="op">-</span>stdatm.od_12)) <span class="op">*</span> <span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="67b4d3d7-6b25-4b48-b64d-ad9713beac90" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">10</span>))</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>stdatm.plot(ax<span class="op">=</span>ax, x<span class="op">=</span><span class="st">'A_15'</span>, y<span class="op">=</span><span class="st">'altitude'</span>, logx<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>stdatm.plot(ax<span class="op">=</span>ax, x<span class="op">=</span><span class="st">'A_14'</span>, y<span class="op">=</span><span class="st">'altitude'</span>, logx<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>stdatm.plot(ax<span class="op">=</span>ax, x<span class="op">=</span><span class="st">'A_13'</span>, y<span class="op">=</span><span class="st">'altitude'</span>, logx<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>stdatm.plot(ax<span class="op">=</span>ax, x<span class="op">=</span><span class="st">'A_12'</span>, y<span class="op">=</span><span class="st">'altitude'</span>, logx<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>ax.grid()</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Absorption'</span>)<span class="op">;</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Altitude (km)'</span>)<span class="op">;</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Infrared Absorption for CO2 in '</span> <span class="op">+</span> stdatm_name <span class="op">+</span> <span class="st">'Standard Atmospheres'</span>)<span class="op">;</span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>ax.legend([<span class="st">'15 um'</span>,<span class="st">'14 um'</span>,<span class="st">'13 um'</span>,<span class="st">'12 um'</span>])<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="InfraredAbsorptionByTheAtmosphere_files/figure-html/cell-16-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
+<div id="67b4d3d7-6b25-4b48-b64d-ad9713beac90" class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">10</span>))</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>stdatm.plot(ax<span class="op">=</span>ax, x<span class="op">=</span><span class="st">'A_15'</span>, y<span class="op">=</span><span class="st">'altitude'</span>, logx<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>stdatm.plot(ax<span class="op">=</span>ax, x<span class="op">=</span><span class="st">'A_14'</span>, y<span class="op">=</span><span class="st">'altitude'</span>, logx<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>stdatm.plot(ax<span class="op">=</span>ax, x<span class="op">=</span><span class="st">'A_13'</span>, y<span class="op">=</span><span class="st">'altitude'</span>, logx<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>stdatm.plot(ax<span class="op">=</span>ax, x<span class="op">=</span><span class="st">'A_12'</span>, y<span class="op">=</span><span class="st">'altitude'</span>, logx<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>ax.grid()</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Absorption'</span>)<span class="op">;</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Altitude (km)'</span>)<span class="op">;</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Infrared Absorption for CO2 in '</span> <span class="op">+</span> stdatm_name <span class="op">+</span> <span class="st">'Standard Atmospheres'</span>)<span class="op">;</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>ax.legend([<span class="st">'15 um'</span>,<span class="st">'14 um'</span>,<span class="st">'13 um'</span>,<span class="st">'12 um'</span>])<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="absorption-by-the-entire-atmosphere" class="level3">
 <h3 class="anchored" data-anchor-id="absorption-by-the-entire-atmosphere">Absorption by the entire atmosphere</h3>
-<div id="5338db1f-1f6e-41a5-a2a1-a95851a5a94a" class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print results</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Total absorption in atmosphere (%) at 15 um = </span><span class="sc">{</span>(<span class="dv">1</span> <span class="op">-</span> Ttotal_15)<span class="op">*</span><span class="dv">100</span><span class="sc">:.2f}</span><span class="ss"> %'</span>)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Total absorption in atmosphere (%) at 14 um = </span><span class="sc">{</span>(<span class="dv">1</span> <span class="op">-</span> Ttotal_14)<span class="op">*</span><span class="dv">100</span><span class="sc">:.2f}</span><span class="ss"> %'</span>)</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Total absorption in atmosphere (%) at 13 um = </span><span class="sc">{</span>(<span class="dv">1</span> <span class="op">-</span> Ttotal_13)<span class="op">*</span><span class="dv">100</span><span class="sc">:.2f}</span><span class="ss"> %'</span>)</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Total absorption in atmosphere (%) at 12 um = </span><span class="sc">{</span>(<span class="dv">1</span> <span class="op">-</span> Ttotal_12)<span class="op">*</span><span class="dv">100</span><span class="sc">:.2f}</span><span class="ss"> %'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Total absorption in atmosphere (%) at 15 um = 100.00 %
-Total absorption in atmosphere (%) at 14 um = 100.00 %
-Total absorption in atmosphere (%) at 13 um = 29.25 %
-Total absorption in atmosphere (%) at 12 um = 0.35 %</code></pre>
-</div>
+<div id="5338db1f-1f6e-41a5-a2a1-a95851a5a94a" class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print results</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Total absorption in atmosphere (%) at 15 um = </span><span class="sc">{</span>(<span class="dv">1</span> <span class="op">-</span> Ttotal_15)<span class="op">*</span><span class="dv">100</span><span class="sc">:.2f}</span><span class="ss"> %'</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Total absorption in atmosphere (%) at 14 um = </span><span class="sc">{</span>(<span class="dv">1</span> <span class="op">-</span> Ttotal_14)<span class="op">*</span><span class="dv">100</span><span class="sc">:.2f}</span><span class="ss"> %'</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Total absorption in atmosphere (%) at 13 um = </span><span class="sc">{</span>(<span class="dv">1</span> <span class="op">-</span> Ttotal_13)<span class="op">*</span><span class="dv">100</span><span class="sc">:.2f}</span><span class="ss"> %'</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Total absorption in atmosphere (%) at 12 um = </span><span class="sc">{</span>(<span class="dv">1</span> <span class="op">-</span> Ttotal_12)<span class="op">*</span><span class="dv">100</span><span class="sc">:.2f}</span><span class="ss"> %'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

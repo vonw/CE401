@@ -295,17 +295,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="calculate-percentage-of-radiation-in-spectral-bands" class="level3">
 <h3 class="anchored" data-anchor-id="calculate-percentage-of-radiation-in-spectral-bands">Calculate Percentage of Radiation in Spectral Bands</h3>
 <p><i>© Von P. Walden, Washington State University</i></p>
-<div id="cell-3" class="cell" data-execution_count="2">
+<div id="cell-3" class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="for-a-given-temperature-t-calculate-the-proportion-of-radiation-emitted-in-various-spectral-bands-uv-visible-near-infrared-and-infrared." class="level5">
 <h5 class="anchored" data-anchor-id="for-a-given-temperature-t-calculate-the-proportion-of-radiation-emitted-in-various-spectral-bands-uv-visible-near-infrared-and-infrared.">For a given temperature T, calculate the proportion of radiation emitted in various spectral bands (UV, visible, near-infrared, and infrared).</h5>
-<div id="cell-5" class="cell" data-execution_count="3">
+<div id="cell-5" class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Temperature of the object</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>T  <span class="op">=</span> <span class="fl">5700.</span>                                 <span class="co"># K</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>T  <span class="op">=</span> <span class="fl">6000.</span>                                 <span class="co"># K</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#T  = 3300.                                 # K</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>T  <span class="op">=</span> <span class="fl">289.</span>                                  <span class="co"># K</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#T  = 300.                                  # K</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="cell-6" class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the Planck radiation distribution between 0 and 50 microns</span></span>

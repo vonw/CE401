@@ -323,7 +323,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h4 class="anchored" data-anchor-id="plot-geographic-distribution-of-1951-1980-climatology">Plot geographic distribution of 1951-1980 climatology</h4>
 <div id="aa116d6a" class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select a particular month to view</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>month <span class="op">=</span> <span class="st">'Jan'</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>month <span class="op">=</span> <span class="st">'Jul'</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>months <span class="op">=</span> [<span class="st">'Jan'</span>, <span class="st">'Feb'</span>, <span class="st">'Mar'</span>, <span class="st">'Apr'</span>, <span class="st">'May'</span>, <span class="st">'Jun'</span>, <span class="st">'Jul'</span>, <span class="st">'Aug'</span>, <span class="st">'Sep'</span>, <span class="st">'Oct'</span>, <span class="st">'Nov'</span>, <span class="st">'Dec'</span>]</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
@@ -339,14 +339,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="b8050626" class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select a particular year and month to view</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>year <span class="op">=</span> <span class="dv">1900</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>month <span class="op">=</span> <span class="st">'Jan'</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>month <span class="op">=</span> <span class="st">'Jul'</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>months <span class="op">=</span> [<span class="st">'Jan'</span>, <span class="st">'Feb'</span>, <span class="st">'Mar'</span>, <span class="st">'Apr'</span>, <span class="st">'May'</span>, <span class="st">'Jun'</span>, <span class="st">'Jul'</span>, <span class="st">'Aug'</span>, <span class="st">'Sep'</span>, <span class="st">'Oct'</span>, <span class="st">'Nov'</span>, <span class="st">'Dec'</span>]</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">20</span>,<span class="dv">10</span>))</span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>ccrs.PlateCarree())</span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>ax.coastlines()</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>(be.temperature[months.index(month)<span class="op">+</span>((year<span class="op">-</span><span class="dv">1850</span>)<span class="op">*</span><span class="dv">12</span>)]).plot(ax<span class="op">=</span>ax, clim<span class="op">=</span>[<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>])</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>(be.temperature[months.index(month)<span class="op">+</span>((year<span class="op">-</span><span class="dv">1850</span>)<span class="op">*</span><span class="dv">12</span>)]).plot(ax<span class="op">=</span>ax, vmin<span class="op">=-</span><span class="dv">12</span>, vmax<span class="op">=</span><span class="dv">12</span>, cmap<span class="op">=</span><span class="st">'RdBu_r'</span>)</span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Temperature Anomalies for '</span> <span class="op">+</span> month <span class="op">+</span> <span class="st">' '</span> <span class="op">+</span> <span class="bu">str</span>(year))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -355,15 +355,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="a37e2e0b" class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select a particular year and month to view</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>year <span class="op">=</span> <span class="dv">2023</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>month <span class="op">=</span> <span class="st">'Jan'</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>month <span class="op">=</span> <span class="st">'Jul'</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>months <span class="op">=</span> [<span class="st">'Jan'</span>, <span class="st">'Feb'</span>, <span class="st">'Mar'</span>, <span class="st">'Apr'</span>, <span class="st">'May'</span>, <span class="st">'Jun'</span>, <span class="st">'Jul'</span>, <span class="st">'Aug'</span>, <span class="st">'Sep'</span>, <span class="st">'Oct'</span>, <span class="st">'Nov'</span>, <span class="st">'Dec'</span>]</span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">20</span>,<span class="dv">10</span>))</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>ccrs.PlateCarree())</span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>ax.coastlines()</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>(be.temperature[months.index(month)<span class="op">+</span>((year<span class="op">-</span><span class="dv">1850</span>)<span class="op">*</span><span class="dv">12</span>)] <span class="op">+</span> be.climatology[months.index(month)]).plot(ax<span class="op">=</span>ax, clim<span class="op">=</span>[<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>])</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Temperatures for '</span> <span class="op">+</span> month <span class="op">+</span> <span class="st">' '</span> <span class="op">+</span> <span class="bu">str</span>(year))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>(be.temperature[months.index(month)<span class="op">+</span>((year<span class="op">-</span><span class="dv">1850</span>)<span class="op">*</span><span class="dv">12</span>)] <span class="op">+</span> be.climatology[months.index(month)]).plot(ax<span class="op">=</span>ax, vmin<span class="op">=-</span><span class="dv">60</span>, vmax<span class="op">=</span><span class="dv">60</span>, cmap<span class="op">=</span><span class="st">'RdBu_r'</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Temperatures for '</span> <span class="op">+</span> month <span class="op">+</span> <span class="st">' '</span> <span class="op">+</span> <span class="bu">str</span>(year))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="calculate-global-annual-temperature-anomalies" class="level4">
@@ -395,13 +395,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h4 class="anchored" data-anchor-id="calculate-longitudinally-averaged-temperature-anomalies">Calculate longitudinally-averaged temperature anomalies</h4>
 <div id="2f7ec941" class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the latitude range to average over</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>beginning_latitude <span class="op">=</span> <span class="op">-</span><span class="dv">5</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>ending_latitude <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>beginning_latitude <span class="op">=</span> <span class="op">-</span><span class="dv">80</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>ending_latitude <span class="op">=</span> <span class="op">-</span><span class="dv">70</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Select a particular year and month to view</span></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># !! Depending on how many years you choose to analyze, this COULD TAKE TENS OF SECONDS to complete.</span></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>beginning_year <span class="op">=</span> <span class="dv">1950</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>ending_year <span class="op">=</span> <span class="dv">2023</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>ending_year <span class="op">=</span> <span class="dv">2020</span></span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>months <span class="op">=</span> pd.date_range(start<span class="op">=</span><span class="bu">str</span>(beginning_year), end<span class="op">=</span><span class="bu">str</span>(ending_year<span class="op">+</span><span class="dv">1</span>), freq<span class="op">=</span><span class="st">'ME'</span>)</span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
